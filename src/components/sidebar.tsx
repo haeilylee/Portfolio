@@ -76,7 +76,7 @@ export default function Sidebar() {
             fontWeight: 500,
           }}
         >
-          Categories
+          Projects
         </div>
         <SidebarLink href="/projects/sdui">Design System</SidebarLink>
         <SidebarLink href="/projects/ai-requirements">AI</SidebarLink>
@@ -84,7 +84,7 @@ export default function Sidebar() {
       </div>
 
       <div style={{ marginTop: "16px" }}>
-        <SidebarLink href="/about">About</SidebarLink>
+        <SidebarLink href="/about">About Me</SidebarLink>
       </div>
     </aside>
   );

@@ -31,34 +31,21 @@ export default function Nav() {
           textDecoration: "none",
         }}
       >
-        <div
+        <Image
+          src="/profile.webp"
+          alt="Hakyeong Lee"
+          width={32}
+          height={32}
           style={{
-            width: 28,
-            height: 28,
+            width: "32px",
+            height: "32px",
+            objectFit: "contain",
             flexShrink: 0,
-            position: "relative",
           }}
-        >
-          <Image
-            src="/profile.webp"
-            alt="Hakyeong Lee"
-            width={36}
-            height={42}
-            style={{
-              objectFit: "cover",
-              objectPosition: "top center",
-              position: "absolute",
-              bottom: 0,
-              left: "50%",
-              transform: "translateX(-50%)",
-              width: "auto",
-              height: "42px",
-            }}
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = "none";
-            }}
-          />
-        </div>
+          onError={(e) => {
+            (e.target as HTMLImageElement).style.display = "none";
+          }}
+        />
         <span
           style={{
             fontSize: "14px",
@@ -74,7 +61,7 @@ export default function Nav() {
       {/* Right: Nav links */}
       <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
         <NavLink href="/">Projects</NavLink>
-        <NavLink href="/about">About</NavLink>
+        <NavLink href="/about">About Me</NavLink>
       </div>
     </nav>
   );
