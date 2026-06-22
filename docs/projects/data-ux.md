@@ -2,6 +2,8 @@
 
 **기간** 2025/09 → 11 · **카테고리** UX Research
 
+<!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
+
 ---
 
 ## 배경

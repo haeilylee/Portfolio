@@ -2,6 +2,8 @@
 
 **기간** 2026/01 → 02 · **카테고리** Design System
 
+<!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
+
 ---
 
 ## 배경

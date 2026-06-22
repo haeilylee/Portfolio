@@ -2,6 +2,8 @@
 
 **기간** 2025/03 → 05 · **카테고리** Product
 
+<!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
+
 ---
 
 ## 배경

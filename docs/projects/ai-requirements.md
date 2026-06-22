@@ -2,6 +2,8 @@
 
 **기간** 2026/02 → 03 · **카테고리** AI
 
+<!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
+
 ---
 
 ## 배경
