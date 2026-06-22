@@ -771,6 +771,24 @@
                 <label>다운로드 링크 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">Download raw 버튼</span></label>
                 <input type="text" id="f-download-url" placeholder="https://..." />
               </div>
+
+              <div style="border-top:1px solid #f0f0f0;margin:1.25rem 0;"></div>
+
+              <div class="form-group">
+                <label>주요 성과 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">한 줄씩 입력 (최대 3개)</span></label>
+                <textarea id="f-outcomes" rows="3" placeholder="개발/디자인 팀 공통 참조 문서 구축&#10;컴포넌트 대응 기준 명문화&#10;신규 온보딩 시간 단축"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>Tools & Stack <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">툴명::설명 형식으로 한 줄씩</span></label>
+                <textarea id="f-tools" rows="3" placeholder="Figma::컴포넌트 설계 및 스펙 문서화에 활용했어요.&#10;Notion::팀 참조 문서 배포에 사용했어요."></textarea>
+              </div>
+
+              <div class="form-group">
+                <label>핵심 인사이트 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">Starter prompt 스타일 강조 박스</span></label>
+                <textarea id="f-insight" rows="3" placeholder="이 프로젝트에서 얻은 핵심 인사이트를 한 단락으로 적어주세요."></textarea>
+              </div>
+
               <div class="form-actions">
                 <button type="submit" class="btn btn-primary" id="form-save-btn">저장 & 배포</button>
                 <button type="button" class="btn btn-ghost" onclick="cancelEdit()">취소</button>
@@ -1055,6 +1073,9 @@ function newProject() {
   document.getElementById('f-date-to').value = '';
   document.getElementById('f-github-url').value = '';
   document.getElementById('f-download-url').value = '';
+  document.getElementById('f-outcomes').value = '';
+  document.getElementById('f-tools').value = '';
+  document.getElementById('f-insight').value = '';
   document.querySelectorAll('.tag-check').forEach(c => c.checked = false);
   resetImageUpload();
   showFormPanel();
@@ -1102,6 +1123,9 @@ function editProject(i) {
   document.getElementById('f-date-to').value = to||'';
   document.getElementById('f-github-url').value = p.github_url || '';
   document.getElementById('f-download-url').value = p.download_url || '';
+  document.getElementById('f-outcomes').value = (p.outcomes || []).join('\n');
+  document.getElementById('f-tools').value = (p.tools || []).map(t => `${t.name}::${t.desc}`).join('\n');
+  document.getElementById('f-insight').value = p.insight || '';
   document.querySelectorAll('.tag-check').forEach(c => { c.checked = p.tags.includes(c.value); });
   pendingImageBase64 = null;
   pendingImageName = null;
@@ -1145,6 +1169,9 @@ async function saveProject(e) {
       link: existing.link || `/projects/${slugify(document.getElementById('f-title').value)}`,
       github_url: document.getElementById('f-github-url').value.trim(),
       download_url: document.getElementById('f-download-url').value.trim(),
+      outcomes: document.getElementById('f-outcomes').value.split('\n').map(s=>s.trim()).filter(Boolean),
+      tools: document.getElementById('f-tools').value.split('\n').map(s=>s.trim()).filter(Boolean).map(s=>{const [name,...rest]=s.split('::');return{name:name.trim(),desc:rest.join('::').trim()};}),
+      insight: document.getElementById('f-insight').value.trim(),
     };
     if (editingIndex !== null) {
       projects[editingIndex] = p;
@@ -1163,44 +1190,106 @@ async function saveProject(e) {
   }
 }
 
-// ─── Push project links to .md file ───────────────
+// ─── Generate & push project .md ──────────────────
 
 function slugify(title) {
   return title.toLowerCase().replace(/[^a-z0-9가-힣]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g,'') || 'project';
 }
 
-function buildLinksHTML(p) {
-  const g = p.github_url ? `<a href="${p.github_url}" class="project-link-btn github" target="_blank" rel="noopener">View on GitHub ↗</a>` : '';
-  const d = p.download_url ? `<a href="${p.download_url}" class="project-link-btn" target="_blank" rel="noopener">Download raw ↓</a>` : '';
-  if (!g && !d) return '';
-  return `\n<div class="project-links">\n${[g,d].filter(Boolean).join('\n')}\n</div>\n`;
+function catClass(tags) {
+  if (tags.includes('Design System')) return 'cat-design-system';
+  if (tags.includes('AI')) return 'cat-ai';
+  if (tags.includes('UX Research')) return 'cat-ux';
+  return 'cat-product';
+}
+
+function buildProjectMd(p) {
+  const cc = catClass(p.tags);
+  const catLabel = p.tags[0] || '';
+  const linksHtml = [
+    p.github_url ? `<a href="${p.github_url}" class="project-link-btn github" target="_blank" rel="noopener">View on GitHub ↗</a>` : '',
+    p.download_url ? `<a href="${p.download_url}" class="project-link-btn" target="_blank" rel="noopener">Download raw ↓</a>` : '',
+  ].filter(Boolean).join('\n');
+
+  const outcomesHtml = (p.outcomes||[]).length
+    ? `<ul>\n${(p.outcomes||[]).map(o=>`<li>${o}</li>`).join('\n')}\n</ul>`
+    : '<ul>\n<li>성과를 입력해주세요</li>\n</ul>';
+
+  const toolsHtml = (p.tools||[]).length
+    ? (p.tools||[]).map(t=>`<div class="tool-row">\n<span class="tool-name">${t.name}</span>\n<span class="tool-desc">${t.desc}</span>\n</div>`).join('\n')
+    : '<div class="tool-row"><span class="tool-name">-</span><span class="tool-desc">사용 도구를 입력해주세요</span></div>';
+
+  const insightHtml = p.insight
+    ? `<div class="article-prompt">\n<div class="article-prompt-label">핵심 인사이트</div>\n<p>${p.insight}</p>\n</div>\n`
+    : '';
+
+  const linksSection = linksHtml
+    ? `<div class="project-links">\n${linksHtml}\n</div>\n\n`
+    : '';
+
+  return `<!-- PROJECT_LINKS {"github_url":"${p.github_url||''}","download_url":"${p.download_url||''}"} -->
+
+${linksSection}<div class="article-header">
+<div class="article-breadcrumb"><a href="/">← Projects</a></div>
+<p class="article-meta"><span>${p.date||''}</span><span class="article-meta-sep">|</span><span>${catLabel}</span></p>
+<h1 class="article-title">${p.title}</h1>
+<p class="article-sub">${p.desc||p.preview||''}</p>
+</div>
+
+<div class="article-thumbnail ${cc}"></div>
+
+<div class="article-cols">
+<div class="article-col-main">
+<p>${p.preview||''}</p>
+<div class="article-difficulty">
+<span>📅 ${p.date||''}</span><span class="sep">|</span><span>🏷 ${p.tags.join(' · ')}</span>
+</div>
+<div class="article-tags-row">
+${p.tags.map(t=>`<span class="article-tag-chip">${t}</span>`).join('\n')}
+</div>
+</div>
+<div class="article-col-side">
+<h3>주요 성과</h3>
+${outcomesHtml}
+</div>
+</div>
+
+<div class="article-tools">
+<h3>Tools & Stack</h3>
+${toolsHtml}
+</div>
+
+${insightHtml}---
+
+## 배경
+
+<!-- 배경과 컨텍스트를 여기에 채워주세요 -->
+
+## 문제
+
+<!-- 해결해야 했던 문제를 여기에 채워주세요 -->
+
+## 해결 과정
+
+<!-- 해결 과정을 여기에 채워주세요 -->
+
+## 결과
+
+<!-- 결과와 임팩트를 여기에 정리해주세요 -->
+`;
 }
 
 async function pushProjectLinks(p) {
   if (!p.link) return;
   const slug = p.link.replace(/^\/projects\//, '');
   const filePath = `docs/projects/${slug}.md`;
-  let data, sha, content;
+  let sha;
+  try { sha = (await ghGet(filePath)).sha; } catch { sha = undefined; }
+
+  const content = buildProjectMd(p);
   try {
-    data = await ghGet(filePath);
-    sha = data.sha;
-    content = decode(data.content);
-  } catch { return; } // file doesn't exist yet
-
-  // Replace the PROJECT_LINKS comment and any existing project-links div
-  const linksComment = `<!-- PROJECT_LINKS {"github_url":"${p.github_url||''}","download_url":"${p.download_url||''}"} -->`;
-  const linksDiv = buildLinksHTML(p);
-
-  // Remove old links div if present
-  content = content.replace(/<div class="project-links">[\s\S]*?<\/div>\n?/g, '');
-  // Update the PROJECT_LINKS comment
-  if (content.includes('<!-- PROJECT_LINKS')) {
-    content = content.replace(/<!-- PROJECT_LINKS[\s\S]*?-->/, linksComment + linksDiv);
-  }
-
-  try {
-    await ghPut(filePath, content, sha, `Update links: ${p.title}`);
-  } catch { /* non-critical, don't block */ }
+    await ghPut(filePath, content, sha, `Update project: ${p.title}`);
+  } catch { /* non-critical */ }
 }
 
 // ─── Image Upload ──────────────────────────────────
