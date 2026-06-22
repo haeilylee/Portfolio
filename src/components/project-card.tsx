@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Project } from "@/lib/projects";
 
@@ -7,10 +9,10 @@ const gradientMap: Record<string, string> = {
   ux: "linear-gradient(145deg, #065f46, #34d399)",
 };
 
-const badgeBgMap: Record<string, string> = {
-  "design-system": "rgba(26, 79, 214, 0.85)",
-  ai: "rgba(91, 33, 182, 0.85)",
-  ux: "rgba(6, 95, 70, 0.85)",
+const categoryColor: Record<string, string> = {
+  "Design System": "#2d5cd8",
+  AI: "#7031d4",
+  "UX Research": "#168f52",
 };
 
 export default function ProjectCard({ project }: { project: Project }) {
@@ -20,99 +22,88 @@ export default function ProjectCard({ project }: { project: Project }) {
       style={{
         display: "flex",
         flexDirection: "column",
-        background: "var(--bg-card)",
-        border: "1px solid #e5e5e5",
-        borderRadius: "10px",
-        overflow: "hidden",
-        boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
         textDecoration: "none",
         color: "inherit",
-        transition: "box-shadow 0.2s, transform 0.2s",
         cursor: "pointer",
+        gap: "12px",
       }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-          "0 4px 16px rgba(0,0,0,0.10)";
-        (e.currentTarget as HTMLAnchorElement).style.transform =
-          "translateY(-2px)";
+        const thumb = (e.currentTarget as HTMLAnchorElement).querySelector(
+          ".thumb"
+        ) as HTMLElement;
+        if (thumb) thumb.style.transform = "scale(1.02)";
       }}
       onMouseLeave={(e) => {
-        (e.currentTarget as HTMLAnchorElement).style.boxShadow =
-          "0 1px 3px rgba(0,0,0,0.06)";
-        (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
+        const thumb = (e.currentTarget as HTMLAnchorElement).querySelector(
+          ".thumb"
+        ) as HTMLElement;
+        if (thumb) thumb.style.transform = "scale(1)";
       }}
     >
-      {/* Thumbnail */}
+      {/* Thumbnail — no card border, just the image */}
       <div
         style={{
           position: "relative",
-          aspectRatio: "16/9",
-          background: gradientMap[project.catClass] ?? "#ccc",
+          aspectRatio: "16/10",
+          borderRadius: "12px",
           overflow: "hidden",
         }}
       >
-        {/* Decorative circles */}
         <div
+          className="thumb"
           style={{
-            position: "absolute",
-            top: "-20px",
-            right: "-20px",
-            width: "100px",
-            height: "100px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.08)",
+            width: "100%",
+            height: "100%",
+            background: gradientMap[project.catClass] ?? "#ccc",
+            transition: "transform 0.3s ease",
+            position: "relative",
           }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "-30px",
-            left: "20px",
-            width: "70px",
-            height: "70px",
-            borderRadius: "50%",
-            background: "rgba(255,255,255,0.06)",
-          }}
-        />
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: "-30px",
+              right: "-30px",
+              width: "130px",
+              height: "130px",
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.07)",
+            }}
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "-40px",
+              left: "30px",
+              width: "100px",
+              height: "100px",
+              borderRadius: "50%",
+              background: "rgba(255,255,255,0.05)",
+            }}
+          />
+        </div>
+      </div>
 
-        {/* Category badge */}
+      {/* Text — no box, just typography */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
         <span
           style={{
-            position: "absolute",
-            top: "10px",
-            left: "10px",
-            background: badgeBgMap[project.catClass] ?? "rgba(0,0,0,0.5)",
-            color: "#fff",
             fontSize: "11px",
             fontWeight: 600,
-            padding: "3px 8px",
-            borderRadius: "4px",
-            backdropFilter: "blur(4px)",
             letterSpacing: "-0.01em",
+            color: categoryColor[project.category] ?? "#888",
           }}
         >
           {project.category}
         </span>
-      </div>
-
-      {/* Card body */}
-      <div
-        style={{
-          padding: "14px 16px 16px",
-          display: "flex",
-          flexDirection: "column",
-          flex: 1,
-          gap: "6px",
-        }}
-      >
         <h3
           style={{
             fontSize: "15px",
             fontWeight: 600,
             letterSpacing: "-0.04em",
-            color: "var(--tx-1)",
+            color: "#111",
             margin: 0,
-            lineHeight: 1.4,
+            lineHeight: 1.35,
           }}
         >
           {project.title}
@@ -120,9 +111,10 @@ export default function ProjectCard({ project }: { project: Project }) {
         <p
           style={{
             fontSize: "13px",
-            color: "var(--tx-3)",
+            color: "#888",
             margin: 0,
             lineHeight: 1.6,
+            letterSpacing: "-0.02em",
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
@@ -131,16 +123,9 @@ export default function ProjectCard({ project }: { project: Project }) {
         >
           {project.preview}
         </p>
-        <div
-          style={{
-            marginTop: "auto",
-            paddingTop: "8px",
-            fontSize: "12px",
-            color: "var(--tx-3)",
-          }}
-        >
+        <span style={{ fontSize: "12px", color: "#bbb", letterSpacing: "-0.01em", marginTop: "2px" }}>
           {project.date}
-        </div>
+        </span>
       </div>
     </Link>
   );

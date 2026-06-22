@@ -66,7 +66,7 @@ export default function FilterBar({ projects }: { projects: Project[] }) {
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(3, 1fr)",
-          gap: "16px",
+          gap: "32px 24px",
         }}
       >
         {visible.map((project) => (
