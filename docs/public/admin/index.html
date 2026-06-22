@@ -939,12 +939,13 @@ function generateTagHTML(tags) {
 
 function generateCardHTML(p) {
   const category = p.tags[0] || '';
-  const dateShort = p.date.replace(/\/\d{2}(\/\d{2})?/g, m => m.slice(0,3)); // "2026/01/01 → 2026/02/01" → "2026/01 → 2026/02"
-  const thumbnailHTML = p.image ? `
-  <div class="project-card-thumbnail">
-    <img src="${p.image}" alt="${p.title}" />
-  </div>` : '';
+  const thumbHTML = p.image
+    ? `<img src="${p.image}" alt="${p.title}" />`
+    : `<div class="project-card-thumbnail-placeholder">📋</div>`;
   return `<div class="project-card" data-tags="${p.tags.join(',')}">
+  <div class="project-card-thumbnail">
+    ${thumbHTML}
+  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">${category}</span>
@@ -952,7 +953,7 @@ function generateCardHTML(p) {
     </div>
     <div class="project-card-title">${p.title}</div>
     <div class="project-card-preview">${p.preview}</div>
-  </div>${thumbnailHTML}
+  </div>
   <div class="project-card-footer">
     <div class="project-card-tags">
 ${p.tags.map(t => `      <span class="project-tag">${t}</span>`).join('\n')}

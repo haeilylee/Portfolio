@@ -17,31 +17,37 @@ export default defineConfig({
     darkMode: false,
     nav: [
       {
-        text: 'About',
-        link: '/about',
-        position: 'left',
-      },
-      {
         text: 'Projects',
         link: '/projects/',
         position: 'left',
       },
+      {
+        text: 'About',
+        link: '/about',
+        position: 'left',
+      },
     ],
     sidebar: {
-      '/': [
-        {
-          text: 'About Me',
-          link: '/about',
-        },
+      '/projects': [
         {
           text: 'Projects',
           items: [
-            {
-              text: '전체 보기',
-              link: '/projects/',
-            },
+            { text: '전체 보기', link: '/projects/' },
+            { text: 'SDUI 컴포넌트 문서화', link: '/projects/sdui' },
+            { text: '요구사항 자동화 생성', link: '/projects/ai-requirements' },
+            { text: '데이터 통화 UX 개선', link: '/projects/data-ux' },
+            { text: '청구 수납 리디자인', link: '/projects/billing' },
+            { text: '슈퍼앱 온보딩 개선', link: '/projects/onboarding' },
           ],
         },
+        { text: 'About Me', link: '/about' },
+      ],
+      '/about': [
+        {
+          text: 'Projects',
+          items: [{ text: '전체 보기', link: '/projects/' }],
+        },
+        { text: 'About Me', link: '/about' },
       ],
     },
     footer: {
