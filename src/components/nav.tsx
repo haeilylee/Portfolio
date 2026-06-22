@@ -33,20 +33,27 @@ export default function Nav() {
       >
         <div
           style={{
-            width: 24,
-            height: 24,
-            borderRadius: "50%",
-            overflow: "hidden",
-            background: "#e0e0e0",
+            width: 28,
+            height: 28,
             flexShrink: 0,
+            position: "relative",
           }}
         >
           <Image
             src="/profile.webp"
             alt="Hakyeong Lee"
-            width={24}
-            height={24}
-            style={{ objectFit: "cover", width: "100%", height: "100%" }}
+            width={36}
+            height={42}
+            style={{
+              objectFit: "cover",
+              objectPosition: "top center",
+              position: "absolute",
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: "auto",
+              height: "42px",
+            }}
             onError={(e) => {
               (e.target as HTMLImageElement).style.display = "none";
             }}
