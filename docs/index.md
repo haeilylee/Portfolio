@@ -1,6 +1,6 @@
 # Hakyeong Lee
 
-디자이너이자 개발자로, 복잡한 문제를 명확한 경험으로 풀어냅니다.
+제품의 구조를 설계하고, 팀이 같은 언어로 일할 수 있도록 만드는 일을 해요.
 
 <div class="filter-bar">
   <button class="filter-chip active" onclick="filterCards('all', this)">전체</button>
@@ -13,10 +13,10 @@
 <div class="project-grid" id="project-grid">
 
 <div class="project-card" data-tags="Design System,Figma,Documentation">
-  <div class="project-card-preview">컴포넌트 체계를 모두가 이해할 수 있는 구조로 세우고, 실제로 대응할 수 있는 형태로 정리했어요.</div>
+  <div class="project-card-preview">Shadcn은 web 기반 베이스이기 때문에 컴포넌트 체계를 모두가 이해할 수 있는 구조로 세우고, 실제로 대응할 수 있는 형태로 정리했어요.</div>
   <div class="project-card-body">
     <div class="project-card-title">SDUI 대응 컴포넌트 시스템 문서화</div>
-    <div class="project-card-desc">디자인 시스템의 구조를 팀 전체가 이해할 수 있도록 문서화하고 온보딩 리소스를 구축했어요.</div>
+    <div class="project-card-desc">서버 드리븐 UI 전환에 맞춰 디자인 시스템 컴포넌트를 재정의하고, 개발/디자인 팀 모두가 참조할 수 있는 문서 체계를 구축했어요.</div>
     <div class="project-card-tags">
       <span class="project-tag tag-blue">Design System</span>
       <span class="project-tag tag-green">Figma</span>
@@ -26,11 +26,11 @@
   </div>
 </div>
 
-<div class="project-card" data-tags="AI,Github,Markdown">
-  <div class="project-card-preview">AI를 활용해 반복 작업을 자동화하고, 팀의 리소스를 핵심 작업에 집중할 수 있도록 개선했어요.</div>
+<div class="project-card" data-tags="AI,Documentation,Product">
+  <div class="project-card-preview">본 프로젝트는 루이비통(Louis Vuitton)이 이끌면서 반복적으로 작성하던 요구사항 정의서를 AI 워크플로우로 자동화한 사례예요.</div>
   <div class="project-card-body">
     <div class="project-card-title">요구사항 정의서 자동화 생성</div>
-    <div class="project-card-desc">통신사 채널 통합 슈퍼앱 문서 선행연구 R&D 프로젝트에서 요구사항 정의 프로세스를 AI로 자동화.</div>
+    <div class="project-card-desc">통신사 채널 통합 슈퍼앱 문서 선행연구 R&D 프로젝트에서 기획자가 매번 수동으로 작성하던 요구사항 정의서를 AI 파이프라인으로 자동화했어요.</div>
     <div class="project-card-tags">
       <span class="project-tag tag-purple">AI</span>
       <span class="project-tag tag-green">Github</span>
@@ -41,15 +41,42 @@
 </div>
 
 <div class="project-card" data-tags="UX Research,Product">
-  <div class="project-card-preview">사용자 흐름을 분석하고, 핵심 경험을 개선해 전환율과 만족도를 높였어요.</div>
+  <div class="project-card-preview">데이터 통화 조회 화면의 이탈률이 높다는 데이터에서 출발해, 정보 구조 자체를 다시 설계했어요.</div>
   <div class="project-card-body">
-    <div class="project-card-title">프로젝트 이름</div>
-    <div class="project-card-desc">프로젝트 한 줄 설명. 어떤 문제를 해결했는지, 어떤 임팩트를 만들었는지.</div>
+    <div class="project-card-title">데이터 통화 조회 서비스 UX 개선</div>
+    <div class="project-card-desc">사용자 인터뷰와 히트맵 분석을 통해 핵심 불편 지점을 도출하고, 정보 계층 구조를 재설계해 조회 완료율을 높였어요.</div>
     <div class="project-card-tags">
       <span class="project-tag tag-blue">UX Research</span>
       <span class="project-tag tag-pink">Product</span>
     </div>
-    <div class="project-card-date">2025/xx/xx → 2025/xx/xx</div>
+    <div class="project-card-date">2025/09/01 → 2025/11/30</div>
+  </div>
+</div>
+
+<div class="project-card" data-tags="Product,Design System">
+  <div class="project-card-preview">청구 & 수납 관리 화면은 사용자가 가장 불안을 느끼는 구간이에요. 신뢰감을 주는 UI 구조로 전면 개편했어요.</div>
+  <div class="project-card-body">
+    <div class="project-card-title">청구 & 수납 관리 서비스 리디자인</div>
+    <div class="project-card-desc">복잡한 요금 체계를 사용자가 직관적으로 이해할 수 있도록 정보 구조를 재편하고, 납부 플로우를 3단계로 단순화했어요.</div>
+    <div class="project-card-tags">
+      <span class="project-tag tag-pink">Product</span>
+      <span class="project-tag tag-blue">Design System</span>
+    </div>
+    <div class="project-card-date">2025/06/01 → 2025/08/31</div>
+  </div>
+</div>
+
+<div class="project-card" data-tags="UX Research,AI,Product">
+  <div class="project-card-preview">신규 가입자가 서비스 구조를 이해하는 데 평균 7분이 걸린다는 문제에서 시작했어요. 온보딩을 처음부터 다시 설계했어요.</div>
+  <div class="project-card-body">
+    <div class="project-card-title">슈퍼앱 온보딩 플로우 개선</div>
+    <div class="project-card-desc">가입 직후 이탈을 줄이기 위해 온보딩 단계를 재구성하고, AI 기반 개인화 추천을 도입해 첫 7일 리텐션을 높였어요.</div>
+    <div class="project-card-tags">
+      <span class="project-tag tag-purple">AI</span>
+      <span class="project-tag tag-blue">UX Research</span>
+      <span class="project-tag tag-pink">Product</span>
+    </div>
+    <div class="project-card-date">2025/03/01 → 2025/05/31</div>
   </div>
 </div>
 
