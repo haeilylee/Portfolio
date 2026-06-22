@@ -1,10 +1,14 @@
-# SDUI 대응 컴포넌트 시스템 문서화
-
-**기간** 2026/01 → 02 · **카테고리** Design System
-
 <!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
 
----
+<div class="project-breadcrumb">
+<a href="/">← Projects</a> <span>/ Design System</span>
+</div>
+
+<div class="project-hero cat-design-system">
+<div class="project-hero-tag">Design System · Figma · Documentation</div>
+<h1 class="project-hero-title">SDUI 대응 컴포넌트 시스템 문서화</h1>
+<p class="project-hero-meta">2026/01 → 02 · 이하경</p>
+</div>
 
 ## 배경
 

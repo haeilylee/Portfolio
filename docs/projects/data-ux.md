@@ -1,10 +1,14 @@
-# 데이터 통화 조회 서비스 UX 개선
-
-**기간** 2025/09 → 11 · **카테고리** UX Research
-
 <!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
 
----
+<div class="project-breadcrumb">
+<a href="/">← Projects</a> <span>/ UX Research</span>
+</div>
+
+<div class="project-hero cat-ux">
+<div class="project-hero-tag">UX Research · Product</div>
+<h1 class="project-hero-title">데이터 통화 조회 서비스 UX 개선</h1>
+<p class="project-hero-meta">2025/09 → 11 · 이하경</p>
+</div>
 
 ## 배경
 

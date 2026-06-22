@@ -1,10 +1,14 @@
-# 요구사항 정의서 자동화 생성
-
-**기간** 2026/02 → 03 · **카테고리** AI
-
 <!-- PROJECT_LINKS {"github_url":"","download_url":""} -->
 
----
+<div class="project-breadcrumb">
+<a href="/">← Projects</a> <span>/ AI</span>
+</div>
+
+<div class="project-hero cat-ai">
+<div class="project-hero-tag">AI · Github · Markdown</div>
+<h1 class="project-hero-title">요구사항 정의서 자동화 생성</h1>
+<p class="project-hero-meta">2026/02 → 03 · 이하경</p>
+</div>
 
 ## 배경
 
