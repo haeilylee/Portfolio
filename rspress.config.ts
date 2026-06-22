@@ -15,7 +15,10 @@ export default defineConfig({
   globalStyles: path.join(__dirname, './styles/index.css'),
   themeConfig: {
     darkMode: false,
-    nav: [],
+    nav: [
+      { text: 'Projects', link: '/projects/' },
+      { text: 'About', link: '/about' },
+    ],
     sidebar: {
       '/projects': [
         {
