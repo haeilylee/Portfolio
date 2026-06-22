@@ -11,17 +11,17 @@
   --rp-c-bg-elv: #f0f0f1;
 
   /* Text */
-  --rp-c-text-1: #111111;
-  --rp-c-text-2: #555555;
-  --rp-c-text-3: #999999;
+  --rp-c-text-1: #1a1a1a;
+  --rp-c-text-2: #6b6b6b;
+  --rp-c-text-3: #aaaaaa;
 
   /* Brand / Accent */
-  --rp-c-brand: #111111;
-  --rp-c-brand-light: #333333;
-  --rp-c-brand-dark: #000000;
-  --rp-c-brand-1: #111111;
-  --rp-c-brand-2: #111111;
-  --rp-c-brand-3: #000000;
+  --rp-c-brand: #1a1a1a;
+  --rp-c-brand-light: #444444;
+  --rp-c-brand-dark: #111111;
+  --rp-c-brand-1: #1a1a1a;
+  --rp-c-brand-2: #1a1a1a;
+  --rp-c-brand-3: #111111;
 
   /* Dividers & Borders */
   --rp-c-divider: #e8e8e8;
@@ -102,28 +102,28 @@ body {
 /* ─── Headings ───────────────────────────────────── */
 
 h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  color: #111111 !important;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #37352f !important;
   margin-bottom: 0.5rem;
 }
 
 h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
+  font-size: 1.25rem;
+  font-weight: 600;
   letter-spacing: -0.02em;
-  color: #1a1a1a !important;
+  color: #37352f !important;
   border-top: 1px solid var(--rp-c-divider);
   padding-top: 1.5rem;
   margin-top: 2.5rem;
 }
 
 h3 {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
-  color: #222222 !important;
+  color: #37352f !important;
 }
 
 /* ─── Links ──────────────────────────────────────── */
@@ -318,21 +318,22 @@ aside.rspress-sidebar > div:empty {
 }
 
 .home-intro h1 {
-  font-size: 1.6rem !important;
-  font-weight: 900 !important;
-  letter-spacing: -0.04em !important;
-  line-height: 1.15 !important;
+  font-size: 1.4rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.2 !important;
+  color: #37352f !important;
   margin: 0 0 0.2rem !important;
   border: none !important;
   padding: 0 !important;
 }
 
 .home-intro p {
-  font-size: 0.9rem;
-  color: #888;
+  font-size: 0.88rem;
+  color: #9b9a97;
   margin: 0;
   line-height: 1.5;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 /* ─── Page Intro ─────────────────────────────────── */
@@ -385,8 +386,8 @@ aside.rspress-sidebar > div:empty {
 }
 
 .filter-chip.active {
-  border-color: #111;
-  background: #111;
+  border-color: #37352f;
+  background: #37352f;
   color: #fff;
 }
 
@@ -448,37 +449,37 @@ a.project-card:hover {
 
 .project-card-category {
   font-size: 0.72rem;
-  font-weight: 600;
-  color: #999;
-  letter-spacing: 0.02em;
+  font-weight: 500;
+  color: #b0aca6;
+  letter-spacing: 0.01em;
 }
 
 .project-card-arrow {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background: #f0f0f0;
+  background: #f0efed;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1rem;
-  color: #333;
+  font-size: 0.95rem;
+  color: #9b9a97;
   flex-shrink: 0;
-  transition: background 0.15s, transform 0.18s;
+  transition: background 0.15s, color 0.15s, transform 0.18s;
 }
 
 a.project-card:hover .project-card-arrow {
-  background: #111;
+  background: #37352f;
   color: #fff;
   transform: translate(2px, -2px);
 }
 
 .project-card-title {
-  font-size: 1.6rem;
-  font-weight: 900;
-  color: #111;
-  letter-spacing: -0.045em;
-  line-height: 1.2;
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #37352f;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
 }
 
 /* ── Screenshot area (bottom ~62%) ── */
