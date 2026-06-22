@@ -58,11 +58,6 @@ export default function Nav() {
         </span>
       </Link>
 
-      {/* Right: Nav links */}
-      <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-        <NavLink href="/">Projects</NavLink>
-        <NavLink href="/about">About Me</NavLink>
-      </div>
     </nav>
   );
 }
