@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Hakyeong Portfolio</title>
+  <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
+  <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+      --accent: #a78bfa;
+      --danger: #f87171;
+      --success: #4ade80;
+      --radius: 10px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Login ── */
+    #login-screen {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .login-box p {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .login-box p a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="password"], input[type="text"] {
+      width: 100%;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 0.92rem;
+      padding: 0.65rem 0.9rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.15s, background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover { border-color: var(--accent); }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--danger);
+      border: 1px solid var(--danger);
+    }
+
+    .btn-danger:hover { background: rgba(248,113,113,0.1); }
+
+    .error-msg {
+      color: var(--danger);
+      font-size: 0.82rem;
+      margin-top: 0.6rem;
+      display: none;
+    }
+
+    /* ── Editor ── */
+    #editor-screen {
+      display: none;
+      flex: 1;
+      flex-direction: column;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .topbar h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+      font-weight: 600;
+    }
+
+    .badge-saved { background: rgba(74,222,128,0.15); color: var(--success); }
+    .badge-saving { background: rgba(167,139,250,0.15); color: var(--accent); }
+    .badge-unsaved { background: rgba(248,113,113,0.12); color: var(--danger); }
+
+    .editor-layout {
+      display: flex;
+      flex: 1;
+      height: calc(100vh - 56px);
+    }
+
+    .sidebar {
+      width: 220px;
+      min-width: 220px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 1rem 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      overflow-y: auto;
+    }
+
+    .sidebar-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.5rem 0.6rem;
+    }
+
+    .file-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      border-radius: 7px;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 0.87rem;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      transition: background 0.12s, color 0.12s;
+    }
+
+    .file-btn:hover { background: var(--border); color: var(--text); }
+    .file-btn.active { background: rgba(167,139,250,0.15); color: var(--accent); font-weight: 600; }
+
+    .editor-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-wrap {
+      flex: 1;
+      overflow: auto;
+      padding: 1.5rem;
+    }
+
+    /* Override EasyMDE to match dark theme */
+    .EasyMDEContainer { height: 100%; }
+
+    .CodeMirror {
+      background: var(--bg) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: var(--radius) !important;
+      font-size: 0.95rem !important;
+      font-family: 'Menlo', 'Monaco', monospace !important;
+      min-height: calc(100vh - 200px);
+    }
+
+    .editor-toolbar {
+      background: var(--surface) !important;
+      border: 1px solid var(--border) !important;
+      border-bottom: none !important;
+      border-radius: var(--radius) var(--radius) 0 0 !important;
+    }
+
+    .editor-toolbar a {
+      color: var(--muted) !important;
+    }
+
+    .editor-toolbar a:hover, .editor-toolbar a.active {
+      background: var(--border) !important;
+      color: var(--text) !important;
+    }
+
+    .editor-toolbar i.separator { border-color: var(--border) !important; }
+
+    .CodeMirror-scroll { min-height: 400px; }
+    .CodeMirror-cursor { border-left-color: var(--accent) !important; }
+
+    .editor-statusbar {
+      background: var(--surface) !important;
+      border-top: 1px solid var(--border) !important;
+      color: var(--muted) !important;
+      border-radius: 0 0 var(--radius) var(--radius) !important;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { background: rgba(74,222,128,0.15); color: var(--success); border: 1px solid rgba(74,222,128,0.3); }
+    .toast.error { background: rgba(248,113,113,0.12); color: var(--danger); border: 1px solid rgba(248,113,113,0.3); }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>관리자 로그인</h1>
+    <p>GitHub Personal Access Token이 필요해요.<br>
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Admin" target="_blank">토큰 발급하기 →</a>
+    </p>
+    <label for="token-input">GitHub Token</label>
+    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
+    <div class="error-msg" id="error-msg">토큰이 올바르지 않아요. 다시 확인해주세요.</div>
+    <button class="btn btn-primary" onclick="login()">로그인</button>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div id="editor-screen">
+  <div class="topbar">
+    <div class="topbar-left">
+      <span style="font-size:0.9rem; color: var(--muted)">✦</span>
+      <h2 id="current-file-name">파일 선택</h2>
+      <span class="badge badge-saved" id="status-badge">저장됨</span>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="window.open('https://haeilylee-portfolio.vercel.app', '_blank')">사이트 보기 ↗</button>
+      <button class="btn btn-primary" style="width:auto" id="save-btn" onclick="saveFile()">저장 & 배포</button>
+      <button class="btn btn-danger" style="font-size:0.82rem;" onclick="logout()">로그아웃</button>
+    </div>
+  </div>
+
+  <div class="editor-layout">
+    <nav class="sidebar">
+      <div class="sidebar-label">페이지</div>
+      <button class="file-btn" onclick="loadFile('docs/about.md', '소개 (About)')" id="btn-about">소개 (About)</button>
+      <button class="file-btn" onclick="loadFile('docs/projects/index.md', '프로젝트 (Projects)')" id="btn-projects">프로젝트 (Projects)</button>
+      <button class="file-btn" onclick="loadFile('docs/index.md', '홈 (Home)')" id="btn-home">홈 (Home)</button>
+    </nav>
+
+    <div class="editor-main">
+      <div class="editor-wrap">
+        <textarea id="md-editor"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const REPO = 'haeilylee/Portfolio';
+  const BRANCH = 'main';
+
+  let easyMDE = null;
+  let currentFilePath = null;
+  let currentFileSha = null;
+  let isDirty = false;
+
+  function getToken() { return sessionStorage.getItem('gh_token'); }
+
+  async function login() {
+    const token = document.getElementById('token-input').value.trim();
+    if (!token) return;
+
+    try {
+      const res = await fetch('https://api.github.com/user', {
+        headers: { Authorization: `token ${token}` }
+      });
+      if (!res.ok) throw new Error();
+      sessionStorage.setItem('gh_token', token);
+      showEditor();
+    } catch {
+      document.getElementById('error-msg').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('gh_token');
+    location.reload();
+  }
+
+  function showEditor() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('editor-screen').style.display = 'flex';
+
+    easyMDE = new EasyMDE({
+      element: document.getElementById('md-editor'),
+      autofocus: true,
+      spellChecker: false,
+      status: ['lines', 'words'],
+      toolbar: ['bold','italic','heading','|','quote','unordered-list','ordered-list','|','link','image','|','preview','side-by-side','fullscreen'],
+      placeholder: '왼쪽에서 파일을 선택하세요...',
+    });
+
+    easyMDE.codemirror.on('change', () => {
+      if (currentFilePath) setDirty(true);
+    });
+
+    loadFile('docs/about.md', '소개 (About)');
+  }
+
+  async function loadFile(path, label) {
+    if (isDirty && !confirm('저장하지 않은 변경사항이 있어요. 이동할까요?')) return;
+
+    document.querySelectorAll('.file-btn').forEach(b => b.classList.remove('active'));
+    const btnMap = {
+      'docs/about.md': 'btn-about',
+      'docs/projects/index.md': 'btn-projects',
+      'docs/index.md': 'btn-home',
+    };
+    document.getElementById(btnMap[path])?.classList.add('active');
+    document.getElementById('current-file-name').textContent = label;
+    setStatus('loading');
+
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`, {
+        headers: { Authorization: `token ${getToken()}` }
+      });
+      const data = await res.json();
+      currentFilePath = path;
+      currentFileSha = data.sha;
+      const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+      easyMDE.value(content);
+      setDirty(false);
+    } catch (e) {
+      showToast('파일을 불러오지 못했어요.', 'error');
+      setStatus('error');
+    }
+  }
+
+  async function saveFile() {
+    if (!currentFilePath) return;
+
+    const btn = document.getElementById('save-btn');
+    btn.disabled = true;
+    btn.textContent = '저장 중...';
+    setStatus('saving');
+
+    const content = btoa(unescape(encodeURIComponent(easyMDE.value())));
+    try {
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${currentFilePath}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `token ${getToken()}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: `Update ${currentFilePath} via admin`,
+          content,
+          sha: currentFileSha,
+          branch: BRANCH,
+        }),
+      });
+
+      if (!res.ok) throw new Error();
+      const data = await res.json();
+      currentFileSha = data.content.sha;
+      setDirty(false);
+      showToast('저장 완료! Vercel이 자동으로 재배포해요 🚀', 'success');
+    } catch {
+      showToast('저장 실패. 토큰 권한을 확인해주세요.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = '저장 & 배포';
+    }
+  }
+
+  function setDirty(dirty) {
+    isDirty = dirty;
+    setStatus(dirty ? 'unsaved' : 'saved');
+  }
+
+  function setStatus(state) {
+    const badge = document.getElementById('status-badge');
+    badge.className = 'badge';
+    if (state === 'saved') { badge.classList.add('badge-saved'); badge.textContent = '저장됨'; }
+    else if (state === 'saving' || state === 'loading') { badge.classList.add('badge-saving'); badge.textContent = state === 'saving' ? '저장 중...' : '불러오는 중...'; }
+    else if (state === 'unsaved') { badge.classList.add('badge-unsaved'); badge.textContent = '미저장'; }
+    else { badge.classList.add('badge-unsaved'); badge.textContent = '오류'; }
+  }
+
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = `toast ${type} show`;
+    setTimeout(() => t.classList.remove('show'), 3500);
+  }
+
+  // Keyboard shortcut: Cmd+S to save
+  document.addEventListener('keydown', e => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+      e.preventDefault();
+      saveFile();
+    }
+  });
+
+  // Auto-login if token in sessionStorage
+  if (getToken()) showEditor();
+
+  // Enter key on login
+  document.getElementById('token-input')?.addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+  });
+</script>
+</body>
+</html>

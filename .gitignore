@@ -3,3 +3,4 @@ doc_build/
 .rspress/
 .DS_Store
 *.log
+.vercel

@@ -1,54 +1,40 @@
 # Projects
 
-지금까지 만든 것들입니다.
+지금까지 만든 것들이에요.
 
----
+<div class="project-grid">
 
-## 프로젝트 1
+<div class="project-card">
+  <span class="project-card-emoji">📊</span>
+  <div class="project-card-title">프로젝트 이름</div>
+  <div class="project-card-period">2024년 xx월 – xx월</div>
+  <div class="project-card-desc">프로젝트 한 줄 설명. 어떤 문제를 해결했는지, 어떤 영향을 만들었는지 간략하게.</div>
+  <div class="project-card-tags">
+    <span class="project-tag">Figma</span>
+    <span class="project-tag">React</span>
+  </div>
+</div>
 
-**기간**: 2024년 xx월 – xx월
+<div class="project-card">
+  <span class="project-card-emoji">🛠️</span>
+  <div class="project-card-title">프로젝트 이름</div>
+  <div class="project-card-period">2024년 xx월 – xx월</div>
+  <div class="project-card-desc">프로젝트 한 줄 설명. 어떤 문제를 해결했는지, 어떤 영향을 만들었는지 간략하게.</div>
+  <div class="project-card-tags">
+    <span class="project-tag">TypeScript</span>
+    <span class="project-tag">Next.js</span>
+  </div>
+</div>
 
-**개요**
+<div class="project-card">
+  <span class="project-card-emoji">✨</span>
+  <div class="project-card-title">프로젝트 이름</div>
+  <div class="project-card-period">2024년 xx월 – xx월</div>
+  <div class="project-card-desc">프로젝트 한 줄 설명. 어떤 문제를 해결했는지, 어떤 영향을 만들었는지 간략하게.</div>
+  <div class="project-card-tags">
+    <span class="project-tag">UX Research</span>
+    <span class="project-tag">Design System</span>
+  </div>
+</div>
 
-<!-- 프로젝트 한 줄 설명 -->
-
-**어떤 문제를 풀었나**
-
-<!-- 이 프로젝트로 해결하려 했던 문제 -->
-
-**내가 한 것**
-
-- 기여 내용 1
-- 기여 내용 2
-- 기여 내용 3
-
-**결과**
-
-<!-- 수치, 임팩트 등 -->
-
----
-
-## 프로젝트 2
-
-**기간**: 2024년 xx월 – xx월
-
-**개요**
-
-<!-- 프로젝트 한 줄 설명 -->
-
-**어떤 문제를 풀었나**
-
-<!-- 이 프로젝트로 해결하려 했던 문제 -->
-
-**내가 한 것**
-
-- 기여 내용 1
-- 기여 내용 2
-
-**결과**
-
-<!-- 수치, 임팩트 등 -->
-
----
-
-_더 많은 프로젝트는 [GitHub](https://github.com/haeilylee)에서 볼 수 있습니다._
+</div>

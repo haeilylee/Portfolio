@@ -6,6 +6,10 @@ export default defineConfig({
   title: 'Hakyeong Lee',
   description: 'Product Designer & Developer',
   icon: '/profile.webp',
+  logo: {
+    light: '/profile.webp',
+    dark: '/profile.webp',
+  },
   lang: 'ko',
   globalStyles: path.join(__dirname, './styles/index.css'),
   themeConfig: {

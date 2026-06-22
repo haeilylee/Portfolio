@@ -1,38 +1,38 @@
-/* ─── Dark Portfolio Theme ─────────────────────────── */
+/* ─── Light Portfolio Theme ────────────────────────── */
 
 :root {
   /* Background */
-  --rp-c-bg: #0d0d0d;
-  --rp-c-bg-soft: #141414;
-  --rp-c-bg-mute: #1c1c1c;
-  --rp-c-bg-elv: #1c1c1c;
+  --rp-c-bg: #ffffff;
+  --rp-c-bg-soft: #f7f7f8;
+  --rp-c-bg-mute: #f0f0f1;
+  --rp-c-bg-elv: #f0f0f1;
 
   /* Text */
-  --rp-c-text-1: #e8e8e8;
-  --rp-c-text-2: #a0a0a0;
-  --rp-c-text-3: #666666;
+  --rp-c-text-1: #111111;
+  --rp-c-text-2: #555555;
+  --rp-c-text-3: #999999;
 
-  /* Brand / Accent — clean white-tinted indigo */
-  --rp-c-brand: #a78bfa;
-  --rp-c-brand-light: #c4b5fd;
-  --rp-c-brand-dark: #7c3aed;
-  --rp-c-brand-1: #a78bfa;
-  --rp-c-brand-2: #a78bfa;
-  --rp-c-brand-3: #7c3aed;
+  /* Brand / Accent */
+  --rp-c-brand: #5b4de8;
+  --rp-c-brand-light: #7c6af7;
+  --rp-c-brand-dark: #4336c4;
+  --rp-c-brand-1: #5b4de8;
+  --rp-c-brand-2: #5b4de8;
+  --rp-c-brand-3: #4336c4;
 
   /* Dividers & Borders */
-  --rp-c-divider: #242424;
-  --rp-c-border: #242424;
-  --rp-c-gutter: #0d0d0d;
+  --rp-c-divider: #e8e8e8;
+  --rp-c-border: #e8e8e8;
+  --rp-c-gutter: #f7f7f8;
 
   /* Sidebar */
-  --rp-c-bg-sidebar: #0d0d0d;
+  --rp-c-bg-sidebar: #fafafa;
 
   /* Nav */
   --rp-nav-height: 56px;
 }
 
-/* ─── Global Resets ───────────────────────────────── */
+/* ─── Global ─────────────────────────────────────── */
 
 body {
   background-color: var(--rp-c-bg) !important;
@@ -41,31 +41,40 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ─── Navigation Bar ─────────────────────────────── */
+/* ─── Nav ────────────────────────────────────────── */
 
 .rspress-nav {
-  background-color: rgba(13, 13, 13, 0.85) !important;
+  background-color: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--rp-c-divider) !important;
+}
+
+/* Logo sizing */
+.rspress-nav-logo img {
+  height: 32px !important;
+  width: 32px !important;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .rspress-nav-title {
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--rp-c-text-1) !important;
+  display: none; /* Hide title text — logo image is enough */
 }
 
 /* ─── Sidebar ────────────────────────────────────── */
 
 .rspress-sidebar {
-  background-color: var(--rp-c-bg) !important;
+  background-color: var(--rp-c-bg-sidebar) !important;
   border-right: 1px solid var(--rp-c-divider) !important;
 }
 
 .rspress-sidebar-item-link {
   color: var(--rp-c-text-2) !important;
   border-radius: 6px;
-  transition: color 0.15s, background-color 0.15s;
+  transition: color 0.12s, background-color 0.12s;
 }
 
 .rspress-sidebar-item-link:hover {
@@ -74,8 +83,9 @@ body {
 }
 
 .rspress-sidebar-item-link.active {
-  color: var(--rp-c-brand-light) !important;
-  background-color: rgba(167, 139, 250, 0.1) !important;
+  color: var(--rp-c-brand) !important;
+  background-color: rgba(91, 77, 232, 0.07) !important;
+  font-weight: 600;
 }
 
 /* ─── Content ────────────────────────────────────── */
@@ -87,48 +97,45 @@ body {
 /* ─── Headings ───────────────────────────────────── */
 
 h1 {
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 1.15;
-  color: #ffffff !important;
+  color: #111111 !important;
   margin-bottom: 0.5rem;
 }
 
 h2 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: #e0e0e0 !important;
+  color: #1a1a1a !important;
   border-top: 1px solid var(--rp-c-divider);
   padding-top: 1.5rem;
   margin-top: 2.5rem;
 }
 
 h3 {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: #d0d0d0 !important;
+  color: #222222 !important;
 }
 
 /* ─── Links ──────────────────────────────────────── */
 
 a {
-  color: var(--rp-c-brand-light) !important;
+  color: var(--rp-c-brand) !important;
   text-decoration: none;
-  transition: opacity 0.15s;
 }
 
-a:hover {
-  opacity: 0.8;
-}
+a:hover { text-decoration: underline; }
 
-/* ─── Code Blocks ────────────────────────────────── */
+/* ─── Code ───────────────────────────────────────── */
 
 code {
-  background-color: #1e1e2e !important;
-  color: #cdd6f4 !important;
-  border: 1px solid #313244 !important;
+  background-color: #f0f0f4 !important;
+  color: #5b4de8 !important;
+  border: 1px solid #e0dff8 !important;
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.88em;
@@ -138,20 +145,21 @@ pre code {
   background: none !important;
   border: none !important;
   padding: 0 !important;
+  color: inherit !important;
 }
 
 pre {
-  background-color: #1e1e2e !important;
-  border: 1px solid #313244 !important;
+  background-color: #f6f6f9 !important;
+  border: 1px solid #e8e8ee !important;
   border-radius: 10px;
   padding: 1.25rem 1.5rem !important;
 }
 
-/* ─── Blockquote / Callout ───────────────────────── */
+/* ─── Blockquote ─────────────────────────────────── */
 
 blockquote {
   border-left: 3px solid var(--rp-c-brand) !important;
-  background-color: rgba(167, 139, 250, 0.06) !important;
+  background-color: rgba(91, 77, 232, 0.04) !important;
   color: var(--rp-c-text-2) !important;
   border-radius: 0 6px 6px 0;
   padding: 0.75rem 1.25rem;
@@ -160,10 +168,7 @@ blockquote {
 
 /* ─── Table ──────────────────────────────────────── */
 
-table {
-  border-collapse: collapse;
-  width: 100%;
-}
+table { border-collapse: collapse; width: 100%; }
 
 th {
   background-color: var(--rp-c-bg-mute) !important;
@@ -180,12 +185,9 @@ td {
 
 /* ─── HR ─────────────────────────────────────────── */
 
-hr {
-  border-color: var(--rp-c-divider) !important;
-  margin: 2rem 0;
-}
+hr { border-color: var(--rp-c-divider) !important; margin: 2rem 0; }
 
-/* ─── Previous / Next Page Nav ───────────────────── */
+/* ─── Prev / Next ────────────────────────────────── */
 
 .rspress-prev-next-page {
   border-top: 1px solid var(--rp-c-divider) !important;
@@ -195,39 +197,32 @@ hr {
   background-color: var(--rp-c-bg-soft) !important;
   border: 1px solid var(--rp-c-divider) !important;
   border-radius: 8px;
-  transition: border-color 0.15s, background-color 0.15s;
+  transition: border-color 0.15s;
 }
 
 .rspress-prev-next-page a:hover {
   border-color: var(--rp-c-brand) !important;
-  background-color: var(--rp-c-bg-mute) !important;
 }
 
-/* ─── Home Page Hero ─────────────────────────────── */
+/* ─── Home Hero ──────────────────────────────────── */
 
-.rspress-home-hero {
-  padding: 6rem 0 4rem !important;
-}
+.rspress-home-hero { padding: 6rem 0 4rem !important; }
 
 .rspress-home-hero-title {
-  font-size: 3.5rem !important;
+  font-size: 3.2rem !important;
   font-weight: 900 !important;
   letter-spacing: -0.05em !important;
-  line-height: 1.1 !important;
-  background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #111111 !important;
 }
 
 .rspress-home-hero-tagline {
   color: var(--rp-c-text-2) !important;
-  font-size: 1.15rem !important;
-  margin-top: 1rem !important;
+  font-size: 1.1rem !important;
+  margin-top: 0.75rem !important;
 }
 
 .rspress-home-hero-action-primary {
-  background-color: var(--rp-c-brand) !important;
+  background-color: #111111 !important;
   color: #ffffff !important;
   border: none !important;
   border-radius: 8px !important;
@@ -235,9 +230,7 @@ hr {
   transition: opacity 0.15s !important;
 }
 
-.rspress-home-hero-action-primary:hover {
-  opacity: 0.85 !important;
-}
+.rspress-home-hero-action-primary:hover { opacity: 0.8 !important; }
 
 .rspress-home-hero-action-alt {
   background-color: transparent !important;
@@ -249,20 +242,20 @@ hr {
 }
 
 .rspress-home-hero-action-alt:hover {
-  border-color: var(--rp-c-brand) !important;
+  border-color: #111111 !important;
 }
 
 /* ─── Home Feature Cards ─────────────────────────── */
 
 .rspress-home-feature {
-  background-color: var(--rp-c-bg-soft) !important;
+  background-color: #fafafa !important;
   border: 1px solid var(--rp-c-divider) !important;
   border-radius: 12px !important;
-  transition: border-color 0.2s, transform 0.2s !important;
+  transition: box-shadow 0.2s, transform 0.2s !important;
 }
 
 .rspress-home-feature:hover {
-  border-color: var(--rp-c-brand) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07) !important;
   transform: translateY(-2px) !important;
 }
 
@@ -281,4 +274,71 @@ hr {
   background-color: var(--rp-c-bg) !important;
   border-top: 1px solid var(--rp-c-divider) !important;
   color: var(--rp-c-text-3) !important;
+}
+
+/* ─── Project Cards (Gallery) ────────────────────── */
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.project-card {
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
+.project-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  border-color: #d0d0d8;
+}
+
+.project-card-emoji {
+  font-size: 2rem;
+  margin-bottom: 0.85rem;
+  display: block;
+}
+
+.project-card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111111;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.02em;
+}
+
+.project-card-period {
+  font-size: 0.78rem;
+  color: #999;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+
+.project-card-desc {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.project-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #5b4de8;
+  background: rgba(91, 77, 232, 0.07);
+  border-radius: 99px;
+  padding: 0.2rem 0.6rem;
 }
