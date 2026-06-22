@@ -5,7 +5,7 @@ export default defineConfig({
   root: path.join(__dirname, 'docs'),
   title: 'Hakyeong Lee',
   description: 'Product Designer & Developer',
-  icon: '/favicon.ico',
+  icon: '/profile.webp',
   lang: 'ko',
   globalStyles: path.join(__dirname, './styles/index.css'),
   themeConfig: {

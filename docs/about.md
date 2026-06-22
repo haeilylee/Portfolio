@@ -1,5 +1,7 @@
 # About Me
 
+<img src="/profile.webp" alt="Hakyeong Lee" style={{width: '120px', borderRadius: '50%', marginBottom: '1.5rem', display: 'block'}} />
+
 안녕하세요, **이하경**입니다.
 
 > 제가 만드는 것들이 누군가의 하루를 조금 더 편하게 만들었으면 합니다.
