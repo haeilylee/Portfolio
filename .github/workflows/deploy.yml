@@ -13,5 +13,8 @@ jobs:
       - name: Install Vercel CLI
         run: npm install -g vercel@latest
 
-      - name: Deploy to Vercel
-        run: vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} --scope=haeilylees-projects
+      - name: Deploy to Vercel and alias
+        run: |
+          DEPLOY_URL=$(vercel deploy --prod --yes --token=${{ secrets.VERCEL_TOKEN }} --scope=haeilylees-projects)
+          echo "Deployed to: $DEPLOY_URL"
+          vercel alias set "$DEPLOY_URL" haeilylee-portfolio.vercel.app --token=${{ secrets.VERCEL_TOKEN }} --scope=haeilylees-projects
