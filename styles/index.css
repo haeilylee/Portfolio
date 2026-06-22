@@ -322,7 +322,7 @@ aside.rspress-sidebar > div:empty {
 .home-avatar {
   width: 52px;
   height: 52px;
-  border-radius: 8px;
+  border-radius: 0;
   object-fit: cover;
   flex-shrink: 0;
 }
