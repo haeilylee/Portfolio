@@ -280,9 +280,141 @@
     /* ─── Project Form ────────────────────────────── */
     .project-form-wrap {
       flex: 1;
+      display: flex;
+      gap: 0;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .project-form-col {
+      flex: 1;
       padding: 2rem;
       overflow-y: auto;
-      background: var(--bg);
+    }
+
+    .project-preview-col {
+      width: 340px;
+      min-width: 340px;
+      padding: 2rem 1.5rem;
+      border-left: 1px solid var(--border);
+      background: var(--surface);
+      overflow-y: auto;
+    }
+
+    .preview-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Mini card preview — mirrors site's .project-card */
+    .preview-card {
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(0,0,0,0.07);
+      font-family: var(--font);
+      --card-bg: #f5f0eb; --card-text: #3d2b1a; --card-sub: #7a5c44;
+    }
+
+    .preview-card-top {
+      background: var(--card-bg);
+      padding: 1.25rem 1.4rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 130px;
+    }
+
+    .preview-card-meta {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.6rem;
+    }
+
+    .preview-card-category {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--card-sub);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .preview-card-arrow {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.09);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      color: var(--card-text);
+    }
+
+    .preview-card-title {
+      font-size: 1.1rem;
+      font-weight: 900;
+      color: var(--card-text);
+      letter-spacing: -0.04em;
+      line-height: 1.25;
+      margin-bottom: 0.55rem;
+    }
+
+    .preview-card-desc {
+      font-size: 0.75rem;
+      color: var(--card-sub);
+      line-height: 1.6;
+      flex: 1;
+    }
+
+    .preview-card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: rgba(0,0,0,0.06);
+      overflow: hidden;
+    }
+
+    .preview-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 1rem;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      gap: 0.5rem;
+    }
+
+    .preview-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+    }
+
+    .preview-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      background: rgba(0,0,0,0.07);
+      color: var(--card-text);
+      border-radius: 99px;
+      padding: 0.1rem 0.4rem;
+    }
+
+    .preview-date {
+      font-size: 0.62rem;
+      color: var(--card-sub);
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .form-empty-state {
@@ -553,7 +685,7 @@
     <span class="topbar-brand">✦ Hakyeong Admin</span>
     <div class="topbar-tabs">
       <button class="tab-btn active" onclick="switchTab('projects', this)">프로젝트</button>
-      <button class="tab-btn" onclick="switchTab('pages', this)">페이지 편집</button>
+      <button class="tab-btn" onclick="switchTab('pages', this)">소개 편집</button>
     </div>
     <div class="topbar-right">
       <span class="badge badge-saved" id="status-badge">저장됨</span>
@@ -573,65 +705,93 @@
         <div class="project-list" id="project-list"></div>
       </div>
       <div class="project-form-wrap" id="project-form-wrap">
-        <div class="form-empty-state" id="form-empty">
+        <!-- empty state spans full width -->
+        <div class="form-empty-state" id="form-empty" style="flex:1;display:flex">
           <div class="form-empty-icon">📋</div>
           <p>왼쪽에서 프로젝트를 선택하거나<br>새 프로젝트를 추가해요.</p>
         </div>
-        <form class="project-form" id="project-form" style="display:none" onsubmit="saveProject(event)">
-          <div>
-            <h2 id="form-title">새 프로젝트</h2>
-          </div>
-          <div class="form-group">
-            <label>미리보기 텍스트 <span style="color:#aaa;font-weight:400;text-transform:none;font-size:0.75rem">카드 상단 회색 영역에 표시돼요</span></label>
-            <textarea id="f-preview" rows="3" placeholder="이 프로젝트에서 해결한 핵심 인사이트를 한 문단으로..."></textarea>
-          </div>
-          <div class="form-group">
-            <label>제목</label>
-            <input type="text" id="f-title" placeholder="프로젝트 제목" required />
-          </div>
-          <div class="form-group">
-            <label>설명</label>
-            <textarea id="f-desc" rows="3" placeholder="무엇을 했는지, 어떤 임팩트가 있었는지 2-3문장으로..."></textarea>
-          </div>
-          <div class="form-group">
-            <label>태그</label>
-            <div class="tags-grid" id="tags-grid"></div>
-          </div>
-          <div class="form-group">
-            <label>커버 이미지 <span style="color:#aaa;font-weight:400;text-transform:none;font-size:0.75rem">선택사항 — 카드에 표시돼요</span></label>
-            <div class="image-upload-area" onclick="document.getElementById('f-image-input').click()" id="image-upload-area">
-              <input type="file" id="f-image-input" accept="image/*" onchange="handleImageUpload(this)" />
-              <div id="image-placeholder">
-                <label class="image-upload-label">
-                  <span class="image-upload-icon">🖼️</span>
-                  <span>클릭해서 이미지 업로드</span>
-                  <span style="font-size:0.72rem;color:#bbb">PNG, JPG, WebP 지원</span>
-                </label>
+
+        <!-- form + preview side by side -->
+        <div id="form-and-preview" style="display:none;flex:1;overflow:hidden;">
+          <div class="project-form-col">
+            <form class="project-form" id="project-form" onsubmit="saveProject(event)">
+              <div>
+                <h2 id="form-title">새 프로젝트</h2>
               </div>
-              <div id="image-preview-container" style="display:none">
-                <div class="image-preview-wrap">
-                  <img id="image-preview" class="image-preview" src="" alt="preview" />
-                  <button class="image-remove-btn" onclick="removeImage(event)" title="이미지 제거">✕</button>
+              <div class="form-group">
+                <label>제목</label>
+                <input type="text" id="f-title" placeholder="프로젝트 제목" required oninput="updatePreview()" />
+              </div>
+              <div class="form-group">
+                <label>한 줄 설명 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">카드에 바로 보여요</span></label>
+                <textarea id="f-preview" rows="3" placeholder="이 프로젝트에서 해결한 핵심 인사이트를..." oninput="updatePreview()"></textarea>
+              </div>
+              <div class="form-group">
+                <label>상세 설명 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">프로젝트 상세 페이지용</span></label>
+                <textarea id="f-desc" rows="3" placeholder="무엇을 했는지, 어떤 임팩트가 있었는지 2-3문장으로..."></textarea>
+              </div>
+              <div class="form-group">
+                <label>태그</label>
+                <div class="tags-grid" id="tags-grid"></div>
+              </div>
+              <div class="form-group">
+                <label>썸네일 이미지 <span style="color:#bbb;font-weight:400;text-transform:none;font-size:0.75rem">카드 하단에 표시돼요</span></label>
+                <div class="image-upload-area" onclick="document.getElementById('f-image-input').click()" id="image-upload-area">
+                  <input type="file" id="f-image-input" accept="image/*" onchange="handleImageUpload(this)" />
+                  <div id="image-placeholder">
+                    <label class="image-upload-label">
+                      <span class="image-upload-icon">🖼️</span>
+                      <span>클릭해서 이미지 업로드</span>
+                      <span style="font-size:0.72rem;color:#bbb">PNG, JPG, WebP 지원</span>
+                    </label>
+                  </div>
+                  <div id="image-preview-container" style="display:none">
+                    <div class="image-preview-wrap">
+                      <img id="image-preview" class="image-preview" src="" alt="preview" />
+                      <button class="image-remove-btn" onclick="removeImage(event)" title="이미지 제거">✕</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>시작일</label>
+                  <input type="text" id="f-date-from" placeholder="2026/01" oninput="updatePreview()" />
+                </div>
+                <div class="form-group">
+                  <label>종료일</label>
+                  <input type="text" id="f-date-to" placeholder="2026/03" oninput="updatePreview()" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="form-save-btn">저장 & 배포</button>
+                <button type="button" class="btn btn-ghost" onclick="cancelEdit()">취소</button>
+              </div>
+            </form>
           </div>
 
-          <div class="form-row">
-            <div class="form-group">
-              <label>시작일</label>
-              <input type="text" id="f-date-from" placeholder="2026/01/01" />
-            </div>
-            <div class="form-group">
-              <label>종료일</label>
-              <input type="text" id="f-date-to" placeholder="2026/03/31" />
+          <!-- Live card preview -->
+          <div class="project-preview-col">
+            <div class="preview-label">카드 미리보기</div>
+            <div class="preview-card" id="preview-card">
+              <div class="preview-card-top">
+                <div class="preview-card-meta">
+                  <span class="preview-card-category" id="pv-category">카테고리</span>
+                  <span class="preview-card-arrow">↗</span>
+                </div>
+                <div class="preview-card-title" id="pv-title">프로젝트 제목</div>
+                <div class="preview-card-desc" id="pv-desc">한 줄 설명이 여기에 표시돼요.</div>
+              </div>
+              <div class="preview-card-thumb" id="pv-thumb" style="display:none">
+                <img id="pv-thumb-img" src="" alt="" />
+              </div>
+              <div class="preview-card-footer">
+                <div class="preview-tags" id="pv-tags"></div>
+                <div class="preview-date" id="pv-date">날짜</div>
+              </div>
             </div>
           </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" id="form-save-btn">저장 & 배포</button>
-            <button type="button" class="btn btn-ghost" onclick="cancelEdit()">취소</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -641,8 +801,7 @@
     <div class="editor-layout">
       <nav class="editor-sidebar">
         <div class="sidebar-label">페이지</div>
-        <button class="file-btn active" onclick="loadPage('docs/about.md','소개 (About)',this)">소개 (About)</button>
-        <button class="file-btn" onclick="loadPage('docs/index.md','홈 (Home)',this)">홈 (Home)</button>
+        <button class="file-btn active" onclick="loadPage('docs/about.md','소개',this)">소개 (About)</button>
       </nav>
       <div class="editor-main">
         <div class="editor-wrap">
@@ -727,7 +886,7 @@ function buildTagsGrid() {
   const grid = document.getElementById('tags-grid');
   grid.innerHTML = TAG_LIST.map(t => `
     <label>
-      <input type="checkbox" class="tag-check" name="tag" value="${t}" />
+      <input type="checkbox" class="tag-check" name="tag" value="${t}" onchange="updatePreview()" />
       <span class="tag-label">${t}</span>
     </label>
   `).join('');
@@ -779,13 +938,24 @@ function generateTagHTML(tags) {
 }
 
 function generateCardHTML(p) {
+  const category = p.tags[0] || '';
+  const dateShort = p.date.replace(/\/\d{2}(\/\d{2})?/g, m => m.slice(0,3)); // "2026/01/01 → 2026/02/01" → "2026/01 → 2026/02"
+  const thumbnailHTML = p.image ? `
+  <div class="project-card-thumbnail">
+    <img src="${p.image}" alt="${p.title}" />
+  </div>` : '';
   return `<div class="project-card" data-tags="${p.tags.join(',')}">
-  <div class="project-card-preview">${p.preview}</div>
-  <div class="project-card-body">
+  <div class="project-card-top">
+    <div class="project-card-meta">
+      <span class="project-card-category">${category}</span>
+      <span class="project-card-arrow">↗</span>
+    </div>
     <div class="project-card-title">${p.title}</div>
-    <div class="project-card-desc">${p.desc}</div>
+    <div class="project-card-preview">${p.preview}</div>
+  </div>${thumbnailHTML}
+  <div class="project-card-footer">
     <div class="project-card-tags">
-${generateTagHTML(p.tags)}
+${p.tags.map(t => `      <span class="project-tag">${t}</span>`).join('\n')}
     </div>
     <div class="project-card-date">${p.date}</div>
   </div>
@@ -855,6 +1025,16 @@ function renderProjectList() {
 
 // ─── Edit / New ────────────────────────────────────
 
+function showFormPanel() {
+  document.getElementById('form-empty').style.display = 'none';
+  document.getElementById('form-and-preview').style.display = 'flex';
+}
+
+function hideFormPanel() {
+  document.getElementById('form-and-preview').style.display = 'none';
+  document.getElementById('form-empty').style.display = 'flex';
+}
+
 function newProject() {
   editingIndex = null;
   document.getElementById('form-title').textContent = '새 프로젝트';
@@ -865,9 +1045,37 @@ function newProject() {
   document.getElementById('f-date-from').value = '';
   document.getElementById('f-date-to').value = '';
   document.querySelectorAll('.tag-check').forEach(c => c.checked = false);
-  document.getElementById('form-empty').style.display = 'none';
-  document.getElementById('project-form').style.display = 'flex';
+  resetImageUpload();
+  showFormPanel();
+  updatePreview();
   renderProjectList();
+}
+
+function resetImageUpload() {
+  pendingImageBase64 = null;
+  pendingImageName = null;
+  const inp = document.getElementById('f-image-input');
+  if (inp) inp.value = '';
+  document.getElementById('image-placeholder').style.display = 'block';
+  document.getElementById('image-preview-container').style.display = 'none';
+  document.getElementById('image-preview').src = '';
+  document.getElementById('pv-thumb').style.display = 'none';
+}
+
+function updatePreview() {
+  const title = document.getElementById('f-title').value || '프로젝트 제목';
+  const desc = document.getElementById('f-preview').value || '한 줄 설명이 여기에 표시돼요.';
+  const from = document.getElementById('f-date-from').value;
+  const to = document.getElementById('f-date-to').value;
+  const date = from && to ? `${from} → ${to}` : (from || to || '날짜');
+  const tags = [...document.querySelectorAll('.tag-check:checked')].map(c => c.value);
+  const category = tags[0] || '카테고리';
+
+  document.getElementById('pv-title').textContent = title;
+  document.getElementById('pv-desc').textContent = desc;
+  document.getElementById('pv-category').textContent = category;
+  document.getElementById('pv-date').textContent = date;
+  document.getElementById('pv-tags').innerHTML = tags.map(t => `<span class="preview-tag">${t}</span>`).join('');
 }
 
 function editProject(i) {
@@ -882,27 +1090,25 @@ function editProject(i) {
   document.getElementById('f-date-from').value = from||'';
   document.getElementById('f-date-to').value = to||'';
   document.querySelectorAll('.tag-check').forEach(c => { c.checked = p.tags.includes(c.value); });
-  // Image
   pendingImageBase64 = null;
   pendingImageName = null;
   if (p.image) {
     document.getElementById('image-placeholder').style.display = 'none';
     document.getElementById('image-preview-container').style.display = 'block';
     document.getElementById('image-preview').src = p.image;
+    document.getElementById('pv-thumb-img').src = p.image;
+    document.getElementById('pv-thumb').style.display = 'block';
   } else {
-    document.getElementById('image-placeholder').style.display = 'block';
-    document.getElementById('image-preview-container').style.display = 'none';
-    document.getElementById('image-preview').src = '';
+    resetImageUpload();
   }
-  document.getElementById('form-empty').style.display = 'none';
-  document.getElementById('project-form').style.display = 'flex';
+  showFormPanel();
+  updatePreview();
   renderProjectList();
 }
 
 function cancelEdit() {
   editingIndex = null;
-  document.getElementById('project-form').style.display = 'none';
-  document.getElementById('form-empty').style.display = 'flex';
+  hideFormPanel();
   renderProjectList();
 }
 
@@ -955,18 +1161,16 @@ function handleImageUpload(input) {
     document.getElementById('image-placeholder').style.display = 'none';
     document.getElementById('image-preview-container').style.display = 'block';
     document.getElementById('image-preview').src = e.target.result;
+    document.getElementById('pv-thumb-img').src = e.target.result;
+    document.getElementById('pv-thumb').style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
 
 function removeImage(e) {
   e.stopPropagation();
-  pendingImageBase64 = null;
-  pendingImageName = null;
-  document.getElementById('f-image-input').value = '';
-  document.getElementById('image-placeholder').style.display = 'block';
-  document.getElementById('image-preview-container').style.display = 'none';
-  document.getElementById('image-preview').src = '';
+  resetImageUpload();
+  if (editingIndex !== null) projects[editingIndex].image = '';
 }
 
 async function uploadImageIfNeeded() {
@@ -1101,7 +1305,7 @@ document.addEventListener('keydown', e => {
   if ((e.metaKey || e.ctrlKey) && e.key === 's') {
     e.preventDefault();
     const activeTab = document.querySelector('.tab-btn.active')?.textContent;
-    if (activeTab === '페이지 편집') savePage();
+    if (activeTab === '소개 편집') savePage();
   }
 });
 
