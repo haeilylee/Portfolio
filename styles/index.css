@@ -468,87 +468,256 @@ a.project-card:nth-child(3) .project-card-thumbnail-placeholder { background: li
 ══════════════════════════════════ */
 
 /* Breadcrumb */
-.project-breadcrumb {
+.article-breadcrumb {
   font-size: 0.8125rem;
   color: var(--gray-500);
   margin-bottom: 1.25rem;
+  text-align: left;
+}
+.article-breadcrumb a {
+  color: var(--gray-500) !important;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: color 0.1s;
+}
+.article-breadcrumb a:hover { color: var(--gray-1000) !important; }
+
+/* Centered article header (title above thumbnail) */
+.article-header {
+  text-align: center;
+  padding: 2rem 0 0;
+  margin-bottom: 1.5rem;
+}
+
+.article-meta {
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  margin: 0 0 0.75rem !important;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  justify-content: center;
+  gap: 0.5rem;
 }
-.project-breadcrumb a { color: var(--gray-500) !important; text-decoration: none !important; }
-.project-breadcrumb a:hover { color: var(--gray-1000) !important; }
-.project-breadcrumb span { color: var(--gray-700); }
 
-/* Hero card (colored gradient, like building-agents blue card) */
-.project-hero {
+.article-meta-sep {
+  color: var(--gray-200);
+}
+
+.article-header h1,
+.article-title {
+  font-size: 2rem !important;
+  font-weight: 700 !important;
+  color: var(--gray-1000) !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.2 !important;
+  margin: 0 0 0.75rem !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+.article-sub {
+  font-size: 0.9375rem;
+  color: var(--gray-500);
+  line-height: 1.65;
+  max-width: 520px;
+  margin: 0 auto !important;
+}
+
+/* Thumbnail image block (separate from title, like OpenAI) */
+.article-thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 7;
   border-radius: 12px;
-  padding: 2.5rem 2.25rem;
-  margin-bottom: 2.5rem;
-  color: #fff;
-  position: relative;
   overflow: hidden;
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+  margin: 0 0 2.5rem;
+  position: relative;
 }
 
-/* Gradient backgrounds per category */
-.project-hero.cat-design-system { background: linear-gradient(145deg, #1a4fd6 0%, #4f86f7 100%); }
-.project-hero.cat-ai            { background: linear-gradient(145deg, #5b21b6 0%, #a78bfa 100%); }
-.project-hero.cat-ux            { background: linear-gradient(145deg, #065f46 0%, #34d399 100%); }
-.project-hero.cat-product       { background: linear-gradient(145deg, #9a3412 0%, #f97316 100%); }
+.article-thumbnail img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  display: block;
+}
 
-/* Decorative circle (like OpenAI's abstract BG elements) */
-.project-hero::before {
+/* Gradient placeholder when no image — matches home card color */
+.article-thumbnail.cat-design-system { background: linear-gradient(145deg, #1a4fd6 0%, #4f86f7 100%); }
+.article-thumbnail.cat-ai            { background: linear-gradient(145deg, #5b21b6 0%, #a78bfa 100%); }
+.article-thumbnail.cat-ux            { background: linear-gradient(145deg, #065f46 0%, #34d399 100%); }
+.article-thumbnail.cat-product       { background: linear-gradient(145deg, #9a3412 0%, #f97316 100%); }
+
+/* Decorative circles on placeholder (like OpenAI's abstract bg) */
+.article-thumbnail::before {
   content: '';
   position: absolute;
   right: -60px; top: -60px;
-  width: 280px; height: 280px;
+  width: 320px; height: 320px;
   border-radius: 50%;
   background: rgba(255,255,255,0.08);
   pointer-events: none;
 }
-.project-hero::after {
+.article-thumbnail::after {
   content: '';
   position: absolute;
-  right: 60px; bottom: -80px;
-  width: 200px; height: 200px;
+  left: -40px; bottom: -80px;
+  width: 240px; height: 240px;
   border-radius: 50%;
   background: rgba(255,255,255,0.05);
   pointer-events: none;
 }
 
-.project-hero-tag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  opacity: 0.75;
+/* ── 2-column overview section ── */
+.article-cols {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 2.5rem;
+  padding: 1.75rem 0 2rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
   margin-bottom: 0.5rem;
 }
 
-.project-hero h1,
-.project-hero-title {
-  font-size: 1.75rem !important;
-  font-weight: 700 !important;
-  color: #fff !important;
-  letter-spacing: -0.025em !important;
-  line-height: 1.2 !important;
-  margin: 0 0 0.4rem !important;
+@media (max-width: 700px) {
+  .article-cols { grid-template-columns: 1fr; }
+}
+
+.article-col-main { }
+
+.article-col-main p {
+  font-size: 0.9375rem;
+  color: var(--gray-700);
+  line-height: 1.75;
+  margin: 0 0 1.25rem !important;
+}
+
+.article-difficulty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--gray-500);
+  margin-bottom: 1rem;
+}
+.article-difficulty .sep { color: var(--gray-200); }
+
+.article-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.article-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 26px;
+  padding: 0 0.625rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+/* Right: Best for / 주요 성과 */
+.article-col-side { }
+.article-col-side h3 {
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  color: var(--gray-900) !important;
+  margin: 0 0 0.875rem !important;
+  padding: 0 !important;
+  border: none !important;
+}
+.article-col-side ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.article-col-side ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--gray-700);
+  line-height: 1.5;
+}
+.article-col-side ul li::before {
+  content: '✓';
+  color: var(--gray-1000);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 0.05em;
+}
+
+/* ── Tools & Stack (Skills & Plugins style) ── */
+.article-tools {
+  margin: 0 0 2rem;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 1.5rem;
+}
+
+.article-tools h3 {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: var(--gray-1000) !important;
+  margin: 0 0 0.75rem !important;
   border: none !important;
   padding: 0 !important;
 }
 
-.project-hero-meta {
+.tool-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  align-items: start;
+  padding: 0.625rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.tool-row:last-of-type { border-bottom: none; }
+
+.tool-name {
   font-size: 0.875rem;
-  color: rgba(255,255,255,0.72);
-  margin: 0 !important;
+  font-weight: 500;
+  color: var(--gray-1000) !important;
+  text-decoration: none !important;
+}
+.tool-desc {
+  font-size: 0.875rem;
+  color: var(--gray-500);
+  line-height: 1.55;
 }
 
-/* Hide the auto-generated markdown H1 when hero is present */
-.has-hero > h1:first-of-type { display: none; }
+/* ── Key Insight (Starter prompt style) ── */
+.article-prompt {
+  background: var(--gray-50);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  margin: 0 0 2rem;
+  font-size: 0.9375rem;
+  color: var(--gray-700);
+  line-height: 1.7;
+  position: relative;
+}
+
+.article-prompt-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-500);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.625rem;
+}
+
+.article-prompt p {
+  margin: 0 !important;
+  font-size: 0.9375rem !important;
+  color: var(--gray-700) !important;
+  line-height: 1.7 !important;
+}
 
 /* Project links bar */
 .project-links {
