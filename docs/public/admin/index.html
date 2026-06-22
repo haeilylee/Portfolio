@@ -7,36 +7,39 @@
   <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css" />
   <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
   <style>
+    @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #1a1a1a;
-      --border: #2a2a2a;
-      --text: #e8e8e8;
-      --muted: #888;
-      --accent: #a78bfa;
-      --danger: #f87171;
-      --success: #4ade80;
-      --radius: 10px;
-      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      --bg: #f8f8f8;
+      --surface: #ffffff;
+      --border: #e8e8e8;
+      --text: #111111;
+      --muted: #888888;
+      --danger: #e03e3e;
+      --success: #0a7c42;
+      --font: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
+      letter-spacing: -0.02em;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Login ── */
+    /* ─── Login ───────────────────────────────────── */
     #login-screen {
       flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: var(--bg);
     }
 
     .login-box {
@@ -46,153 +49,368 @@
       padding: 2.5rem;
       width: 100%;
       max-width: 400px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
 
     .login-box h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.4rem;
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.35rem;
     }
 
     .login-box p {
       color: var(--muted);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       margin-bottom: 1.75rem;
+      line-height: 1.6;
     }
 
-    .login-box p a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .login-box p a { color: #111; font-weight: 600; }
 
     label {
       display: block;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-size: 0.75rem;
+      font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.45rem;
     }
 
-    input[type="password"], input[type="text"] {
+    input[type="password"], input[type="text"], input[type="date"], textarea, select {
       width: 100%;
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 8px;
       color: var(--text);
       font-family: var(--font);
-      font-size: 0.92rem;
-      padding: 0.65rem 0.9rem;
+      font-size: 0.9rem;
+      letter-spacing: -0.02em;
+      padding: 0.6rem 0.85rem;
       outline: none;
       transition: border-color 0.15s;
     }
 
-    input:focus { border-color: var(--accent); }
+    textarea { resize: vertical; line-height: 1.6; }
+    input:focus, textarea:focus, select:focus { border-color: #111; }
 
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.4rem;
-      padding: 0.65rem 1.25rem;
+      gap: 0.35rem;
+      padding: 0.6rem 1.1rem;
       border-radius: 8px;
       font-family: var(--font);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 600;
+      letter-spacing: -0.02em;
       cursor: pointer;
       border: none;
       transition: opacity 0.15s, background 0.15s;
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      width: 100%;
-      margin-top: 1rem;
-    }
+    .btn-primary { background: #111; color: #fff; }
+    .btn-primary:hover { opacity: 0.8; }
+    .btn-ghost { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: #111; }
+    .btn-danger { background: transparent; color: var(--danger); border: 1px solid #fca5a5; }
+    .btn-danger:hover { background: #fef2f2; }
+    .btn-sm { padding: 0.35rem 0.7rem; font-size: 0.78rem; }
+    .btn-full { width: 100%; margin-top: 1rem; }
 
-    .btn-primary:hover { opacity: 0.85; }
+    .error-msg { color: var(--danger); font-size: 0.82rem; margin-top: 0.5rem; display: none; }
 
-    .btn-ghost {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .btn-ghost:hover { border-color: var(--accent); }
-
-    .btn-danger {
-      background: transparent;
-      color: var(--danger);
-      border: 1px solid var(--danger);
-    }
-
-    .btn-danger:hover { background: rgba(248,113,113,0.1); }
-
-    .error-msg {
-      color: var(--danger);
-      font-size: 0.82rem;
-      margin-top: 0.6rem;
-      display: none;
-    }
-
-    /* ── Editor ── */
-    #editor-screen {
-      display: none;
-      flex: 1;
-      flex-direction: column;
-    }
+    /* ─── App Shell ───────────────────────────────── */
+    #app { display: none; flex: 1; flex-direction: column; }
 
     .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.85rem 1.5rem;
+      padding: 0 1.5rem;
+      height: 52px;
       background: var(--surface);
       border-bottom: 1px solid var(--border);
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 20;
     }
 
-    .topbar-left {
+    .topbar-brand {
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: -0.03em;
+      color: #111;
+    }
+
+    .topbar-tabs {
       display: flex;
-      align-items: center;
-      gap: 1rem;
+      gap: 0.25rem;
     }
 
-    .topbar h2 {
-      font-size: 0.95rem;
-      font-weight: 700;
+    .tab-btn {
+      padding: 0.35rem 0.85rem;
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 0.83rem;
+      font-weight: 600;
       letter-spacing: -0.02em;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: var(--muted);
+      transition: background 0.12s, color 0.12s;
     }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
+    .tab-btn:hover { background: var(--bg); color: #111; }
+    .tab-btn.active { background: #111; color: #fff; }
+
+    .topbar-right { display: flex; align-items: center; gap: 0.5rem; }
 
     .badge {
-      font-size: 0.75rem;
-      padding: 0.2rem 0.55rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.18rem 0.5rem;
       border-radius: 99px;
-      font-weight: 600;
+      letter-spacing: 0;
     }
 
-    .badge-saved { background: rgba(74,222,128,0.15); color: var(--success); }
-    .badge-saving { background: rgba(167,139,250,0.15); color: var(--accent); }
-    .badge-unsaved { background: rgba(248,113,113,0.12); color: var(--danger); }
+    .badge-saved { background: #dcfce7; color: var(--success); }
+    .badge-saving { background: #fef9c3; color: #854d0e; }
+    .badge-unsaved { background: #fee2e2; color: var(--danger); }
 
+    /* ─── Tab Panels ──────────────────────────────── */
+    .panel { display: none; flex: 1; }
+    .panel.active { display: flex; flex-direction: column; }
+
+    /* ─── Projects Panel ──────────────────────────── */
+    .projects-layout {
+      display: flex;
+      flex: 1;
+      gap: 0;
+    }
+
+    .projects-sidebar {
+      width: 300px;
+      min-width: 300px;
+      border-right: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .projects-sidebar-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .projects-sidebar-header h3 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .project-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .project-list-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.12s;
+      gap: 0.5rem;
+    }
+
+    .project-list-item:hover { background: var(--bg); }
+    .project-list-item.active { background: #f0f0f0; }
+
+    .project-list-item-info { flex: 1; min-width: 0; }
+
+    .project-list-item-title {
+      font-size: 0.87rem;
+      font-weight: 700;
+      color: #111;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .project-list-item-date {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.1rem;
+    }
+
+    .project-list-actions { display: flex; gap: 0.25rem; opacity: 0; transition: opacity 0.1s; }
+    .project-list-item:hover .project-list-actions { opacity: 1; }
+
+    .icon-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      transition: background 0.1s, color 0.1s;
+    }
+
+    .icon-btn:hover { background: #e8e8e8; color: #111; }
+    .icon-btn.del:hover { background: #fee2e2; color: var(--danger); }
+
+    /* ─── Project Form ────────────────────────────── */
+    .project-form-wrap {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+      background: var(--bg);
+    }
+
+    .form-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: var(--muted);
+      gap: 0.75rem;
+      text-align: center;
+    }
+
+    .form-empty-icon { font-size: 2.5rem; opacity: 0.4; }
+    .form-empty-state p { font-size: 0.88rem; }
+
+    .project-form { max-width: 640px; display: flex; flex-direction: column; gap: 1.25rem; }
+
+    .project-form h2 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+
+    .image-upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      background: var(--bg);
+      position: relative;
+    }
+
+    .image-upload-area:hover { border-color: #111; background: #f0f0f0; }
+    .image-upload-area input[type="file"] { display: none; }
+
+    .image-upload-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .image-upload-icon { font-size: 1.5rem; }
+
+    .image-preview-wrap {
+      position: relative;
+      display: inline-block;
+    }
+
+    .image-preview {
+      max-width: 100%;
+      max-height: 160px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .image-remove-btn {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tags-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-check {
+      display: none;
+    }
+
+    .tag-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 0.25rem 0.65rem;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: all 0.12s;
+      background: #f0f0f0;
+      color: #555;
+      letter-spacing: -0.01em;
+    }
+
+    .tag-check:checked + .tag-label {
+      background: #111;
+      color: #fff;
+      border-color: #111;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 0.6rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── Page Editor Panel ───────────────────────── */
     .editor-layout {
       display: flex;
       flex: 1;
-      height: calc(100vh - 56px);
+      overflow: hidden;
     }
 
-    .sidebar {
+    .editor-sidebar {
       width: 220px;
       min-width: 220px;
       background: var(--surface);
@@ -200,17 +418,16 @@
       padding: 1rem 0.75rem;
       display: flex;
       flex-direction: column;
-      gap: 0.25rem;
-      overflow-y: auto;
+      gap: 0.2rem;
     }
 
     .sidebar-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 0.25rem 0.5rem 0.6rem;
+      letter-spacing: 0.07em;
+      padding: 0.2rem 0.5rem 0.5rem;
     }
 
     .file-btn {
@@ -223,86 +440,93 @@
       color: var(--muted);
       font-family: var(--font);
       font-size: 0.87rem;
+      font-weight: 500;
+      letter-spacing: -0.02em;
       padding: 0.5rem 0.75rem;
       cursor: pointer;
-      transition: background 0.12s, color 0.12s;
+      transition: background 0.1s, color 0.1s;
     }
 
-    .file-btn:hover { background: var(--border); color: var(--text); }
-    .file-btn.active { background: rgba(167,139,250,0.15); color: var(--accent); font-weight: 600; }
+    .file-btn:hover { background: var(--bg); color: #111; }
+    .file-btn.active { background: #f0f0f0; color: #111; font-weight: 700; }
 
-    .editor-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
+    .editor-main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
 
-    .editor-wrap {
-      flex: 1;
-      overflow: auto;
-      padding: 1.5rem;
-    }
+    .editor-wrap { flex: 1; overflow: auto; padding: 1.5rem 2rem; }
 
-    /* Override EasyMDE to match dark theme */
-    .EasyMDEContainer { height: 100%; }
-
+    /* EasyMDE light theme */
     .CodeMirror {
-      background: var(--bg) !important;
-      color: var(--text) !important;
-      border: 1px solid var(--border) !important;
-      border-radius: var(--radius) !important;
-      font-size: 0.95rem !important;
-      font-family: 'Menlo', 'Monaco', monospace !important;
-      min-height: calc(100vh - 200px);
+      background: #ffffff !important;
+      color: #111111 !important;
+      border: 1px solid #e8e8e8 !important;
+      border-radius: 10px !important;
+      font-family: 'Pretendard Variable', 'Pretendard', sans-serif !important;
+      font-size: 1rem !important;
+      line-height: 1.8 !important;
+      letter-spacing: -0.02em !important;
+      min-height: calc(100vh - 220px);
+      padding: 0.75rem !important;
     }
 
     .editor-toolbar {
-      background: var(--surface) !important;
-      border: 1px solid var(--border) !important;
+      background: #fafafa !important;
+      border: 1px solid #e8e8e8 !important;
       border-bottom: none !important;
-      border-radius: var(--radius) var(--radius) 0 0 !important;
+      border-radius: 10px 10px 0 0 !important;
     }
 
-    .editor-toolbar a {
-      color: var(--muted) !important;
-    }
-
-    .editor-toolbar a:hover, .editor-toolbar a.active {
-      background: var(--border) !important;
-      color: var(--text) !important;
-    }
-
-    .editor-toolbar i.separator { border-color: var(--border) !important; }
-
+    .editor-toolbar a { color: #888 !important; }
+    .editor-toolbar a:hover, .editor-toolbar a.active { background: #efefef !important; color: #111 !important; border-color: #e8e8e8 !important; }
+    .editor-toolbar i.separator { border-color: #e8e8e8 !important; }
     .CodeMirror-scroll { min-height: 400px; }
-    .CodeMirror-cursor { border-left-color: var(--accent) !important; }
+    .CodeMirror-cursor { border-left-color: #111 !important; }
+    .editor-statusbar { background: #fafafa !important; border-top: 1px solid #e8e8e8 !important; color: #aaa !important; border-radius: 0 0 10px 10px !important; }
 
-    .editor-statusbar {
-      background: var(--surface) !important;
-      border-top: 1px solid var(--border) !important;
-      color: var(--muted) !important;
-      border-radius: 0 0 var(--radius) var(--radius) !important;
-    }
-
+    /* ─── Toast ───────────────────────────────────── */
     .toast {
       position: fixed;
       bottom: 1.5rem;
       right: 1.5rem;
-      padding: 0.75rem 1.25rem;
+      padding: 0.7rem 1.1rem;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       font-weight: 600;
       opacity: 0;
       transform: translateY(8px);
       transition: opacity 0.2s, transform 0.2s;
       z-index: 99;
       pointer-events: none;
+      letter-spacing: -0.02em;
     }
 
     .toast.show { opacity: 1; transform: translateY(0); }
-    .toast.success { background: rgba(74,222,128,0.15); color: var(--success); border: 1px solid rgba(74,222,128,0.3); }
-    .toast.error { background: rgba(248,113,113,0.12); color: var(--danger); border: 1px solid rgba(248,113,113,0.3); }
+    .toast.success { background: #dcfce7; color: var(--success); border: 1px solid #bbf7d0; }
+    .toast.error { background: #fee2e2; color: var(--danger); border: 1px solid #fca5a5; }
+
+    /* ─── Confirm Dialog ──────────────────────────── */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay.show { display: flex; }
+
+    .dialog {
+      background: var(--surface);
+      border-radius: 14px;
+      padding: 1.75rem;
+      max-width: 360px;
+      width: 90%;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    }
+
+    .dialog h3 { font-size: 1rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .dialog p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.25rem; }
+    .dialog-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
   </style>
 </head>
 <body>
@@ -310,44 +534,136 @@
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
-    <h1>관리자 로그인</h1>
-    <p>GitHub Personal Access Token이 필요해요.<br>
+    <h1>포트폴리오 관리</h1>
+    <p>GitHub Personal Access Token으로 로그인해요.<br>
       <a href="https://github.com/settings/tokens/new?scopes=repo&description=Portfolio+Admin" target="_blank">토큰 발급하기 →</a>
     </p>
-    <label for="token-input">GitHub Token</label>
-    <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
-    <div class="error-msg" id="error-msg">토큰이 올바르지 않아요. 다시 확인해주세요.</div>
-    <button class="btn btn-primary" onclick="login()">로그인</button>
+    <div class="form-group">
+      <label for="token-input">GitHub Token</label>
+      <input type="password" id="token-input" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
+    </div>
+    <div class="error-msg" id="error-msg">토큰이 올바르지 않아요.</div>
+    <button class="btn btn-primary btn-full" onclick="login()">로그인</button>
   </div>
 </div>
 
-<!-- EDITOR -->
-<div id="editor-screen">
+<!-- APP -->
+<div id="app">
   <div class="topbar">
-    <div class="topbar-left">
-      <span style="font-size:0.9rem; color: var(--muted)">✦</span>
-      <h2 id="current-file-name">파일 선택</h2>
-      <span class="badge badge-saved" id="status-badge">저장됨</span>
+    <span class="topbar-brand">✦ Hakyeong Admin</span>
+    <div class="topbar-tabs">
+      <button class="tab-btn active" onclick="switchTab('projects', this)">프로젝트</button>
+      <button class="tab-btn" onclick="switchTab('pages', this)">페이지 편집</button>
     </div>
     <div class="topbar-right">
-      <button class="btn btn-ghost" style="font-size:0.82rem;" onclick="window.open('https://haeilylee-portfolio.vercel.app', '_blank')">사이트 보기 ↗</button>
-      <button class="btn btn-primary" style="width:auto" id="save-btn" onclick="saveFile()">저장 & 배포</button>
-      <button class="btn btn-danger" style="font-size:0.82rem;" onclick="logout()">로그아웃</button>
+      <span class="badge badge-saved" id="status-badge">저장됨</span>
+      <button class="btn btn-ghost btn-sm" onclick="window.open('https://haeilylee-portfolio.vercel.app','_blank')">사이트 보기 ↗</button>
+      <button class="btn btn-ghost btn-sm" onclick="logout()">로그아웃</button>
     </div>
   </div>
 
-  <div class="editor-layout">
-    <nav class="sidebar">
-      <div class="sidebar-label">페이지</div>
-      <button class="file-btn" onclick="loadFile('docs/about.md', '소개 (About)')" id="btn-about">소개 (About)</button>
-      <button class="file-btn" onclick="loadFile('docs/projects/index.md', '프로젝트 (Projects)')" id="btn-projects">프로젝트 (Projects)</button>
-      <button class="file-btn" onclick="loadFile('docs/index.md', '홈 (Home)')" id="btn-home">홈 (Home)</button>
-    </nav>
-
-    <div class="editor-main">
-      <div class="editor-wrap">
-        <textarea id="md-editor"></textarea>
+  <!-- PROJECTS TAB -->
+  <div class="panel active" id="panel-projects">
+    <div class="projects-layout">
+      <div class="projects-sidebar">
+        <div class="projects-sidebar-header">
+          <h3>프로젝트 목록</h3>
+          <button class="btn btn-primary btn-sm" onclick="newProject()">+ 추가</button>
+        </div>
+        <div class="project-list" id="project-list"></div>
       </div>
+      <div class="project-form-wrap" id="project-form-wrap">
+        <div class="form-empty-state" id="form-empty">
+          <div class="form-empty-icon">📋</div>
+          <p>왼쪽에서 프로젝트를 선택하거나<br>새 프로젝트를 추가해요.</p>
+        </div>
+        <form class="project-form" id="project-form" style="display:none" onsubmit="saveProject(event)">
+          <div>
+            <h2 id="form-title">새 프로젝트</h2>
+          </div>
+          <div class="form-group">
+            <label>미리보기 텍스트 <span style="color:#aaa;font-weight:400;text-transform:none;font-size:0.75rem">카드 상단 회색 영역에 표시돼요</span></label>
+            <textarea id="f-preview" rows="3" placeholder="이 프로젝트에서 해결한 핵심 인사이트를 한 문단으로..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>제목</label>
+            <input type="text" id="f-title" placeholder="프로젝트 제목" required />
+          </div>
+          <div class="form-group">
+            <label>설명</label>
+            <textarea id="f-desc" rows="3" placeholder="무엇을 했는지, 어떤 임팩트가 있었는지 2-3문장으로..."></textarea>
+          </div>
+          <div class="form-group">
+            <label>태그</label>
+            <div class="tags-grid" id="tags-grid"></div>
+          </div>
+          <div class="form-group">
+            <label>커버 이미지 <span style="color:#aaa;font-weight:400;text-transform:none;font-size:0.75rem">선택사항 — 카드에 표시돼요</span></label>
+            <div class="image-upload-area" onclick="document.getElementById('f-image-input').click()" id="image-upload-area">
+              <input type="file" id="f-image-input" accept="image/*" onchange="handleImageUpload(this)" />
+              <div id="image-placeholder">
+                <label class="image-upload-label">
+                  <span class="image-upload-icon">🖼️</span>
+                  <span>클릭해서 이미지 업로드</span>
+                  <span style="font-size:0.72rem;color:#bbb">PNG, JPG, WebP 지원</span>
+                </label>
+              </div>
+              <div id="image-preview-container" style="display:none">
+                <div class="image-preview-wrap">
+                  <img id="image-preview" class="image-preview" src="" alt="preview" />
+                  <button class="image-remove-btn" onclick="removeImage(event)" title="이미지 제거">✕</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>시작일</label>
+              <input type="text" id="f-date-from" placeholder="2026/01/01" />
+            </div>
+            <div class="form-group">
+              <label>종료일</label>
+              <input type="text" id="f-date-to" placeholder="2026/03/31" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="form-save-btn">저장 & 배포</button>
+            <button type="button" class="btn btn-ghost" onclick="cancelEdit()">취소</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGES TAB -->
+  <div class="panel" id="panel-pages">
+    <div class="editor-layout">
+      <nav class="editor-sidebar">
+        <div class="sidebar-label">페이지</div>
+        <button class="file-btn active" onclick="loadPage('docs/about.md','소개 (About)',this)">소개 (About)</button>
+        <button class="file-btn" onclick="loadPage('docs/index.md','홈 (Home)',this)">홈 (Home)</button>
+      </nav>
+      <div class="editor-main">
+        <div class="editor-wrap">
+          <textarea id="md-editor"></textarea>
+        </div>
+      </div>
+    </div>
+    <div style="padding: 0.75rem 1.5rem; border-top: 1px solid var(--border); background: #fff; display:flex; justify-content:flex-end; gap:0.5rem;">
+      <button class="btn btn-primary" onclick="savePage()">저장 & 배포</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Confirm Dialog -->
+<div class="overlay" id="confirm-overlay">
+  <div class="dialog">
+    <h3>프로젝트 삭제</h3>
+    <p id="confirm-msg">이 프로젝트를 삭제할까요? 삭제하면 사이트에서 바로 사라져요.</p>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost btn-sm" onclick="closeConfirm()">취소</button>
+      <button class="btn btn-danger btn-sm" id="confirm-ok-btn">삭제</button>
     </div>
   </div>
 </div>
@@ -355,159 +671,446 @@
 <div class="toast" id="toast"></div>
 
 <script>
-  const REPO = 'haeilylee/Portfolio';
-  const BRANCH = 'main';
+const REPO = 'haeilylee/Portfolio';
+const BRANCH = 'main';
+const HOME_PATH = 'docs/index.md';
 
-  let easyMDE = null;
-  let currentFilePath = null;
-  let currentFileSha = null;
-  let isDirty = false;
+const TAG_LIST = ['Design System','Figma','Documentation','AI','Github','Markdown','UX Research','Product','Development','Research'];
+const TAG_COLORS = {
+  'Design System':'tag-blue','Figma':'tag-green','Documentation':'tag-amber',
+  'AI':'tag-purple','Github':'tag-green','Markdown':'tag-amber',
+  'UX Research':'tag-blue','Product':'tag-pink','Development':'tag-green',
+  'Research':'tag-blue'
+};
 
-  function getToken() { return sessionStorage.getItem('gh_token'); }
+const getToken = () => sessionStorage.getItem('gh_token');
 
-  async function login() {
-    const token = document.getElementById('token-input').value.trim();
-    if (!token) return;
+let projects = [];
+let homeSha = null;
+let homeContent = '';
+let editingIndex = null;
+let easyMDE = null;
+let pageSha = null;
+let isDirty = false;
 
-    try {
-      const res = await fetch('https://api.github.com/user', {
-        headers: { Authorization: `token ${token}` }
-      });
-      if (!res.ok) throw new Error();
-      sessionStorage.setItem('gh_token', token);
-      showEditor();
-    } catch {
-      document.getElementById('error-msg').style.display = 'block';
-    }
+// ─── Auth ──────────────────────────────────────────
+
+async function login() {
+  const token = document.getElementById('token-input').value.trim();
+  if (!token) return;
+  try {
+    const res = await fetch('https://api.github.com/user', { headers: { Authorization: `token ${token}` } });
+    if (!res.ok) throw new Error();
+    sessionStorage.setItem('gh_token', token);
+    showApp();
+  } catch {
+    document.getElementById('error-msg').style.display = 'block';
   }
+}
 
-  function logout() {
-    sessionStorage.removeItem('gh_token');
-    location.reload();
+function logout() { sessionStorage.removeItem('gh_token'); location.reload(); }
+
+// ─── App Init ──────────────────────────────────────
+
+async function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  buildTagsGrid();
+  await loadHomeFile();
+  renderProjectList();
+  initPageEditor();
+}
+
+// ─── Tag Grid ──────────────────────────────────────
+
+function buildTagsGrid() {
+  const grid = document.getElementById('tags-grid');
+  grid.innerHTML = TAG_LIST.map(t => `
+    <label>
+      <input type="checkbox" class="tag-check" name="tag" value="${t}" />
+      <span class="tag-label">${t}</span>
+    </label>
+  `).join('');
+}
+
+// ─── GitHub API ────────────────────────────────────
+
+async function ghGet(path) {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`, {
+    headers: { Authorization: `token ${getToken()}` }
+  });
+  if (!res.ok) throw new Error('fetch failed');
+  return res.json();
+}
+
+async function ghPut(path, content, sha, message) {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message, content: btoa(unescape(encodeURIComponent(content))), sha, branch: BRANCH })
+  });
+  if (!res.ok) throw new Error('save failed');
+  return res.json();
+}
+
+function decode(b64) { return decodeURIComponent(escape(atob(b64.replace(/\n/g,'')))); }
+
+// ─── Load Home File & Parse Projects ───────────────
+
+async function loadHomeFile() {
+  setStatus('loading');
+  const data = await ghGet(HOME_PATH);
+  homeSha = data.sha;
+  homeContent = decode(data.content);
+  projects = parseProjects(homeContent);
+  setStatus('saved');
+}
+
+function parseProjects(md) {
+  const m = md.match(/<!-- PROJECTS_JSON\n([\s\S]*?)\n-->/);
+  if (!m) return [];
+  try { return JSON.parse(m[1]); } catch { return []; }
+}
+
+// ─── Rebuild index.md from projects array ──────────
+
+function generateTagHTML(tags) {
+  return tags.map(t => `      <span class="project-tag ${TAG_COLORS[t]||'tag-gray'}">${t}</span>`).join('\n');
+}
+
+function generateCardHTML(p) {
+  return `<div class="project-card" data-tags="${p.tags.join(',')}">
+  <div class="project-card-preview">${p.preview}</div>
+  <div class="project-card-body">
+    <div class="project-card-title">${p.title}</div>
+    <div class="project-card-desc">${p.desc}</div>
+    <div class="project-card-tags">
+${generateTagHTML(p.tags)}
+    </div>
+    <div class="project-card-date">${p.date}</div>
+  </div>
+</div>`;
+}
+
+function rebuildHomeContent(intro) {
+  const jsonComment = `<!-- PROJECTS_JSON\n${JSON.stringify(projects, null, 2)}\n-->`;
+  const cards = projects.map(generateCardHTML).join('\n\n');
+
+  return `${jsonComment}
+
+${intro}
+
+<div class="filter-bar">
+  <button class="filter-chip active" onclick="filterCards('all', this)">전체</button>
+  <button class="filter-chip" onclick="filterCards('Design System', this)">Design System</button>
+  <button class="filter-chip" onclick="filterCards('AI', this)">AI</button>
+  <button class="filter-chip" onclick="filterCards('UX Research', this)">UX Research</button>
+  <button class="filter-chip" onclick="filterCards('Product', this)">Product</button>
+</div>
+
+<div class="project-grid" id="project-grid">
+
+${cards}
+
+</div>
+
+<script>
+function filterCards(tag, btn) {
+  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(card => {
+    const tags = card.getAttribute('data-tags') || '';
+    card.style.display = (tag === 'all' || tags.includes(tag)) ? '' : 'none';
+  });
+}
+<\/script>
+`;
+}
+
+function getHomeIntro() {
+  const m = homeContent.match(/-->\n\n(# Hakyeong Lee[\s\S]*?)\n\n<div class="filter/);
+  return m ? m[1] : '# Hakyeong Lee\n\n제품의 구조를 설계하고, 팀이 같은 언어로 일할 수 있도록 만드는 일을 해요.';
+}
+
+// ─── Project List UI ───────────────────────────────
+
+function renderProjectList() {
+  const list = document.getElementById('project-list');
+  if (!projects.length) {
+    list.innerHTML = '<p style="font-size:0.8rem;color:var(--muted);padding:1rem 0.75rem;">프로젝트가 없어요. 추가해보세요!</p>';
+    return;
   }
+  list.innerHTML = projects.map((p, i) => `
+    <div class="project-list-item ${editingIndex===i?'active':''}" onclick="editProject(${i})">
+      <div class="project-list-item-info">
+        <div class="project-list-item-title">${p.title}</div>
+        <div class="project-list-item-date">${p.date}</div>
+      </div>
+      <div class="project-list-actions">
+        <button class="icon-btn del" onclick="confirmDelete(event,${i})">✕</button>
+      </div>
+    </div>
+  `).join('');
+}
 
-  function showEditor() {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('editor-screen').style.display = 'flex';
+// ─── Edit / New ────────────────────────────────────
 
-    easyMDE = new EasyMDE({
-      element: document.getElementById('md-editor'),
-      autofocus: true,
-      spellChecker: false,
-      status: ['lines', 'words'],
-      toolbar: ['bold','italic','heading','|','quote','unordered-list','ordered-list','|','link','image','|','preview','side-by-side','fullscreen'],
-      placeholder: '왼쪽에서 파일을 선택하세요...',
-    });
+function newProject() {
+  editingIndex = null;
+  document.getElementById('form-title').textContent = '새 프로젝트';
+  document.getElementById('form-save-btn').textContent = '추가 & 배포';
+  document.getElementById('f-preview').value = '';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-desc').value = '';
+  document.getElementById('f-date-from').value = '';
+  document.getElementById('f-date-to').value = '';
+  document.querySelectorAll('.tag-check').forEach(c => c.checked = false);
+  document.getElementById('form-empty').style.display = 'none';
+  document.getElementById('project-form').style.display = 'flex';
+  renderProjectList();
+}
 
-    easyMDE.codemirror.on('change', () => {
-      if (currentFilePath) setDirty(true);
-    });
-
-    loadFile('docs/about.md', '소개 (About)');
+function editProject(i) {
+  editingIndex = i;
+  const p = projects[i];
+  document.getElementById('form-title').textContent = '프로젝트 수정';
+  document.getElementById('form-save-btn').textContent = '저장 & 배포';
+  document.getElementById('f-preview').value = p.preview;
+  document.getElementById('f-title').value = p.title;
+  document.getElementById('f-desc').value = p.desc;
+  const [from, to] = (p.date||'').split(' → ');
+  document.getElementById('f-date-from').value = from||'';
+  document.getElementById('f-date-to').value = to||'';
+  document.querySelectorAll('.tag-check').forEach(c => { c.checked = p.tags.includes(c.value); });
+  // Image
+  pendingImageBase64 = null;
+  pendingImageName = null;
+  if (p.image) {
+    document.getElementById('image-placeholder').style.display = 'none';
+    document.getElementById('image-preview-container').style.display = 'block';
+    document.getElementById('image-preview').src = p.image;
+  } else {
+    document.getElementById('image-placeholder').style.display = 'block';
+    document.getElementById('image-preview-container').style.display = 'none';
+    document.getElementById('image-preview').src = '';
   }
+  document.getElementById('form-empty').style.display = 'none';
+  document.getElementById('project-form').style.display = 'flex';
+  renderProjectList();
+}
 
-  async function loadFile(path, label) {
-    if (isDirty && !confirm('저장하지 않은 변경사항이 있어요. 이동할까요?')) return;
+function cancelEdit() {
+  editingIndex = null;
+  document.getElementById('project-form').style.display = 'none';
+  document.getElementById('form-empty').style.display = 'flex';
+  renderProjectList();
+}
 
-    document.querySelectorAll('.file-btn').forEach(b => b.classList.remove('active'));
-    const btnMap = {
-      'docs/about.md': 'btn-about',
-      'docs/projects/index.md': 'btn-projects',
-      'docs/index.md': 'btn-home',
+async function saveProject(e) {
+  e.preventDefault();
+  setStatus('saving');
+  document.getElementById('form-save-btn').disabled = true;
+  try {
+    const imageUrl = await uploadImageIfNeeded();
+    const tags = [...document.querySelectorAll('.tag-check:checked')].map(c => c.value);
+    const from = document.getElementById('f-date-from').value;
+    const to = document.getElementById('f-date-to').value;
+    const existing = editingIndex !== null ? projects[editingIndex] : {};
+    const p = {
+      preview: document.getElementById('f-preview').value,
+      title: document.getElementById('f-title').value,
+      desc: document.getElementById('f-desc').value,
+      tags,
+      date: from && to ? `${from} → ${to}` : (from || to || ''),
+      image: imageUrl || existing.image || ''
     };
-    document.getElementById(btnMap[path])?.classList.add('active');
-    document.getElementById('current-file-name').textContent = label;
-    setStatus('loading');
-
-    try {
-      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}?ref=${BRANCH}`, {
-        headers: { Authorization: `token ${getToken()}` }
-      });
-      const data = await res.json();
-      currentFilePath = path;
-      currentFileSha = data.sha;
-      const content = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
-      easyMDE.value(content);
-      setDirty(false);
-    } catch (e) {
-      showToast('파일을 불러오지 못했어요.', 'error');
-      setStatus('error');
+    if (editingIndex !== null) {
+      projects[editingIndex] = p;
+    } else {
+      projects.unshift(p);
+      editingIndex = 0;
     }
+    await pushHome();
+    renderProjectList();
+  } catch (err) {
+    showToast('저장 실패: ' + err.message, 'error');
+    setStatus('error');
+  } finally {
+    document.getElementById('form-save-btn').disabled = false;
   }
+}
 
-  async function saveFile() {
-    if (!currentFilePath) return;
+// ─── Image Upload ──────────────────────────────────
 
-    const btn = document.getElementById('save-btn');
-    btn.disabled = true;
-    btn.textContent = '저장 중...';
-    setStatus('saving');
+let pendingImageBase64 = null;
+let pendingImageName = null;
 
-    const content = btoa(unescape(encodeURIComponent(easyMDE.value())));
-    try {
-      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${currentFilePath}`, {
-        method: 'PUT',
-        headers: {
-          Authorization: `token ${getToken()}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: `Update ${currentFilePath} via admin`,
-          content,
-          sha: currentFileSha,
-          branch: BRANCH,
-        }),
-      });
+function handleImageUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  pendingImageName = `images/${Date.now()}-${file.name.replace(/\s/g,'_')}`;
+  const reader = new FileReader();
+  reader.onload = e => {
+    pendingImageBase64 = e.target.result.split(',')[1];
+    document.getElementById('image-placeholder').style.display = 'none';
+    document.getElementById('image-preview-container').style.display = 'block';
+    document.getElementById('image-preview').src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
 
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      currentFileSha = data.content.sha;
-      setDirty(false);
-      showToast('저장 완료! Vercel이 자동으로 재배포해요 🚀', 'success');
-    } catch {
-      showToast('저장 실패. 토큰 권한을 확인해주세요.', 'error');
-    } finally {
-      btn.disabled = false;
-      btn.textContent = '저장 & 배포';
-    }
-  }
+function removeImage(e) {
+  e.stopPropagation();
+  pendingImageBase64 = null;
+  pendingImageName = null;
+  document.getElementById('f-image-input').value = '';
+  document.getElementById('image-placeholder').style.display = 'block';
+  document.getElementById('image-preview-container').style.display = 'none';
+  document.getElementById('image-preview').src = '';
+}
 
-  function setDirty(dirty) {
-    isDirty = dirty;
-    setStatus(dirty ? 'unsaved' : 'saved');
-  }
-
-  function setStatus(state) {
-    const badge = document.getElementById('status-badge');
-    badge.className = 'badge';
-    if (state === 'saved') { badge.classList.add('badge-saved'); badge.textContent = '저장됨'; }
-    else if (state === 'saving' || state === 'loading') { badge.classList.add('badge-saving'); badge.textContent = state === 'saving' ? '저장 중...' : '불러오는 중...'; }
-    else if (state === 'unsaved') { badge.classList.add('badge-unsaved'); badge.textContent = '미저장'; }
-    else { badge.classList.add('badge-unsaved'); badge.textContent = '오류'; }
-  }
-
-  function showToast(msg, type) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.className = `toast ${type} show`;
-    setTimeout(() => t.classList.remove('show'), 3500);
-  }
-
-  // Keyboard shortcut: Cmd+S to save
-  document.addEventListener('keydown', e => {
-    if ((e.metaKey || e.ctrlKey) && e.key === 's') {
-      e.preventDefault();
-      saveFile();
-    }
+async function uploadImageIfNeeded() {
+  if (!pendingImageBase64 || !pendingImageName) return null;
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/docs/public/${pendingImageName}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${getToken()}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: `Upload image: ${pendingImageName}`, content: pendingImageBase64, branch: BRANCH })
   });
+  if (!res.ok) throw new Error('image upload failed');
+  pendingImageBase64 = null;
+  return `/${pendingImageName}`;
+}
 
-  // Auto-login if token in sessionStorage
-  if (getToken()) showEditor();
+// ─── Delete ────────────────────────────────────────
 
-  // Enter key on login
-  document.getElementById('token-input')?.addEventListener('keydown', e => {
-    if (e.key === 'Enter') login();
+let pendingDeleteIndex = null;
+
+function confirmDelete(e, i) {
+  e.stopPropagation();
+  pendingDeleteIndex = i;
+  document.getElementById('confirm-msg').textContent = `"${projects[i].title}" 프로젝트를 삭제할까요?`;
+  document.getElementById('confirm-overlay').classList.add('show');
+  document.getElementById('confirm-ok-btn').onclick = async () => {
+    closeConfirm();
+    projects.splice(pendingDeleteIndex, 1);
+    if (editingIndex === pendingDeleteIndex) cancelEdit();
+    else if (editingIndex > pendingDeleteIndex) editingIndex--;
+    await pushHome();
+    renderProjectList();
+  };
+}
+
+function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('show'); }
+
+// ─── Push Home ─────────────────────────────────────
+
+async function pushHome() {
+  setStatus('saving');
+  document.getElementById('form-save-btn').disabled = true;
+  try {
+    const newContent = rebuildHomeContent(getHomeIntro());
+    const data = await ghPut(HOME_PATH, newContent, homeSha, `Update projects via admin`);
+    homeSha = data.content.sha;
+    homeContent = newContent;
+    setStatus('saved');
+    showToast('저장 완료! GitHub Actions가 자동 배포 중이에요 🚀', 'success');
+  } catch {
+    setStatus('error');
+    showToast('저장 실패. 토큰 권한을 확인해주세요.', 'error');
+  } finally {
+    document.getElementById('form-save-btn').disabled = false;
+    document.getElementById('form-save-btn').textContent = '저장 & 배포';
+  }
+}
+
+// ─── Page Editor ───────────────────────────────────
+
+function initPageEditor() {
+  easyMDE = new EasyMDE({
+    element: document.getElementById('md-editor'),
+    autofocus: false,
+    spellChecker: false,
+    status: ['lines','words'],
+    toolbar: ['bold','italic','heading','|','quote','unordered-list','ordered-list','|','link','|','preview','side-by-side','fullscreen'],
+    placeholder: '왼쪽에서 파일을 선택하세요...',
   });
+  loadPage('docs/about.md', '소개 (About)', document.querySelector('.file-btn.active'));
+}
+
+async function loadPage(path, label, btn) {
+  document.querySelectorAll('.file-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  setStatus('loading');
+  try {
+    const data = await ghGet(path);
+    pageSha = data.sha;
+    easyMDE._path = path;
+    easyMDE.value(decode(data.content));
+    setStatus('saved');
+    isDirty = false;
+  } catch { showToast('파일 로드 실패', 'error'); }
+}
+
+async function savePage() {
+  if (!easyMDE._path) return;
+  setStatus('saving');
+  try {
+    const data = await ghPut(easyMDE._path, easyMDE.value(), pageSha, `Update ${easyMDE._path} via admin`);
+    pageSha = data.content.sha;
+    setStatus('saved');
+    isDirty = false;
+    showToast('저장 완료! 자동 배포 중이에요 🚀', 'success');
+  } catch { showToast('저장 실패.', 'error'); setStatus('error'); }
+}
+
+// ─── Tabs ──────────────────────────────────────────
+
+function switchTab(tab, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`panel-${tab}`).classList.add('active');
+}
+
+// ─── Status & Toast ────────────────────────────────
+
+function setStatus(state) {
+  const b = document.getElementById('status-badge');
+  b.className = 'badge';
+  const map = {
+    saved: ['badge-saved','저장됨'],
+    saving: ['badge-saving','저장 중...'],
+    loading: ['badge-saving','불러오는 중...'],
+    error: ['badge-unsaved','오류']
+  };
+  const [cls, label] = map[state]||['badge-saved','저장됨'];
+  b.classList.add(cls);
+  b.textContent = label;
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// ─── Keyboard ──────────────────────────────────────
+
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+    e.preventDefault();
+    const activeTab = document.querySelector('.tab-btn.active')?.textContent;
+    if (activeTab === '페이지 편집') savePage();
+  }
+});
+
+document.getElementById('token-input')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+
+// Auto-login
+if (getToken()) showApp();
 </script>
 </body>
 </html>
