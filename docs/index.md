@@ -8,9 +8,13 @@
 ]
 -->
 
-# Hakyeong Lee
-
-제품의 구조를 설계하고, 팀이 같은 언어로 일할 수 있도록 만드는 일을 해요.
+<div class="home-intro">
+  <img src="/profile.webp" alt="Hakyeong Lee" class="home-avatar" />
+  <div>
+    <h1>Hakyeong Lee</h1>
+    <p>제품의 구조를 설계하고, 팀이 같은 언어로 일할 수 있도록 만드는 일을 해요.</p>
+  </div>
+</div>
 
 <div class="filter-bar">
   <button class="filter-chip active" onclick="filterCards('all', this)">전체</button>
@@ -23,16 +27,15 @@
 <div class="project-grid" id="project-grid">
 
 <a class="project-card" href="/projects/sdui" data-tags="Design System,Figma,Documentation">
-  <div class="project-card-thumbnail">
-    <div class="project-card-thumbnail-placeholder">🗂</div>
-  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">Design System</span>
-      <span class="project-card-arrow">↗</span>
+      <span class="project-card-arrow">→</span>
     </div>
     <div class="project-card-title">SDUI 대응 컴포넌트 시스템 문서화</div>
-    <div class="project-card-preview">Shadcn은 web 기반 베이스이기 때문에 컴포넌트 체계를 모두가 이해할 수 있는 구조로 세우고, 실제로 대응할 수 있는 형태로 정리했어요.</div>
+  </div>
+  <div class="project-card-thumbnail">
+    <div class="project-card-thumbnail-placeholder">🗂</div>
   </div>
   <div class="project-card-footer">
     <div class="project-card-tags"><span class="project-tag">Design System</span><span class="project-tag">Figma</span><span class="project-tag">Documentation</span></div>
@@ -41,16 +44,15 @@
 </a>
 
 <a class="project-card" href="/projects/ai-requirements" data-tags="AI,Github,Markdown">
-  <div class="project-card-thumbnail">
-    <div class="project-card-thumbnail-placeholder">🤖</div>
-  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">AI</span>
-      <span class="project-card-arrow">↗</span>
+      <span class="project-card-arrow">→</span>
     </div>
     <div class="project-card-title">요구사항 정의서 자동화 생성</div>
-    <div class="project-card-preview">AI를 활용해 반복 작업을 자동화하고, 팀의 리소스를 핵심 작업에 집중할 수 있도록 개선했어요.</div>
+  </div>
+  <div class="project-card-thumbnail">
+    <div class="project-card-thumbnail-placeholder">🤖</div>
   </div>
   <div class="project-card-footer">
     <div class="project-card-tags"><span class="project-tag">AI</span><span class="project-tag">Github</span><span class="project-tag">Markdown</span></div>
@@ -59,16 +61,15 @@
 </a>
 
 <a class="project-card" href="/projects/data-ux" data-tags="UX Research,Product">
-  <div class="project-card-thumbnail">
-    <div class="project-card-thumbnail-placeholder">📊</div>
-  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">UX Research</span>
-      <span class="project-card-arrow">↗</span>
+      <span class="project-card-arrow">→</span>
     </div>
     <div class="project-card-title">데이터 통화 조회 서비스 UX 개선</div>
-    <div class="project-card-preview">데이터 통화 조회 화면의 이탈률이 높다는 데이터에서 출발해, 정보 구조 자체를 다시 설계했어요.</div>
+  </div>
+  <div class="project-card-thumbnail">
+    <div class="project-card-thumbnail-placeholder">📊</div>
   </div>
   <div class="project-card-footer">
     <div class="project-card-tags"><span class="project-tag">UX Research</span><span class="project-tag">Product</span></div>
@@ -77,16 +78,15 @@
 </a>
 
 <a class="project-card" href="/projects/billing" data-tags="Product,Design System">
-  <div class="project-card-thumbnail">
-    <div class="project-card-thumbnail-placeholder">💳</div>
-  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">Product</span>
-      <span class="project-card-arrow">↗</span>
+      <span class="project-card-arrow">→</span>
     </div>
     <div class="project-card-title">청구 & 수납 관리 서비스 리디자인</div>
-    <div class="project-card-preview">청구 & 수납 관리 화면은 사용자가 가장 불안을 느끼는 구간이에요. 신뢰감을 주는 UI 구조로 전면 개편했어요.</div>
+  </div>
+  <div class="project-card-thumbnail">
+    <div class="project-card-thumbnail-placeholder">💳</div>
   </div>
   <div class="project-card-footer">
     <div class="project-card-tags"><span class="project-tag">Product</span><span class="project-tag">Design System</span></div>
@@ -95,16 +95,15 @@
 </a>
 
 <a class="project-card" href="/projects/onboarding" data-tags="AI,UX Research,Product">
-  <div class="project-card-thumbnail">
-    <div class="project-card-thumbnail-placeholder">🚀</div>
-  </div>
   <div class="project-card-top">
     <div class="project-card-meta">
       <span class="project-card-category">Product</span>
-      <span class="project-card-arrow">↗</span>
+      <span class="project-card-arrow">→</span>
     </div>
     <div class="project-card-title">슈퍼앱 온보딩 플로우 개선</div>
-    <div class="project-card-preview">신규 가입자가 서비스 구조를 이해하는 데 평균 7분이 걸린다는 문제에서 시작했어요. 온보딩을 처음부터 다시 설계했어요.</div>
+  </div>
+  <div class="project-card-thumbnail">
+    <div class="project-card-thumbnail-placeholder">🚀</div>
   </div>
   <div class="project-card-footer">
     <div class="project-card-tags"><span class="project-tag">AI</span><span class="project-tag">UX Research</span><span class="project-tag">Product</span></div>
