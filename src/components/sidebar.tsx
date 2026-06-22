@@ -84,6 +84,18 @@ export default function Sidebar() {
       </div>
 
       <div style={{ marginTop: "16px" }}>
+        <div
+          style={{
+            fontSize: "11px",
+            textTransform: "uppercase",
+            color: "var(--tx-3)",
+            letterSpacing: "0.06em",
+            padding: "12px 12px 4px",
+            fontWeight: 500,
+          }}
+        >
+          Introduction
+        </div>
         <SidebarLink href="/about">About Me</SidebarLink>
       </div>
     </aside>
