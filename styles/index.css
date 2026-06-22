@@ -13,12 +13,12 @@
   --rp-c-text-3: #999999;
 
   /* Brand / Accent */
-  --rp-c-brand: #5b4de8;
-  --rp-c-brand-light: #7c6af7;
-  --rp-c-brand-dark: #4336c4;
-  --rp-c-brand-1: #5b4de8;
-  --rp-c-brand-2: #5b4de8;
-  --rp-c-brand-3: #4336c4;
+  --rp-c-brand: #111111;
+  --rp-c-brand-light: #333333;
+  --rp-c-brand-dark: #000000;
+  --rp-c-brand-1: #111111;
+  --rp-c-brand-2: #111111;
+  --rp-c-brand-3: #000000;
 
   /* Dividers & Borders */
   --rp-c-divider: #e8e8e8;
@@ -83,8 +83,8 @@ body {
 }
 
 .rspress-sidebar-item-link.active {
-  color: var(--rp-c-brand) !important;
-  background-color: rgba(91, 77, 232, 0.07) !important;
+  color: #111111 !important;
+  background-color: rgba(0, 0, 0, 0.06) !important;
   font-weight: 600;
 }
 
@@ -134,7 +134,7 @@ a:hover { text-decoration: underline; }
 
 code {
   background-color: #f0f0f4 !important;
-  color: #5b4de8 !important;
+  color: #111111 !important;
   border: 1px solid #e0dff8 !important;
   padding: 0.15em 0.4em;
   border-radius: 4px;
@@ -159,7 +159,7 @@ pre {
 
 blockquote {
   border-left: 3px solid var(--rp-c-brand) !important;
-  background-color: rgba(91, 77, 232, 0.04) !important;
+  background-color: rgba(0, 0, 0, 0.04) !important;
   color: var(--rp-c-text-2) !important;
   border-radius: 0 6px 6px 0;
   padding: 0.75rem 1.25rem;
@@ -337,8 +337,8 @@ hr { border-color: var(--rp-c-divider) !important; margin: 2rem 0; }
 .project-tag {
   font-size: 0.72rem;
   font-weight: 600;
-  color: #5b4de8;
-  background: rgba(91, 77, 232, 0.07);
+  color: #111111;
+  background: rgba(0, 0, 0, 0.07);
   border-radius: 99px;
   padding: 0.2rem 0.6rem;
 }
