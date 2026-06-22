@@ -1,5 +1,6 @@
 import * as path from 'node:path';
 import { defineConfig } from 'rspress/config';
+import rehypeRaw from 'rehype-raw';
 
 export default defineConfig({
   root: path.join(__dirname, 'docs'),
@@ -49,5 +50,7 @@ export default defineConfig({
   },
   markdown: {
     mdxRs: false,
+    checkDeadLinks: false,
+    rehypePlugins: [[rehypeRaw]],
   },
 });
