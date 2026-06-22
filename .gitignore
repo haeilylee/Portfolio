@@ -1,6 +1,8 @@
 node_modules/
 doc_build/
 .rspress/
+.next/
 .DS_Store
 *.log
 .vercel
+next-env.d.ts
