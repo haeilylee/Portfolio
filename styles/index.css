@@ -1,0 +1,284 @@
+/* ─── Dark Portfolio Theme ─────────────────────────── */
+
+:root {
+  /* Background */
+  --rp-c-bg: #0d0d0d;
+  --rp-c-bg-soft: #141414;
+  --rp-c-bg-mute: #1c1c1c;
+  --rp-c-bg-elv: #1c1c1c;
+
+  /* Text */
+  --rp-c-text-1: #e8e8e8;
+  --rp-c-text-2: #a0a0a0;
+  --rp-c-text-3: #666666;
+
+  /* Brand / Accent — clean white-tinted indigo */
+  --rp-c-brand: #a78bfa;
+  --rp-c-brand-light: #c4b5fd;
+  --rp-c-brand-dark: #7c3aed;
+  --rp-c-brand-1: #a78bfa;
+  --rp-c-brand-2: #a78bfa;
+  --rp-c-brand-3: #7c3aed;
+
+  /* Dividers & Borders */
+  --rp-c-divider: #242424;
+  --rp-c-border: #242424;
+  --rp-c-gutter: #0d0d0d;
+
+  /* Sidebar */
+  --rp-c-bg-sidebar: #0d0d0d;
+
+  /* Nav */
+  --rp-nav-height: 56px;
+}
+
+/* ─── Global Resets ───────────────────────────────── */
+
+body {
+  background-color: var(--rp-c-bg) !important;
+  color: var(--rp-c-text-1) !important;
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Navigation Bar ─────────────────────────────── */
+
+.rspress-nav {
+  background-color: rgba(13, 13, 13, 0.85) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rp-c-divider) !important;
+}
+
+.rspress-nav-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--rp-c-text-1) !important;
+}
+
+/* ─── Sidebar ────────────────────────────────────── */
+
+.rspress-sidebar {
+  background-color: var(--rp-c-bg) !important;
+  border-right: 1px solid var(--rp-c-divider) !important;
+}
+
+.rspress-sidebar-item-link {
+  color: var(--rp-c-text-2) !important;
+  border-radius: 6px;
+  transition: color 0.15s, background-color 0.15s;
+}
+
+.rspress-sidebar-item-link:hover {
+  color: var(--rp-c-text-1) !important;
+  background-color: var(--rp-c-bg-mute) !important;
+}
+
+.rspress-sidebar-item-link.active {
+  color: var(--rp-c-brand-light) !important;
+  background-color: rgba(167, 139, 250, 0.1) !important;
+}
+
+/* ─── Content ────────────────────────────────────── */
+
+.rspress-doc-content {
+  color: var(--rp-c-text-1) !important;
+}
+
+/* ─── Headings ───────────────────────────────────── */
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  color: #ffffff !important;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #e0e0e0 !important;
+  border-top: 1px solid var(--rp-c-divider);
+  padding-top: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #d0d0d0 !important;
+}
+
+/* ─── Links ──────────────────────────────────────── */
+
+a {
+  color: var(--rp-c-brand-light) !important;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+/* ─── Code Blocks ────────────────────────────────── */
+
+code {
+  background-color: #1e1e2e !important;
+  color: #cdd6f4 !important;
+  border: 1px solid #313244 !important;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+
+pre code {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+pre {
+  background-color: #1e1e2e !important;
+  border: 1px solid #313244 !important;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem !important;
+}
+
+/* ─── Blockquote / Callout ───────────────────────── */
+
+blockquote {
+  border-left: 3px solid var(--rp-c-brand) !important;
+  background-color: rgba(167, 139, 250, 0.06) !important;
+  color: var(--rp-c-text-2) !important;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+}
+
+/* ─── Table ──────────────────────────────────────── */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background-color: var(--rp-c-bg-mute) !important;
+  color: var(--rp-c-text-1) !important;
+  border: 1px solid var(--rp-c-divider) !important;
+  padding: 0.6rem 1rem;
+}
+
+td {
+  border: 1px solid var(--rp-c-divider) !important;
+  padding: 0.6rem 1rem;
+  color: var(--rp-c-text-2) !important;
+}
+
+/* ─── HR ─────────────────────────────────────────── */
+
+hr {
+  border-color: var(--rp-c-divider) !important;
+  margin: 2rem 0;
+}
+
+/* ─── Previous / Next Page Nav ───────────────────── */
+
+.rspress-prev-next-page {
+  border-top: 1px solid var(--rp-c-divider) !important;
+}
+
+.rspress-prev-next-page a {
+  background-color: var(--rp-c-bg-soft) !important;
+  border: 1px solid var(--rp-c-divider) !important;
+  border-radius: 8px;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.rspress-prev-next-page a:hover {
+  border-color: var(--rp-c-brand) !important;
+  background-color: var(--rp-c-bg-mute) !important;
+}
+
+/* ─── Home Page Hero ─────────────────────────────── */
+
+.rspress-home-hero {
+  padding: 6rem 0 4rem !important;
+}
+
+.rspress-home-hero-title {
+  font-size: 3.5rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -0.05em !important;
+  line-height: 1.1 !important;
+  background: linear-gradient(135deg, #ffffff 0%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.rspress-home-hero-tagline {
+  color: var(--rp-c-text-2) !important;
+  font-size: 1.15rem !important;
+  margin-top: 1rem !important;
+}
+
+.rspress-home-hero-action-primary {
+  background-color: var(--rp-c-brand) !important;
+  color: #ffffff !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: opacity 0.15s !important;
+}
+
+.rspress-home-hero-action-primary:hover {
+  opacity: 0.85 !important;
+}
+
+.rspress-home-hero-action-alt {
+  background-color: transparent !important;
+  color: var(--rp-c-text-1) !important;
+  border: 1px solid var(--rp-c-divider) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: border-color 0.15s !important;
+}
+
+.rspress-home-hero-action-alt:hover {
+  border-color: var(--rp-c-brand) !important;
+}
+
+/* ─── Home Feature Cards ─────────────────────────── */
+
+.rspress-home-feature {
+  background-color: var(--rp-c-bg-soft) !important;
+  border: 1px solid var(--rp-c-divider) !important;
+  border-radius: 12px !important;
+  transition: border-color 0.2s, transform 0.2s !important;
+}
+
+.rspress-home-feature:hover {
+  border-color: var(--rp-c-brand) !important;
+  transform: translateY(-2px) !important;
+}
+
+.rspress-home-feature-title {
+  color: var(--rp-c-text-1) !important;
+  font-weight: 700 !important;
+}
+
+.rspress-home-feature-details {
+  color: var(--rp-c-text-2) !important;
+}
+
+/* ─── Footer ─────────────────────────────────────── */
+
+.rspress-footer {
+  background-color: var(--rp-c-bg) !important;
+  border-top: 1px solid var(--rp-c-divider) !important;
+  color: var(--rp-c-text-3) !important;
+}
