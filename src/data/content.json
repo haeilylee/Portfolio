@@ -1,0 +1,188 @@
+{
+  "hero": {
+    "name": "Hakyeong Lee",
+    "role": "Technical Writer · TW",
+    "bio": "디자인 시스템, AI 자동화, UX 리서치를 통해\n팀이 같은 언어로 일할 수 있는 환경을 만들어요.",
+    "github": "https://github.com/haeilylee",
+    "linkedin": "https://www.linkedin.com/in/%ED%95%98%EA%B2%BD-%EC%9D%B4-59655a237/"
+  },
+  "projects": [
+    {
+      "slug": "sdui",
+      "title": "AI 목업 생성의 선행 조건, 컴포넌트 레지스트리 만들기",
+      "category": "AI Design System",
+      "catClass": "design-system",
+      "date": "2026/04 → 06",
+      "tags": [
+        "Design System",
+        "Figma",
+        "Documentation"
+      ],
+      "preview": "구축 프로젝트에 앞서 R&D 프로젝트에서 컴포넌트 레지스트리 문서화를 담당했습니다. SDUI 스키마 기준으로 디자인 시스템 컴포넌트를 구조화하고, AI 목업 생성 과정에서 개발·디자인 조직이 동일한 기준으로 활용할 수 있도록 컴포넌트 정의와 문서 체계를 정립했습니다.",
+      "desc": "구축 프로젝트에 앞서 R&D 프로젝트에서 컴포넌트 레지스트리 문서화를 담당했습니다. SDUI 스키마 기준으로 디자인 시스템 컴포넌트를 구조화하고, AI 목업 생성 과정에서 개발·디자인 조직이 동일한 기준으로 활용할 수 있도록 컴포넌트 정의와 문서 체계를 정립했습니다.",
+      "outcomes": [
+        "AI가 직접 참조할 수 있는 JSON 구조 기반 컴포넌트 정의 체계 설계 ",
+        "shadcn/ui 컴포넌트를 디자인 시스템 레벨로 시스템화, 개발-디자인 간 공통 언어 문서로 기능",
+        "각 컴포넌트에 Do/Don'ts 기준 문서화, UI Designer와 협업하여 실제 구축 시스템으로 정착"
+      ],
+      "tools": [
+        {
+          "name": "GitHub",
+          "desc": "스토리보드 내 버전 관리 및 변경 이력 추적"
+        },
+        {
+          "name": "Google Excel",
+          "desc": "컴포넌트 명세 문서 작성 및 전체 골조 팀 공유"
+        },
+        {
+          "name": "Figma",
+          "desc": "Props, States에 맞는 컴포넌트 설계"
+        },
+        {
+          "name": "Storybook",
+          "desc": "개발 팀을 위한 인터랙티브 컴포넌트 문서"
+        }
+      ],
+      "insight": "SDUI 전환의 핵심은 단순한 컴포넌트 분류가 아니라 '서버가 어떤 단위로 컴포넌트를 제어할 것인가'에 대한 팀 공통 언어를 만드는 것이었습니다. 문서화 작업은 그 언어를 정의하고 공유하는 과정이었어요.",
+      "insightHighlights": [
+        "팀 공통 언어를 만드는 것이었습니다.",
+        "문서화 작업은 그 언어를 정의하고 공유하는 과정이었어요."
+      ],
+      "sections": [
+        {
+          "id": "목업-ai로-그냥-생성하면-되는-거-아니야",
+          "title": "목업, AI로 그냥 생성하면 되는 거 아니야?",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "서버 드리븐 UI(SDUI) 아키텍처로의 전환이 결정되면서, 기존 컴포넌트 체계가 새로운 패러다임에 맞지 않는 문제가 발생했습니다. 개발팀과 디자인팀 모두 SDUI에서 컴포넌트가 어떤 단위로 존재해야 하는지에 대한 공통 이해가 부족한 상태였어요."
+            }
+          ]
+        },
+        {
+          "id": "",
+          "title": "문제",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "컴포넌트 명세가 Figma 파일, Confluence, Slack 메시지 등 여러 곳에 분산되어 있었고, 서로 다른 버전이 공존하면서 개발팀이 어느 기준을 따라야 하는지 알 수 없는 상황이었습니다. SDUI 전환에서는 컴포넌트 재사용성이 핵심인데, 재사용 가능한 컴포넌트 비율이 68%에 불과했어요."
+            }
+          ]
+        },
+        {
+          "id": "process",
+          "title": "해결 과정",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "먼저 개발팀과 디자인팀이 함께 참여하는 워크숍을 통해 SDUI 맥락에서 '컴포넌트'의 정의를 재합의했습니다. 이후 Figma를 단일 소스 오브 트루스로 삼아 모든 컴포넌트 명세를 이전하고, Storybook과 연동해 개발자도 실시간으로 컴포넌트 상태를 확인할 수 있는 체계를 구축했어요."
+            }
+          ]
+        },
+        {
+          "id": "result",
+          "title": "결과",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "컴포넌트 명세 문서화로 개발-디자인 간 싱크 시간이 40% 단축됐고, 재사용 가능한 컴포넌트 비율이 68%에서 91%로 향상됐어요. 신규 팀원 온보딩 시간도 평균 3일에서 1일로 줄었습니다."
+            }
+          ]
+        }
+      ],
+      "github_url": "https://github.com",
+      "download_url": "#"
+    },
+    {
+      "slug": "ai-requirements",
+      "title": "요구사항 정의서 자동화 생성",
+      "category": "AI",
+      "catClass": "ai",
+      "date": "2026/02 → 03",
+      "tags": [
+        "AI",
+        "Github",
+        "Markdown"
+      ],
+      "preview": "기획자가 매번 수동으로 작성하던 요구사항 정의서를 AI 파이프라인으로 자동화했어요.",
+      "desc": "기획자가 매번 수동으로 작성하던 요구사항 정의서를 AI 파이프라인으로 자동화했어요.",
+      "outcomes": [
+        "요구사항 정의서 초안 작성 시간 평균 4시간 → 20분으로 단축",
+        "GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소",
+        "기획-개발 간 요구사항 오해로 인한 재작업 건수 월 평균 6건 → 1건으로 감소"
+      ],
+      "tools": [
+        {
+          "name": "OpenAI API",
+          "desc": "GPT-4o 기반 문서 초안 자동 생성"
+        },
+        {
+          "name": "GitHub Actions",
+          "desc": "PR 트리거 기반 자동화 파이프라인 구성"
+        },
+        {
+          "name": "Markdown",
+          "desc": "표준화된 요구사항 정의서 포맷 설계"
+        },
+        {
+          "name": "Python",
+          "desc": "파이프라인 스크립트 및 API 연동 구현"
+        }
+      ],
+      "insight": "AI 자동화의 가치는 '완벽한 문서 생성'이 아니라 '기획자가 더 중요한 판단에 집중할 수 있도록 반복 작업을 제거하는 것'임을 프로젝트를 통해 확인했습니다. 초안의 품질보다 워크플로우 통합이 핵심이었어요.",
+      "insightHighlights": [
+        "기획자가 더 중요한 판단에 집중할 수 있도록 반복 작업을 제거하는 것",
+        "초안의 품질보다 워크플로우 통합이 핵심이었어요."
+      ],
+      "codeSnippet": {
+        "filename": "generate-requirements.py",
+        "lang": "python",
+        "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ndef generate_requirements(pr_diff: str) -> str:\n    message = client.messages.create(\n        model=\"claude-opus-4-5\",\n        max_tokens=2048,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": f\"다음 PR diff를 분석해 요구사항 정의서를 작성하세요:\\n\\n{pr_diff}\"\n            }\n        ]\n    )\n    return message.content[0].text"
+      },
+      "sections": [
+        {
+          "id": "background",
+          "title": "배경",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "기획자들은 새로운 기능이 논의될 때마다 동일한 구조의 요구사항 정의서를 반복적으로 작성해야 했습니다. 이 작업은 창의적 판단이 필요하지 않은 반복 업무임에도 매번 평균 4시간 이상이 소요되었어요."
+            }
+          ]
+        },
+        {
+          "id": "problem",
+          "title": "문제",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "수동 작성 방식의 문제는 단순한 시간 낭비에 그치지 않았습니다. 작성자마다 양식이 달라 일관성이 부족했고, 누락 항목이 발생하면 개발 착수 후에야 발견되어 재작업으로 이어지는 경우가 많았어요."
+            }
+          ]
+        },
+        {
+          "id": "process",
+          "title": "해결 과정",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "GitHub PR이 생성될 때 자동으로 트리거되는 Actions 워크플로우를 구성했습니다. PR의 변경 내용을 분석해 Claude API로 요구사항 초안을 생성하고, 표준화된 Markdown 양식으로 포맷팅한 뒤 PR 코멘트로 자동 첨부되도록 파이프라인을 설계했어요."
+            }
+          ]
+        },
+        {
+          "id": "result",
+          "title": "결과",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "요구사항 정의서 작성 시간이 80% 단축됐고, 문서 형식 표준화로 리뷰 효율이 크게 향상됐습니다. AI 파이프라인은 재사용 가능한 모듈로 구성되어 다른 프로젝트에도 적용할 수 있게 됐어요."
+            }
+          ]
+        }
+      ],
+      "github_url": "https://github.com",
+      "download_url": "#"
+    }
+  ]
+}

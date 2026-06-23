@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI 요소 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Pretendard Variable', sans-serif;
+  background: #f0f0f0;
+  -webkit-font-smoothing: antialiased;
+  color: #111;
+}
+
+/* ── 탭 ── */
+.tabs {
+  position: sticky; top: 0; z-index: 99;
+  background: #111; display: flex;
+  padding: 0 24px; gap: 2px; height: 44px; align-items: center;
+  overflow-x: auto;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  background: none; border: none; color: rgba(255,255,255,.4);
+  font: 600 11px/1 'Pretendard Variable', sans-serif;
+  letter-spacing: .05em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 5px; cursor: pointer;
+  white-space: nowrap; transition: all .15s;
+}
+.tab:hover { color: #fff; background: rgba(255,255,255,.08); }
+.tab.on { color: #fff; background: rgba(255,255,255,.14); }
+
+/* ── 캔버스 ── */
+.canvas { padding: 24px; }
+.section { display: none; }
+.section.on { display: block; }
+
+/* ── 브라우저 프레임 ── */
+.frame {
+  background: #fff; border-radius: 12px;
+  overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+.bar {
+  background: #f2f2f2; height: 36px;
+  display: flex; align-items: center; padding: 0 14px; gap: 6px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.r{background:#ff5f57;} .y{background:#febc2e;} .g{background:#28c840;}
+.url {
+  flex: 1; background: #e8e8e8; border-radius: 5px;
+  font-size: 11px; color: #888; padding: 4px 10px; margin-left: 8px;
+}
+.badge {
+  background: #111; color: #fff; font-size: 10px; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 3px 8px; border-radius: 4px; margin-left: 8px;
+}
+
+/* ── 공통 NAV ── */
+.nav {
+  height: 52px; background: #fff; border-bottom: 1px solid #ebebeb;
+  display: flex; align-items: center; padding: 0 24px;
+}
+.nav img { height: 32px; object-fit: contain; margin-right: 10px; }
+.nav-name { font-size: 13px; font-weight: 600; letter-spacing: -.04em; color: #111; }
+
+/* ── 공통 썸네일 그라디언트 ── */
+.g1 { background: linear-gradient(140deg,#1a4fd6,#4f86f7); }
+.g2 { background: linear-gradient(140deg,#5b21b6,#a78bfa); }
+.g3 { background: linear-gradient(140deg,#065f46,#34d399); }
+.c-ds { color: #2d5cd8; } .c-ai { color: #7031d4; } .c-ux { color: #168f52; }
+
+/* ────────────────────────────────────
+   A. STATS BAR
+──────────────────────────────────── */
+.stats-bar {
+  display: flex; gap: 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0;
+}
+.stat {
+  flex: 1; padding: 28px 32px;
+  border-right: 1px solid #f0f0f0;
+}
+.stat:last-child { border-right: none; }
+.stat-num {
+  font-size: 2rem; font-weight: 700;
+  letter-spacing: -.06em; color: #111; line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 12px; color: #bbb;
+  letter-spacing: -.02em; line-height: 1.4;
+}
+
+/* ────────────────────────────────────
+   B. FEATURED CARD
+──────────────────────────────────── */
+.featured {
+  display: grid; grid-template-columns: 1fr 320px;
+  border: 1px solid #ebebeb; border-radius: 14px;
+  overflow: hidden; cursor: pointer;
+  transition: border-color .2s;
+}
+.featured:hover { border-color: #ccc; }
+.feat-thumb { min-height: 220px; position: relative; overflow: hidden; }
+.feat-body {
+  padding: 32px 28px; display: flex;
+  flex-direction: column; justify-content: center; gap: 10px;
+}
+.feat-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .07em;
+  text-transform: uppercase; color: #ccc;
+}
+.feat-title {
+  font-size: 1.25rem; font-weight: 700;
+  letter-spacing: -.05em; color: #111; line-height: 1.3;
+}
+.feat-desc {
+  font-size: 13px; color: #999;
+  line-height: 1.7; letter-spacing: -.025em;
+}
+.feat-link {
+  font-size: 13px; font-weight: 600; color: #2d5cd8;
+  letter-spacing: -.02em; margin-top: 6px;
+  display: flex; align-items: center; gap: 4px;
+}
+.feat-tag {
+  font-size: 11px; font-weight: 500; padding: 3px 10px;
+  border-radius: 20px; background: #f2f2f2; color: #555;
+  display: inline-block;
+}
+
+/* ────────────────────────────────────
+   C. ABOUT SNIPPET
+──────────────────────────────────── */
+.about-strip {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-top: 1px solid #f0f0f0;
+}
+.about-left { padding: 44px 48px 44px 48px; border-right: 1px solid #f0f0f0; }
+.about-right { padding: 44px 48px; }
+.about-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .07em;
+  color: #ccc; font-weight: 600; margin-bottom: 14px;
+}
+.about-text {
+  font-size: 14px; color: #555; line-height: 1.8;
+  letter-spacing: -.025em;
+}
+.about-kv { display: flex; flex-direction: column; gap: 16px; }
+.kv-row { display: flex; gap: 16px; align-items: baseline; }
+.kv-key {
+  font-size: 12px; font-weight: 600; color: #111;
+  letter-spacing: -.03em; width: 80px; flex-shrink: 0;
+}
+.kv-val { font-size: 12px; color: #888; letter-spacing: -.02em; line-height: 1.5; }
+
+/* ────────────────────────────────────
+   D. SKILLS GRID
+──────────────────────────────────── */
+.skills-section { padding: 40px 48px; }
+.skills-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .07em;
+  color: #ccc; font-weight: 600; margin-bottom: 20px;
+}
+.skills-groups { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; }
+.skill-group-title {
+  font-size: 11px; font-weight: 600; letter-spacing: -.025em;
+  color: #111; margin-bottom: 10px;
+}
+.skill-item {
+  font-size: 12px; color: #888; letter-spacing: -.02em;
+  padding: 3px 0; border-bottom: 1px solid #f4f4f4;
+  line-height: 1.6;
+}
+.skill-item:last-child { border-bottom: none; }
+
+/* ────────────────────────────────────
+   E. PROCESS STEPS
+──────────────────────────────────── */
+.process-section { padding: 40px 48px; background: #fafafa; border-top: 1px solid #f0f0f0; }
+.process-label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .07em;
+  color: #ccc; font-weight: 600; margin-bottom: 24px;
+}
+.process-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; }
+.step { padding: 0 24px 0 0; border-right: 1px solid #ebebeb; }
+.step:last-child { border-right: none; padding-right: 0; }
+.step-num {
+  font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  color: #ccc; margin-bottom: 10px;
+}
+.step-title {
+  font-size: 13px; font-weight: 600; letter-spacing: -.04em;
+  color: #111; margin-bottom: 6px; line-height: 1.3;
+}
+.step-desc { font-size: 12px; color: #aaa; line-height: 1.65; letter-spacing: -.02em; }
+
+/* ────────────────────────────────────
+   F. CARD with ICON
+──────────────────────────────────── */
+.icon-card {
+  border: 1px solid #ebebeb; border-radius: 12px;
+  padding: 24px; cursor: pointer;
+  transition: border-color .2s, box-shadow .2s;
+}
+.icon-card:hover { border-color: #ccc; box-shadow: 0 2px 12px rgba(0,0,0,.06); }
+.icon-wrap {
+  width: 36px; height: 36px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; margin-bottom: 14px;
+}
+.ic-blue { background: #eff3ff; }
+.ic-purple { background: #f3eeff; }
+.ic-green { background: #edfbf5; }
+.icon-title {
+  font-size: 14px; font-weight: 600; letter-spacing: -.04em;
+  color: #111; margin-bottom: 6px; line-height: 1.3;
+}
+.icon-desc { font-size: 12px; color: #aaa; line-height: 1.65; letter-spacing: -.02em; }
+.icon-cat { font-size: 10px; font-weight: 600; margin-bottom: 6px; }
+
+/* ────────────────────────────────────
+   G. INSIGHT QUOTE STRIP
+──────────────────────────────────── */
+.quote-strip {
+  background: #0f0f0f; padding: 48px;
+  display: flex; gap: 48px; align-items: flex-start;
+}
+.quote-left { flex: 1; }
+.quote-eyebrow {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .07em;
+  color: #555; font-weight: 600; margin-bottom: 16px;
+}
+.quote-text {
+  font-size: 1.125rem; color: rgba(255,255,255,.85);
+  line-height: 1.75; letter-spacing: -.03em;
+  font-family: 'SF Mono', monospace;
+}
+.quote-right { width: 200px; flex-shrink: 0; }
+.quote-meta-label { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: #444; font-weight: 600; margin-bottom: 10px; }
+.quote-tag {
+  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  background: rgba(255,255,255,.07); color: rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.08); display: inline-block;
+  margin: 2px; letter-spacing: -.01em;
+}
+
+/* ────────────────────────────────────
+   H. TIMELINE (Chronological)
+──────────────────────────────────── */
+.tl-section { padding: 40px 48px; }
+.tl-label { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: #ccc; font-weight: 600; margin-bottom: 24px; }
+.tl-item {
+  display: grid; grid-template-columns: 80px 1fr;
+  gap: 24px; padding: 16px 0; border-bottom: 1px solid #f4f4f4;
+  align-items: flex-start; cursor: pointer;
+}
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-size: 11px; color: #ccc; padding-top: 4px; letter-spacing: -.01em; }
+.tl-body { display: flex; gap: 14px; align-items: flex-start; }
+.tl-thumb { width: 56px; flex-shrink: 0; border-radius: 7px; aspect-ratio: 4/3; }
+.tl-info {}
+.tl-cat { font-size: 10px; font-weight: 600; margin-bottom: 3px; }
+.tl-title { font-size: 13px; font-weight: 600; letter-spacing: -.04em; color: #111; margin-bottom: 2px; }
+.tl-desc { font-size: 11px; color: #bbb; letter-spacing: -.02em; line-height: 1.5; }
+
+/* ────────────────────────────────────
+   I. CONTACT / CTA FOOTER
+──────────────────────────────────── */
+.cta {
+  padding: 52px 48px; border-top: 1px solid #f0f0f0;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.cta-left {}
+.cta-title { font-size: 1.5rem; font-weight: 700; letter-spacing: -.055em; color: #111; margin-bottom: 6px; }
+.cta-sub { font-size: 13px; color: #bbb; letter-spacing: -.025em; line-height: 1.6; }
+.cta-btns { display: flex; gap: 8px; }
+.btn-primary {
+  font-size: 13px; font-weight: 600; padding: 10px 20px;
+  background: #111; color: #fff; border: none; border-radius: 8px;
+  cursor: pointer; font-family: inherit; letter-spacing: -.02em;
+}
+.btn-ghost {
+  font-size: 13px; font-weight: 600; padding: 10px 20px;
+  background: none; color: #111; border: 1px solid #e0e0e0; border-radius: 8px;
+  cursor: pointer; font-family: inherit; letter-spacing: -.02em;
+}
+
+/* 섹션 래퍼 */
+.body-wrap { padding: 0 48px; }
+.body-inner { max-width: 900px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="tab on" onclick="show('a',this)">A. Stats Bar</button>
+  <button class="tab" onclick="show('b',this)">B. Featured Card</button>
+  <button class="tab" onclick="show('c',this)">C. About Snippet</button>
+  <button class="tab" onclick="show('d',this)">D. Skills Grid</button>
+  <button class="tab" onclick="show('e',this)">E. Process Steps</button>
+  <button class="tab" onclick="show('f',this)">F. Icon Cards</button>
+  <button class="tab" onclick="show('g',this)">G. Quote Strip</button>
+  <button class="tab" onclick="show('h',this)">H. Timeline</button>
+  <button class="tab" onclick="show('i',this)">I. CTA Footer</button>
+  <button class="tab" onclick="show('all',this)">전체 조합</button>
+</div>
+
+<div class="canvas">
+
+<!-- A. Stats Bar -->
+<div class="section on" id="sa">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">A</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="padding:32px 48px 28px;max-width:900px;margin:0 auto;text-align:center;">
+      <p style="font-size:14px;color:#bbb;letter-spacing:-.025em;">디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.</p>
+    </div>
+    <div style="max-width:900px;margin:0 auto 0;">
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">사이드 프로젝트<br>포트폴리오</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">40%</div>
+          <div class="stat-label">개발-디자인<br>싱크 시간 단축</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">80%</div>
+          <div class="stat-label">반복 작업<br>자동화율</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">2년</div>
+          <div class="stat-label">PM + 디자이너<br>겸직 경력</div>
+        </div>
+      </div>
+    </div>
+    <div style="height:40px;"></div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">Hero 아래 숫자로 임팩트를 빠르게 전달. OpenAI 스타일의 수평 통계 bar.</p>
+</div>
+
+<!-- B. Featured Card -->
+<div class="section" id="sb">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">B</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="padding:32px 48px;max-width:900px;margin:0 auto;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#ccc;font-weight:600;margin-bottom:16px;display:flex;justify-content:space-between;">
+        <span>Projects</span><span style="color:#ddd;">3 works</span>
+      </div>
+      <!-- Featured (대표 1개) -->
+      <div class="featured" style="margin-bottom:20px;">
+        <div class="feat-thumb g1"></div>
+        <div class="feat-body">
+          <div class="feat-eyebrow">Featured · Design System</div>
+          <div class="feat-title">SDUI 대응 컴포넌트<br>시스템 문서화</div>
+          <div class="feat-desc">서버 드리븐 UI 전환에 맞춰 컴포넌트 정의를 재합의하고, Figma를 단일 소스로 삼아 문서 체계를 구축했어요.</div>
+          <div><span class="feat-tag">Design System</span> <span class="feat-tag">Figma</span></div>
+          <div class="feat-link">자세히 보기 →</div>
+        </div>
+      </div>
+      <!-- 나머지 2개 소형 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+        <div style="border:1px solid #ebebeb;border-radius:10px;overflow:hidden;cursor:pointer;">
+          <div class="g2" style="aspect-ratio:16/8;"></div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:10px;font-weight:600;color:#7031d4;margin-bottom:4px;">AI</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">요구사항 정의서 자동화 생성</div>
+          </div>
+        </div>
+        <div style="border:1px solid #ebebeb;border-radius:10px;overflow:hidden;cursor:pointer;">
+          <div class="g3" style="aspect-ratio:16/8;"></div>
+          <div style="padding:14px 16px;">
+            <div style="font-size:10px;font-weight:600;color:#168f52;margin-bottom:4px;">UX Research</div>
+            <div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">데이터 통화 조회 서비스 UX 개선</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="height:40px;"></div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">대표 프로젝트 1개를 크게 + 나머지 소형으로 계층 강조.</p>
+</div>
+
+<!-- C. About Snippet -->
+<div class="section" id="sc">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">C</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="about-strip">
+        <div class="about-left">
+          <div class="about-label">About</div>
+          <div class="about-text">
+            디자이너이자 PM으로서 디자인 시스템 구축, AI 자동화 파이프라인 설계, UX 리서치를 넘나들어요.<br><br>
+            개발자와 같은 언어로 소통하고, 팀 전체가 참조할 수 있는 구조를 만드는 일에 집중해요.
+          </div>
+        </div>
+        <div class="about-right">
+          <div class="about-label">Info</div>
+          <div class="about-kv">
+            <div class="kv-row"><span class="kv-key">현재</span><span class="kv-val">Product Designer · PM @ 토스뱅크</span></div>
+            <div class="kv-row"><span class="kv-key">관심사</span><span class="kv-val">Design Systems, AI Automation, UX Research</span></div>
+            <div class="kv-row"><span class="kv-key">연락처</span><span class="kv-val" style="color:#2d5cd8;">plus@plus-ex.com</span></div>
+            <div class="kv-row"><span class="kv-key">링크</span><span class="kv-val" style="color:#2d5cd8;">LinkedIn · GitHub</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">홈 하단 또는 About 페이지. 2열로 자기소개 + 기본 정보.</p>
+</div>
+
+<!-- D. Skills Grid -->
+<div class="section" id="sd">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">D</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="skills-section">
+        <div class="skills-label">Skills & Tools</div>
+        <div class="skills-groups">
+          <div>
+            <div class="skill-group-title">Design</div>
+            <div class="skill-item">Figma</div>
+            <div class="skill-item">Design System</div>
+            <div class="skill-item">Prototyping</div>
+            <div class="skill-item">UI / Visual</div>
+          </div>
+          <div>
+            <div class="skill-group-title">Research</div>
+            <div class="skill-item">User Interview</div>
+            <div class="skill-item">Heatmap</div>
+            <div class="skill-item">Usability Test</div>
+            <div class="skill-item">Data Analysis</div>
+          </div>
+          <div>
+            <div class="skill-group-title">Development</div>
+            <div class="skill-item">React / Next.js</div>
+            <div class="skill-item">TypeScript</div>
+            <div class="skill-item">GitHub Actions</div>
+            <div class="skill-item">Tailwind CSS</div>
+          </div>
+          <div>
+            <div class="skill-group-title">AI / Automation</div>
+            <div class="skill-item">Claude API</div>
+            <div class="skill-item">Prompt Design</div>
+            <div class="skill-item">Pipeline 설계</div>
+            <div class="skill-item">Notion / Slack 연동</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">About 페이지 또는 홈 하단. 4열 스킬 카테고리 분류.</p>
+</div>
+
+<!-- E. Process Steps -->
+<div class="section" id="se">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">E</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="process-section">
+        <div class="process-label">How I Work</div>
+        <div class="process-steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-title">문제 정의</div>
+            <div class="step-desc">데이터와 인터뷰로 진짜 문제를 찾아요. 증상이 아닌 원인에 집중해요.</div>
+          </div>
+          <div class="step" style="padding-left:24px;">
+            <div class="step-num">02</div>
+            <div class="step-title">구조 설계</div>
+            <div class="step-desc">정보 계층과 컴포넌트 경계를 먼저 합의해요. 빠른 시각화보다 언어 정렬이 우선이에요.</div>
+          </div>
+          <div class="step" style="padding-left:24px;">
+            <div class="step-num">03</div>
+            <div class="step-title">실행 & 검증</div>
+            <div class="step-desc">프로토타입을 빠르게 만들고 실제 사용자에게 검증해요.</div>
+          </div>
+          <div class="step" style="padding-left:24px;border-right:none;">
+            <div class="step-num">04</div>
+            <div class="step-title">문서화</div>
+            <div class="step-desc">결과를 팀이 참조할 수 있는 형태로 남겨요. 작업이 자산이 되게 해요.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">작업 방식을 4단계로 설명. About 페이지 또는 홈 하단 섹션.</p>
+</div>
+
+<!-- F. Icon Cards -->
+<div class="section" id="sf">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">F</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;padding:36px 48px;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#ccc;font-weight:600;margin-bottom:20px;display:flex;justify-content:space-between;"><span>Projects</span><span style="color:#ddd;">3 works</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="icon-card">
+          <div class="icon-wrap ic-blue">🧩</div>
+          <div class="icon-cat c-ds">Design System</div>
+          <div class="icon-title">SDUI 대응 컴포넌트 시스템 문서화</div>
+          <div class="icon-desc">서버 드리븐 UI 전환에 맞춰 컴포넌트를 재정의하고 문서 체계를 구축했어요.</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap ic-purple">⚡</div>
+          <div class="icon-cat c-ai">AI</div>
+          <div class="icon-title">요구사항 정의서 자동화 생성</div>
+          <div class="icon-desc">AI 파이프라인으로 4시간짜리 반복 작업을 80% 단축했어요.</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap ic-green">🔍</div>
+          <div class="icon-cat c-ux">UX Research</div>
+          <div class="icon-title">데이터 통화 조회 서비스 UX 개선</div>
+          <div class="icon-desc">히트맵과 인터뷰로 이탈 원인을 찾고 정보 계층을 재설계했어요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">썸네일 대신 아이콘 + 텍스트 카드. developers.openai.com use-cases 스타일.</p>
+</div>
+
+<!-- G. Quote Strip -->
+<div class="section" id="sg">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">G</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="quote-strip">
+        <div class="quote-left">
+          <div class="quote-eyebrow">핵심 인사이트</div>
+          <div class="quote-text">"좋은 디자인 시스템은 규칙의 모음이 아니에요. 팀 전체가 동의한 언어예요. 그 언어가 없으면 빠르게 만들수록 빠르게 무너져요."</div>
+        </div>
+        <div class="quote-right">
+          <div class="quote-meta-label">관련 프로젝트</div>
+          <span class="quote-tag">Design System</span>
+          <span class="quote-tag">SDUI</span>
+          <span class="quote-tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">홈 또는 About 중간에 넣는 다크 인용구 섹션. OpenAI 프롬프트 박스 스타일.</p>
+</div>
+
+<!-- H. Timeline -->
+<div class="section" id="sh">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">H</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="tl-section">
+        <div class="tl-label">Projects · Chronological</div>
+        <div>
+          <div class="tl-item">
+            <div class="tl-year">2026 / 02</div>
+            <div class="tl-body">
+              <div class="tl-thumb g2"></div>
+              <div class="tl-info">
+                <div class="tl-cat c-ai">AI</div>
+                <div class="tl-title">요구사항 정의서 자동화 생성</div>
+                <div class="tl-desc">AI 파이프라인으로 반복 작업을 80% 단축했어요.</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026 / 01</div>
+            <div class="tl-body">
+              <div class="tl-thumb g1"></div>
+              <div class="tl-info">
+                <div class="tl-cat c-ds">Design System</div>
+                <div class="tl-title">SDUI 대응 컴포넌트 시스템 문서화</div>
+                <div class="tl-desc">서버 드리븐 UI 전환에 맞춰 컴포넌트를 재정의했어요.</div>
+              </div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2025 / 09</div>
+            <div class="tl-body">
+              <div class="tl-thumb g3"></div>
+              <div class="tl-info">
+                <div class="tl-cat c-ux">UX Research</div>
+                <div class="tl-title">데이터 통화 조회 서비스 UX 개선</div>
+                <div class="tl-desc">히트맵과 인터뷰로 핵심 불편 지점을 도출했어요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">카드 그리드 대신 날짜 축 리스트. 최신순 or 오래된 순 정렬.</p>
+</div>
+
+<!-- I. CTA Footer -->
+<div class="section" id="si">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">I</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="cta">
+        <div class="cta-left">
+          <div class="cta-title">함께 일해요.</div>
+          <div class="cta-sub">디자인 시스템, AI 자동화, UX 개선 프로젝트에<br>관심이 있다면 연락 주세요.</div>
+        </div>
+        <div class="cta-btns">
+          <button class="btn-primary">이메일 보내기</button>
+          <button class="btn-ghost">LinkedIn</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid #f0f0f0;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;color:#ccc;letter-spacing:-.02em;">© 2026 Hakyeong Lee</span>
+        <span style="font-size:12px;color:#ccc;letter-spacing:-.02em;">Built with Next.js</span>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:#999;text-align:center;padding:8px 0;">홈 맨 아래 연락 유도 섹션 + 미니 footer.</p>
+</div>
+
+<!-- 전체 조합 -->
+<div class="section" id="sall">
+  <div class="frame">
+    <div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">전체 조합</div></div>
+    <div class="nav"><img src="/profile.webp"><span class="nav-name">Hakyeong Lee</span></div>
+
+    <!-- Hero -->
+    <div style="max-width:900px;margin:0 auto;padding:60px 48px 44px;text-align:center;border-bottom:1px solid #f0f0f0;">
+      <img src="/profile.webp" style="height:80px;object-fit:contain;margin-bottom:18px;">
+      <h1 style="font-size:2.25rem;font-weight:700;letter-spacing:-.055em;color:#111;margin:0 0 12px;line-height:1.15;">Hakyeong Lee</h1>
+      <p style="font-size:14px;color:#bbb;line-height:1.7;letter-spacing:-.025em;">디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.</p>
+    </div>
+
+    <!-- Stats -->
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="stats-bar">
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">포트폴리오 프로젝트</div></div>
+        <div class="stat"><div class="stat-num">40%</div><div class="stat-label">싱크 시간 단축</div></div>
+        <div class="stat"><div class="stat-num">80%</div><div class="stat-label">자동화율</div></div>
+        <div class="stat"><div class="stat-num">2년</div><div class="stat-label">PM + 디자이너</div></div>
+      </div>
+    </div>
+
+    <!-- Projects (icon cards) -->
+    <div style="max-width:900px;margin:0 auto;padding:36px 48px 0;">
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#ccc;font-weight:600;margin-bottom:16px;display:flex;justify-content:space-between;"><span>Projects</span><span style="color:#ddd;">3 works</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="icon-card">
+          <div class="icon-wrap ic-blue">🧩</div>
+          <div class="icon-cat c-ds">Design System</div>
+          <div class="icon-title">SDUI 대응 컴포넌트 시스템 문서화</div>
+          <div class="icon-desc">서버 드리븐 UI 전환에 맞춰 컴포넌트를 재정의했어요.</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap ic-purple">⚡</div>
+          <div class="icon-cat c-ai">AI</div>
+          <div class="icon-title">요구사항 정의서 자동화 생성</div>
+          <div class="icon-desc">AI 파이프라인으로 반복 작업을 80% 단축했어요.</div>
+        </div>
+        <div class="icon-card">
+          <div class="icon-wrap ic-green">🔍</div>
+          <div class="icon-cat c-ux">UX Research</div>
+          <div class="icon-title">데이터 통화 조회 서비스 UX 개선</div>
+          <div class="icon-desc">히트맵과 인터뷰로 정보 계층을 재설계했어요.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote -->
+    <div style="max-width:900px;margin:32px auto 0;">
+      <div class="quote-strip">
+        <div class="quote-left">
+          <div class="quote-eyebrow">핵심 인사이트</div>
+          <div class="quote-text">"좋은 디자인 시스템은 팀 전체가 동의한 언어예요. 그 언어가 없으면 빠르게 만들수록 빠르게 무너져요."</div>
+        </div>
+        <div class="quote-right">
+          <div class="quote-meta-label">관련 영역</div>
+          <span class="quote-tag">Design System</span>
+          <span class="quote-tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="about-strip">
+        <div class="about-left">
+          <div class="about-label">About</div>
+          <div class="about-text">디자이너이자 PM으로서 디자인 시스템, AI 자동화, UX 리서치를 넘나들어요. 개발자와 같은 언어로 소통하고, 팀 전체가 참조할 수 있는 구조를 만드는 일에 집중해요.</div>
+        </div>
+        <div class="about-right">
+          <div class="about-label">Info</div>
+          <div class="about-kv">
+            <div class="kv-row"><span class="kv-key">현재</span><span class="kv-val">Product Designer · PM</span></div>
+            <div class="kv-row"><span class="kv-key">관심사</span><span class="kv-val">Design Systems, AI, UX Research</span></div>
+            <div class="kv-row"><span class="kv-key">연락처</span><span class="kv-val" style="color:#2d5cd8;">plus@plus-ex.com</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="cta">
+        <div class="cta-left">
+          <div class="cta-title">함께 일해요.</div>
+          <div class="cta-sub">디자인 시스템, AI, UX 프로젝트에 관심 있다면 연락 주세요.</div>
+        </div>
+        <div class="cta-btns">
+          <button class="btn-primary">이메일 보내기</button>
+          <button class="btn-ghost">LinkedIn</button>
+        </div>
+      </div>
+      <div style="border-top:1px solid #f0f0f0;padding:20px 48px;display:flex;justify-content:space-between;">
+        <span style="font-size:12px;color:#ccc;">© 2026 Hakyeong Lee</span>
+        <span style="font-size:12px;color:#ccc;">Built with Next.js</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /canvas -->
+
+<script>
+function show(key, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('s' + key).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo(0, 44);
+}
+</script>
+</body>
+</html>

@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/nav";
-import Sidebar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "Hakyeong Lee",
+  icons: {
+    icon: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -16,15 +19,9 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Nav />
-        <div
-          style={{ paddingTop: "var(--nav-h)" }}
-          className="flex min-h-screen"
-        >
-          <Sidebar />
-          <main className="flex-1" style={{ marginLeft: "var(--sidebar-w)" }}>
-            {children}
-          </main>
-        </div>
+        <main style={{ paddingTop: "var(--nav-h)" }}>
+          {children}
+        </main>
       </body>
     </html>
   );

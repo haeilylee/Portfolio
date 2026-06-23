@@ -30,3 +30,15 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+a.proj-link:hover { text-decoration: underline !important; text-underline-offset: 3px; }
+
+.reveal-wrap {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+.reveal-wrap.reveal-in {
+  opacity: 1;
+  transform: none;
+}

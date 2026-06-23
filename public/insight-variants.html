@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insight 하이라이트 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard Variable', sans-serif; background: #ebebeb; -webkit-font-smoothing: antialiased; padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+
+.label { font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: #999; margin-bottom: 10px; }
+
+.card { background: #fff; border-radius: 12px; padding: 36px 40px; max-width: 720px; }
+
+/* 공통 */
+.section-label { font-size: 10px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; margin-bottom: 10px; }
+.quote { font-size: 14px; line-height: 1.85; letter-spacing: -0.03em; word-break: keep-all; }
+
+/* ── 시안 1: 소프트 노란 배경 박스 ── */
+.v1-box {
+  background: #fffbea;
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+.v1-box .section-label { color: #b89c1a; }
+.v1-box .quote { color: #5c4d00; }
+
+/* ── 시안 2: 왼쪽 굵은 바 + 연노랑 배경 ── */
+.v2-box {
+  background: #fffef0;
+  border-left: 3px solid #f0d000;
+  border-radius: 0 8px 8px 0;
+  padding: 18px 20px;
+}
+.v2-box .section-label { color: #999; }
+.v2-box .quote { color: #444; }
+
+/* ── 시안 3: 인라인 마커 하이라이트 ── */
+.v3-box {
+  padding: 0;
+}
+.v3-box .section-label { color: #999; margin-bottom: 12px; }
+.v3-box .quote { color: #333; }
+.hl {
+  background: linear-gradient(transparent 55%, #fff176 55%);
+  padding: 0 1px;
+}
+</style>
+</head>
+<body>
+
+<!-- 시안 1 -->
+<div>
+  <div class="label">시안 1 · 소프트 노란 배경</div>
+  <div class="card">
+    <div class="v1-box">
+      <div class="section-label">핵심 인사이트</div>
+      <div class="quote">
+        "히트맵 데이터와 사용자 인터뷰를 함께 분석했을 때, 숫자가 말해주지 않는 맥락을 인터뷰가 채워줬습니다. 정량 데이터만으로는 '왜 이탈하는가'를 알 수 없었고, 두 방법론을 교차 검증하는 과정이 핵심 인사이트를 만들어냈어요."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 시안 2 -->
+<div>
+  <div class="label">시안 2 · 왼쪽 바 + 옅은 배경</div>
+  <div class="card">
+    <div class="v2-box">
+      <div class="section-label">핵심 인사이트</div>
+      <div class="quote">
+        "히트맵 데이터와 사용자 인터뷰를 함께 분석했을 때, 숫자가 말해주지 않는 맥락을 인터뷰가 채워줬습니다. 정량 데이터만으로는 '왜 이탈하는가'를 알 수 없었고, 두 방법론을 교차 검증하는 과정이 핵심 인사이트를 만들어냈어요."
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 시안 3 -->
+<div>
+  <div class="label">시안 3 · 인라인 마커</div>
+  <div class="card">
+    <div class="v3-box">
+      <div class="section-label">핵심 인사이트</div>
+      <div class="quote">
+        "히트맵 데이터와 사용자 인터뷰를 함께 분석했을 때, <span class="hl">숫자가 말해주지 않는 맥락을 인터뷰가 채워줬습니다.</span> 정량 데이터만으로는 '왜 이탈하는가'를 알 수 없었고, <span class="hl">두 방법론을 교차 검증하는 과정이 핵심 인사이트를 만들어냈어요.</span>"
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

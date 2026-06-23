@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E형 발전 시안 3종</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard Variable', sans-serif; background: #e8e8e8; -webkit-font-smoothing: antialiased; }
+
+.tabs { position: sticky; top:0; z-index:99; background:#111; display:flex; padding:0 24px; gap:2px; height:44px; align-items:center; }
+.tab { background:none; border:none; color:rgba(255,255,255,.4); font:600 12px/1 'Pretendard Variable',sans-serif; letter-spacing:.04em; text-transform:uppercase; padding:7px 16px; border-radius:5px; cursor:pointer; white-space:nowrap; transition:all .15s; }
+.tab:hover { color:#fff; background:rgba(255,255,255,.08); }
+.tab.on { color:#fff; background:rgba(255,255,255,.16); }
+
+.canvas { padding:24px; }
+.section { display:none; }
+.section.on { display:block; }
+
+.frame { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 32px rgba(0,0,0,.12); }
+.bar { background:#f2f2f2; height:36px; display:flex; align-items:center; padding:0 14px; gap:6px; border-bottom:1px solid #e8e8e8; }
+.dot { width:10px; height:10px; border-radius:50%; }
+.r{background:#ff5f57;} .y{background:#febc2e;} .g{background:#28c840;}
+.url { flex:1; background:#e8e8e8; border-radius:5px; font-size:11px; color:#888; padding:4px 10px; margin-left:8px; }
+.badge { background:#111; color:#fff; font-size:10px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:3px 8px; border-radius:4px; margin-left:8px; }
+
+/* 공용 그라디언트 */
+.g1 { background: linear-gradient(145deg,#1a4fd6,#4f86f7); }
+.g2 { background: linear-gradient(145deg,#5b21b6,#a78bfa); }
+.g3 { background: linear-gradient(145deg,#065f46,#34d399); }
+.c-ds { color:#2d5cd8; } .c-ai { color:#7031d4; } .c-ux { color:#168f52; }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="tab on"  onclick="show('a',this)">E-1 · 프로필 사이드바</button>
+  <button class="tab" onclick="show('b',this)">E-2 · 에디토리얼 넘버링</button>
+  <button class="tab" onclick="show('c',this)">E-3 · 콤팩트 + 인사이트</button>
+</div>
+
+<div class="canvas">
+
+<!-- ══════════════════════════════════════
+     E-1  프로필 고정 사이드바 + 프로젝트 리스트
+══════════════════════════════════════ -->
+<div class="section on" id="sa">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">E-1</div></div>
+
+<style>
+.e1-wrap { display:grid; grid-template-columns:240px 1fr; min-height:640px; }
+.e1-sidebar {
+  border-right:1px solid #f0f0f0; padding:40px 28px;
+  display:flex; flex-direction:column; gap:0;
+  position:sticky; top:0; align-self:flex-start;
+}
+.e1-avatar { margin-bottom:18px; }
+.e1-avatar img { height:56px; object-fit:contain; }
+.e1-name { font-size:1.125rem; font-weight:700; letter-spacing:-.05em; color:#111; line-height:1.2; margin-bottom:4px; }
+.e1-role { font-size:11px; color:#bbb; letter-spacing:-.02em; margin-bottom:24px; }
+.e1-bio { font-size:12px; color:#888; line-height:1.75; letter-spacing:-.025em; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid #f0f0f0; }
+.e1-section-label { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; margin-bottom:10px; margin-top:20px; }
+.e1-skill-row { display:flex; flex-direction:column; gap:4px; margin-bottom:0; }
+.e1-skill { font-size:12px; color:#666; letter-spacing:-.02em; padding:4px 0; border-bottom:1px solid #f8f8f8; display:flex; align-items:center; gap:6px; }
+.e1-skill-dot { width:5px; height:5px; border-radius:50%; flex-shrink:0; }
+.e1-contact { margin-top:28px; padding-top:20px; border-top:1px solid #f0f0f0; }
+.e1-contact-link { font-size:12px; color:#000; font-weight:600; letter-spacing:-.02em; display:block; margin-bottom:6px; }
+
+.e1-main { padding:40px 44px 60px; }
+.e1-main-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid #f0f0f0; }
+.e1-main-title { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; }
+.e1-main-count { font-size:11px; color:#ddd; }
+
+.e1-project { display:grid; grid-template-columns:160px 1fr; gap:24px; border-top:1px solid #f4f4f4; padding:22px 0; }
+.e1-project:first-child { border-top:none; padding-top:0; }
+.e1-left {}
+.e1-thumb { border-radius:8px; aspect-ratio:4/3; margin-bottom:10px; }
+.e1-cat { font-size:10px; font-weight:600; margin-bottom:3px; }
+.e1-date { font-size:11px; color:#ccc; }
+.e1-right {}
+.e1-proj-header { display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.e1-proj-title { font-size:14px; font-weight:600; letter-spacing:-.04em; color:#111; line-height:1.3; }
+.e1-proj-link { font-size:11px; font-weight:600; color:#000; white-space:nowrap; flex-shrink:0; }
+.e1-bullets { display:flex; flex-direction:column; gap:5px; }
+.e1-bullet { display:flex; gap:8px; font-size:12px; color:#666; line-height:1.7; letter-spacing:-.025em; }
+.e1-dash { color:#ddd; flex-shrink:0; font-size:10px; margin-top:3px; }
+.e1-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; }
+.e1-tag { font-size:10px; font-weight:500; padding:3px 8px; border-radius:20px; background:#f4f4f4; color:#888; }
+</style>
+
+<!-- NAV -->
+<div style="height:52px;background:#fff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 28px;">
+  <img src="/profile.webp" style="height:26px;object-fit:contain;margin-right:8px;filter:none;">
+  <span style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">Hakyeong Lee</span>
+</div>
+
+<div class="e1-wrap">
+  <!-- 사이드바 -->
+  <div class="e1-sidebar">
+    <div class="e1-avatar"><img src="/profile.webp" alt=""></div>
+    <div class="e1-name">Hakyeong Lee</div>
+    <div class="e1-role">Product Designer · PM</div>
+    <div class="e1-bio">디자인 시스템, AI 자동화, UX 리서치를 통해 개발과 디자인이 같은 언어로 움직이는 환경을 만들어요.</div>
+
+    <div class="e1-section-label">Expertise</div>
+    <div class="e1-skill-row">
+      <div class="e1-skill"><div class="e1-skill-dot" style="background:#2d5cd8;"></div>Design System</div>
+      <div class="e1-skill"><div class="e1-skill-dot" style="background:#7031d4;"></div>AI Automation</div>
+      <div class="e1-skill"><div class="e1-skill-dot" style="background:#168f52;"></div>UX Research</div>
+      <div class="e1-skill"><div class="e1-skill-dot" style="background:#888;"></div>Figma · Next.js</div>
+    </div>
+
+    <div class="e1-section-label">Contact</div>
+    <div class="e1-contact">
+      <span class="e1-contact-link">이메일 보내기 →</span>
+      <span class="e1-contact-link">LinkedIn →</span>
+    </div>
+  </div>
+
+  <!-- 메인 -->
+  <div class="e1-main">
+    <div class="e1-main-header">
+      <span class="e1-main-title">Projects</span>
+      <span class="e1-main-count">3 works</span>
+    </div>
+
+    <div class="e1-project">
+      <div class="e1-left">
+        <div class="e1-thumb g1"></div>
+        <div class="e1-cat c-ds">Design System</div>
+        <div class="e1-date">2026/01 → 02</div>
+      </div>
+      <div class="e1-right">
+        <div class="e1-proj-header">
+          <span class="e1-proj-title">SDUI 대응 컴포넌트 시스템 문서화</span>
+          <span class="e1-proj-link">링크 →</span>
+        </div>
+        <div class="e1-bullets">
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>컴포넌트 명세 문서화로 개발-디자인 간 싱크 시간 40% 단축</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>SDUI 전환 시 재사용 컴포넌트 비율 68% → 91%로 향상</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>신규 온보딩 컴포넌트 학습 시간 3일 → 1일로 감소</span></div>
+        </div>
+        <div class="e1-tags"><span class="e1-tag">Figma</span><span class="e1-tag">Storybook</span><span class="e1-tag">Notion</span></div>
+      </div>
+    </div>
+
+    <div class="e1-project">
+      <div class="e1-left">
+        <div class="e1-thumb g2"></div>
+        <div class="e1-cat c-ai">AI</div>
+        <div class="e1-date">2026/02 → 03</div>
+      </div>
+      <div class="e1-right">
+        <div class="e1-proj-header">
+          <span class="e1-proj-title">요구사항 정의서 자동화 생성</span>
+          <span class="e1-proj-link">링크 →</span>
+        </div>
+        <div class="e1-bullets">
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>요구사항 정의서 초안 작성 시간 4시간 → 20분으로 단축</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>재작업 건수 월 평균 6건 → 1건으로 감소</span></div>
+        </div>
+        <div class="e1-tags"><span class="e1-tag">Claude API</span><span class="e1-tag">GitHub Actions</span><span class="e1-tag">Python</span></div>
+      </div>
+    </div>
+
+    <div class="e1-project">
+      <div class="e1-left">
+        <div class="e1-thumb g3"></div>
+        <div class="e1-cat c-ux">UX Research</div>
+        <div class="e1-date">2025/09 → 11</div>
+      </div>
+      <div class="e1-right">
+        <div class="e1-proj-header">
+          <span class="e1-proj-title">데이터 통화 조회 서비스 UX 개선</span>
+          <span class="e1-proj-link">링크 →</span>
+        </div>
+        <div class="e1-bullets">
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>조회 완료율 57% → 78%로 21%p 향상</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>핵심 불편 지점 5가지 도출 및 우선순위 기반 개선안 도입</span></div>
+          <div class="e1-bullet"><span class="e1-dash">—</span><span>평균 태스크 완료 시간 38% 단축</span></div>
+        </div>
+        <div class="e1-tags"><span class="e1-tag">Hotjar</span><span class="e1-tag">Figma</span><span class="e1-tag">Maze</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div><!-- E-1 end -->
+
+
+<!-- ══════════════════════════════════════
+     E-2  에디토리얼 넘버링 + 지표 콜아웃
+══════════════════════════════════════ -->
+<div class="section" id="sb">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">E-2</div></div>
+
+<style>
+.e2-body { max-width:900px; margin:0 auto; padding:0 48px; }
+.e2-hero { padding:56px 0 44px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:24px; }
+.e2-hero img { height:64px; object-fit:contain; flex-shrink:0; }
+.e2-hero-text { flex:1; }
+.e2-hero-name { font-size:2rem; font-weight:700; letter-spacing:-.06em; color:#111; margin-bottom:6px; }
+.e2-hero-sub { font-size:13px; color:#bbb; letter-spacing:-.025em; line-height:1.6; }
+.e2-hero-tags { display:flex; gap:6px; margin-top:12px; }
+.e2-hero-tag { font-size:11px; font-weight:500; padding:4px 10px; border-radius:20px; background:#f2f2f2; color:#555; }
+
+.e2-list { padding:44px 0 60px; }
+.e2-list-header { display:flex; align-items:baseline; justify-content:space-between; margin-bottom:28px; }
+.e2-list-label { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; }
+
+.e2-item { display:grid; grid-template-columns:64px 1fr 200px; gap:28px; border-top:1px solid #f0f0f0; padding:28px 0; align-items:flex-start; }
+.e2-num { font-size:2rem; font-weight:700; letter-spacing:-.06em; color:#f0f0f0; line-height:1; padding-top:4px; }
+.e2-center {}
+.e2-item-cat { font-size:10px; font-weight:600; margin-bottom:6px; }
+.e2-item-title { font-size:15px; font-weight:600; letter-spacing:-.04em; color:#111; line-height:1.3; margin-bottom:12px; }
+.e2-item-bullets { display:flex; flex-direction:column; gap:5px; }
+.e2-item-bullet { display:flex; gap:8px; font-size:12px; color:#666; line-height:1.7; letter-spacing:-.025em; }
+.e2-right { display:flex; flex-direction:column; gap:12px; }
+.e2-thumb { border-radius:8px; aspect-ratio:16/10; }
+.e2-meta { display:flex; flex-direction:column; gap:4px; }
+.e2-meta-date { font-size:11px; color:#ccc; }
+.e2-stat { background:#f7f7f7; border-radius:8px; padding:12px 14px; }
+.e2-stat-num { font-size:1.25rem; font-weight:700; letter-spacing:-.05em; color:#111; }
+.e2-stat-label { font-size:10px; color:#bbb; letter-spacing:-.01em; margin-top:2px; }
+.e2-link { font-size:11px; font-weight:600; color:#000; letter-spacing:-.01em; }
+</style>
+
+<div style="height:52px;background:#fff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 48px;gap:10px;">
+  <img src="/profile.webp" style="height:26px;object-fit:contain;">
+  <span style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">Hakyeong Lee</span>
+</div>
+
+<div class="e2-body">
+  <div class="e2-hero">
+    <img src="/profile.webp" alt="">
+    <div class="e2-hero-text">
+      <div class="e2-hero-name">Hakyeong Lee</div>
+      <div class="e2-hero-sub">디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.</div>
+      <div class="e2-hero-tags">
+        <span class="e2-hero-tag">Design System</span>
+        <span class="e2-hero-tag">AI Automation</span>
+        <span class="e2-hero-tag">UX Research</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="e2-list">
+    <div class="e2-list-header">
+      <span class="e2-list-label">Projects</span>
+      <span style="font-size:11px;color:#ddd;">3 works</span>
+    </div>
+
+    <!-- 01 -->
+    <div class="e2-item">
+      <div class="e2-num">01</div>
+      <div class="e2-center">
+        <div class="e2-item-cat c-ds">Design System</div>
+        <div class="e2-item-title">SDUI 대응 컴포넌트<br>시스템 문서화</div>
+        <div class="e2-item-bullets">
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>컴포넌트 명세 문서화로 개발-디자인 간 싱크 시간 40% 단축</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>SDUI 전환 시 재사용 컴포넌트 비율 68% → 91%로 향상</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>신규 온보딩 학습 시간 3일 → 1일로 감소</span></div>
+        </div>
+      </div>
+      <div class="e2-right">
+        <div class="e2-thumb g1"></div>
+        <div class="e2-stat"><div class="e2-stat-num">40%</div><div class="e2-stat-label">싱크 시간 단축</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="e2-meta-date">2026/01 → 02</span>
+          <span class="e2-link">링크 →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="e2-item">
+      <div class="e2-num">02</div>
+      <div class="e2-center">
+        <div class="e2-item-cat c-ai">AI</div>
+        <div class="e2-item-title">요구사항 정의서<br>자동화 생성</div>
+        <div class="e2-item-bullets">
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>요구사항 정의서 초안 작성 4시간 → 20분으로 단축</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>재작업 건수 월 평균 6건 → 1건으로 감소</span></div>
+        </div>
+      </div>
+      <div class="e2-right">
+        <div class="e2-thumb g2"></div>
+        <div class="e2-stat"><div class="e2-stat-num">80%</div><div class="e2-stat-label">작성 시간 단축</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="e2-meta-date">2026/02 → 03</span>
+          <span class="e2-link">링크 →</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="e2-item">
+      <div class="e2-num">03</div>
+      <div class="e2-center">
+        <div class="e2-item-cat c-ux">UX Research</div>
+        <div class="e2-item-title">데이터 통화 조회<br>서비스 UX 개선</div>
+        <div class="e2-item-bullets">
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>조회 완료율 57% → 78%로 21%p 향상</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>핵심 불편 지점 5가지 도출 및 우선순위 기반 개선안 도입</span></div>
+          <div class="e2-item-bullet"><span style="color:#ddd;font-size:10px;flex-shrink:0;margin-top:3px;">—</span><span>평균 태스크 완료 시간 38% 단축</span></div>
+        </div>
+      </div>
+      <div class="e2-right">
+        <div class="e2-thumb g3"></div>
+        <div class="e2-stat"><div class="e2-stat-num">+21%p</div><div class="e2-stat-label">조회 완료율</div></div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <span class="e2-meta-date">2025/09 → 11</span>
+          <span class="e2-link">링크 →</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div><!-- E-2 end -->
+
+
+<!-- ══════════════════════════════════════
+     E-3  콤팩트 로우 + 인라인 인사이트
+══════════════════════════════════════ -->
+<div class="section" id="sc">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div><div class="badge">E-3</div></div>
+
+<style>
+.e3-body { max-width:900px; margin:0 auto; padding:0 48px; }
+.e3-hero { padding:56px 0 44px; border-bottom:1px solid #f0f0f0; text-align:center; }
+.e3-hero img { height:80px; object-fit:contain; margin-bottom:18px; display:inline-block; }
+.e3-hero-name { font-size:2.25rem; font-weight:700; letter-spacing:-.055em; color:#111; margin-bottom:10px; }
+.e3-hero-sub { font-size:14px; color:#bbb; letter-spacing:-.025em; line-height:1.7; }
+
+.e3-list { padding:40px 0 64px; }
+.e3-header { display:flex; justify-content:space-between; margin-bottom:20px; }
+.e3-header-label { font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; }
+
+.e3-row {
+  border-top:1px solid #f0f0f0;
+  padding:0;
+  overflow:hidden;
+}
+/* 상단 요약 행 */
+.e3-summary {
+  display:grid;
+  grid-template-columns:120px 1fr auto auto;
+  gap:20px;
+  align-items:center;
+  padding:18px 0;
+  cursor:pointer;
+}
+.e3-mini-thumb { border-radius:6px; aspect-ratio:4/3; }
+.e3-summary-info {}
+.e3-s-cat { font-size:10px; font-weight:600; margin-bottom:3px; }
+.e3-s-title { font-size:13px; font-weight:600; letter-spacing:-.04em; color:#111; }
+.e3-s-date { font-size:11px; color:#ccc; white-space:nowrap; }
+.e3-s-link { font-size:11px; font-weight:600; color:#000; white-space:nowrap; }
+
+/* 확장 영역 */
+.e3-detail {
+  padding:0 0 24px 140px; /* mini-thumb(120) + gap(20) */
+  display:grid;
+  grid-template-columns:1fr 180px;
+  gap:28px;
+}
+.e3-bullets { display:flex; flex-direction:column; gap:5px; }
+.e3-bullet { display:flex; gap:8px; font-size:12px; color:#666; line-height:1.7; letter-spacing:-.025em; }
+.e3-dash { color:#ddd; flex-shrink:0; font-size:10px; margin-top:3px; }
+
+.e3-insight { background:#0f0f0f; border-radius:8px; padding:14px 16px; }
+.e3-insight-label { font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:#555; font-weight:600; margin-bottom:6px; }
+.e3-insight-text { font-size:11px; color:rgba(255,255,255,.65); line-height:1.7; letter-spacing:-.01em; font-family:'SF Mono',monospace; }
+
+.e3-tags { display:flex; gap:5px; flex-wrap:wrap; margin-top:10px; }
+.e3-tag { font-size:10px; font-weight:500; padding:3px 8px; border-radius:20px; background:#f4f4f4; color:#888; }
+</style>
+
+<div style="height:52px;background:#fff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 48px;gap:10px;">
+  <img src="/profile.webp" style="height:26px;object-fit:contain;">
+  <span style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">Hakyeong Lee</span>
+</div>
+
+<div class="e3-body">
+  <div class="e3-hero">
+    <img src="/profile.webp" alt="">
+    <div class="e3-hero-name">Hakyeong Lee</div>
+    <div class="e3-hero-sub">디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.</div>
+  </div>
+
+  <div class="e3-list">
+    <div class="e3-header">
+      <span class="e3-header-label">Projects</span>
+      <span style="font-size:11px;color:#ddd;">3 works</span>
+    </div>
+
+    <!-- 프로젝트 1 -->
+    <div class="e3-row">
+      <div class="e3-summary">
+        <div class="e3-mini-thumb g1"></div>
+        <div class="e3-summary-info">
+          <div class="e3-s-cat c-ds">Design System</div>
+          <div class="e3-s-title">SDUI 대응 컴포넌트 시스템 문서화</div>
+        </div>
+        <div class="e3-s-date">2026/01 → 02</div>
+        <div class="e3-s-link">링크 →</div>
+      </div>
+      <div class="e3-detail">
+        <div>
+          <div class="e3-bullets">
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>컴포넌트 명세 문서화로 개발-디자인 간 싱크 시간 40% 단축</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>SDUI 전환 시 재사용 컴포넌트 비율 68% → 91%로 향상</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>신규 온보딩 컴포넌트 학습 시간 3일 → 1일로 감소</span></div>
+          </div>
+          <div class="e3-tags"><span class="e3-tag">Figma</span><span class="e3-tag">Storybook</span><span class="e3-tag">Notion</span></div>
+        </div>
+        <div class="e3-insight">
+          <div class="e3-insight-label">Insight</div>
+          <div class="e3-insight-text">"문서화는 경계를 팀 전체가 동의한 언어로 고정하는 역할을 해요."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 2 -->
+    <div class="e3-row">
+      <div class="e3-summary">
+        <div class="e3-mini-thumb g2"></div>
+        <div class="e3-summary-info">
+          <div class="e3-s-cat c-ai">AI</div>
+          <div class="e3-s-title">요구사항 정의서 자동화 생성</div>
+        </div>
+        <div class="e3-s-date">2026/02 → 03</div>
+        <div class="e3-s-link">링크 →</div>
+      </div>
+      <div class="e3-detail">
+        <div>
+          <div class="e3-bullets">
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>요구사항 정의서 초안 작성 시간 4시간 → 20분으로 단축</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>재작업 건수 월 평균 6건 → 1건으로 감소</span></div>
+          </div>
+          <div class="e3-tags"><span class="e3-tag">Claude API</span><span class="e3-tag">GitHub Actions</span><span class="e3-tag">Python</span></div>
+        </div>
+        <div class="e3-insight">
+          <div class="e3-insight-label">Insight</div>
+          <div class="e3-insight-text">"AI 자동화의 가치는 완벽한 문서가 아니라 더 중요한 판단에 집중하게 하는 것이에요."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 3 -->
+    <div class="e3-row">
+      <div class="e3-summary">
+        <div class="e3-mini-thumb g3"></div>
+        <div class="e3-summary-info">
+          <div class="e3-s-cat c-ux">UX Research</div>
+          <div class="e3-s-title">데이터 통화 조회 서비스 UX 개선</div>
+        </div>
+        <div class="e3-s-date">2025/09 → 11</div>
+        <div class="e3-s-link">링크 →</div>
+      </div>
+      <div class="e3-detail">
+        <div>
+          <div class="e3-bullets">
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>조회 완료율 57% → 78%로 21%p 향상</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>핵심 불편 지점 5가지 도출 및 우선순위 기반 개선안 도입</span></div>
+            <div class="e3-bullet"><span class="e3-dash">—</span><span>평균 태스크 완료 시간 38% 단축</span></div>
+          </div>
+          <div class="e3-tags"><span class="e3-tag">Hotjar</span><span class="e3-tag">Figma</span><span class="e3-tag">Maze</span></div>
+        </div>
+        <div class="e3-insight">
+          <div class="e3-insight-label">Insight</div>
+          <div class="e3-insight-text">"정량 데이터만으로는 '왜 이탈하는가'를 알 수 없었어요. 두 방법론의 교차 검증이 핵심이었어요."</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+</div><!-- E-3 end -->
+
+</div><!-- /canvas -->
+
+<script>
+function show(key, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('s' + key).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo(0, 44);
+}
+</script>
+</body>
+</html>

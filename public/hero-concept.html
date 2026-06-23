@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Concept</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Pretendard Variable', sans-serif; background: #f0f0f0; -webkit-font-smoothing: antialiased; }
+
+/* 탭 */
+.tabs { position: sticky; top:0; z-index:99; background:#111; display:flex; padding:0 24px; gap:2px; height:44px; align-items:center; overflow-x:auto; }
+.tabs::-webkit-scrollbar { display:none; }
+.tab { background:none; border:none; color:rgba(255,255,255,.4); font:600 11px/1 'Pretendard Variable',sans-serif; letter-spacing:.05em; text-transform:uppercase; padding:6px 14px; border-radius:5px; cursor:pointer; white-space:nowrap; transition:all .15s; }
+.tab:hover { color:#fff; background:rgba(255,255,255,.08); }
+.tab.on { color:#fff; background:rgba(255,255,255,.14); }
+
+.canvas { padding:24px; }
+.section { display:none; }
+.section.on { display:block; }
+
+/* 프레임 */
+.frame { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 2px 24px rgba(0,0,0,.1); margin-bottom:16px; }
+.bar { background:#f2f2f2; height:36px; display:flex; align-items:center; padding:0 14px; gap:6px; border-bottom:1px solid #e8e8e8; }
+.dot { width:10px; height:10px; border-radius:50%; }
+.r{background:#ff5f57;} .y{background:#febc2e;} .g{background:#28c840;}
+.url { flex:1; background:#e8e8e8; border-radius:5px; font-size:11px; color:#888; padding:4px 10px; margin-left:8px; }
+
+/* 공통 nav */
+.nav { position:absolute; top:0; left:0; right:0; height:52px; display:flex; align-items:center; padding:0 32px; z-index:10; }
+.nav-logo { display:flex; align-items:center; gap:8px; }
+.nav-logo img { height:28px; object-fit:contain; filter:invert(1); }
+.nav-name { font-size:13px; font-weight:600; letter-spacing:-.04em; color:#fff; }
+.nav-links { margin-left:auto; display:flex; gap:4px; }
+.nav-link { font-size:12px; color:rgba(255,255,255,.5); padding:5px 10px; border-radius:6px; cursor:pointer; letter-spacing:-.02em; }
+
+/* ── 그라디언트 썸네일 ── */
+.g1 { background: linear-gradient(140deg,#1a4fd6,#4f86f7); }
+.g2 { background: linear-gradient(140deg,#5b21b6,#a78bfa); }
+.g3 { background: linear-gradient(140deg,#065f46,#34d399); }
+.c-ds { color:#2d5cd8; } .c-ai { color:#7031d4; } .c-ux { color:#168f52; }
+</style>
+</head>
+<body>
+
+<div class="tabs">
+  <button class="tab" onclick="show('a',this)">A. 경계 돌출 (기본)</button>
+  <button class="tab" onclick="show('b',this)">B. 경계 돌출 + 텍스트 왼쪽</button>
+  <button class="tab" onclick="show('c',this)">C. 캐릭터 크게</button>
+  <button class="tab" onclick="show('d',this)">D. 다크 전체 + 화이트 카드</button>
+  <button class="tab" onclick="show('e',this)">E. 이력서형 리스트</button>
+  <button class="tab on" onclick="show('f',this)">F. 이력서형 OpenAI</button>
+</div>
+
+<div class="canvas">
+
+<!-- ══════════ A ══════════ -->
+<div class="section" id="sa">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+<div style="position:relative;">
+
+  <!-- 다크 히어로 -->
+  <div style="background:#0a0a0a; height:280px; position:relative; overflow:visible;">
+    <!-- nav -->
+    <div class="nav">
+      <div class="nav-logo">
+        <img src="/profile.webp" alt="">
+        <span class="nav-name">Hakyeong Lee</span>
+      </div>
+      <div class="nav-links">
+        <span class="nav-link">Projects</span>
+        <span class="nav-link">About</span>
+      </div>
+    </div>
+
+    <!-- 히어로 텍스트 — 중앙 -->
+    <div style="position:absolute; bottom:80px; left:0; right:0; text-align:center;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:10px;">Product Designer · PM</div>
+      <h1 style="font-size:2.5rem; font-weight:700; letter-spacing:-.06em; color:#fff; line-height:1.1;">Hakyeong Lee</h1>
+    </div>
+
+    <!-- 캐릭터 — 경계선 걸침 -->
+    <div style="position:absolute; bottom:-80px; left:50%; transform:translateX(-50%); z-index:5; pointer-events:none;">
+      <img src="/profile.webp" alt=""
+        style="height:160px; object-fit:contain; filter:invert(1); display:block;">
+    </div>
+  </div>
+
+  <!-- 화이트 콘텐츠 -->
+  <div style="background:#fff; padding:100px 48px 48px; position:relative;">
+    <div style="max-width:900px; margin:0 auto;">
+      <p style="font-size:14px; color:#bbb; text-align:center; letter-spacing:-.025em; line-height:1.7; margin-bottom:40px;">
+        디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.
+      </p>
+
+      <!-- 카드 그리드 -->
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between;">
+        <span>Projects</span><span style="color:#ddd;">3 works</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div>
+          <div class="g1" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div>
+          <div style="font-size:10px; font-weight:600; color:#2d5cd8; margin-bottom:4px;">Design System</div>
+          <div style="font-size:13px; font-weight:600; letter-spacing:-.04em; color:#111; line-height:1.35;">SDUI 대응 컴포넌트 시스템 문서화</div>
+          <div style="font-size:11px; color:#bbb; margin-top:4px; letter-spacing:-.02em;">2026/01 → 02</div>
+        </div>
+        <div>
+          <div class="g2" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div>
+          <div style="font-size:10px; font-weight:600; color:#7031d4; margin-bottom:4px;">AI</div>
+          <div style="font-size:13px; font-weight:600; letter-spacing:-.04em; color:#111; line-height:1.35;">요구사항 정의서 자동화 생성</div>
+          <div style="font-size:11px; color:#bbb; margin-top:4px; letter-spacing:-.02em;">2026/02 → 03</div>
+        </div>
+        <div>
+          <div class="g3" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div>
+          <div style="font-size:10px; font-weight:600; color:#168f52; margin-bottom:4px;">UX Research</div>
+          <div style="font-size:13px; font-weight:600; letter-spacing:-.04em; color:#111; line-height:1.35;">데이터 통화 조회 서비스 UX 개선</div>
+          <div style="font-size:11px; color:#bbb; margin-top:4px; letter-spacing:-.02em;">2025/09 → 11</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div><!-- /frame -->
+</div>
+
+<!-- ══════════ B ══════════ -->
+<div class="section" id="sb">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+<div style="position:relative;">
+
+  <!-- 다크 히어로 -->
+  <div style="background:#0a0a0a; height:280px; position:relative; overflow:visible;">
+    <div class="nav">
+      <div class="nav-logo">
+        <img src="/profile.webp" alt="">
+        <span class="nav-name">Hakyeong Lee</span>
+      </div>
+    </div>
+
+    <!-- 텍스트 왼쪽 정렬 -->
+    <div style="position:absolute; bottom:72px; left:0; right:0; max-width:900px; margin:0 auto; padding:0 48px;">
+      <div style="font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:10px;">Product Designer · PM</div>
+      <h1 style="font-size:2.25rem; font-weight:700; letter-spacing:-.06em; color:#fff; line-height:1.1; max-width:400px;">구조를 설계하고,<br>팀의 언어를 만들어요.</h1>
+    </div>
+
+    <!-- 캐릭터 — 우하단 걸침 -->
+    <div style="position:absolute; bottom:-100px; right:calc(50% - 450px + 48px); z-index:5;">
+      <img src="/profile.webp" alt=""
+        style="height:200px; object-fit:contain; filter:invert(1); display:block;">
+    </div>
+  </div>
+
+  <!-- 화이트 콘텐츠 -->
+  <div style="background:#fff; padding:120px 48px 48px; position:relative;">
+    <div style="max-width:900px; margin:0 auto;">
+      <p style="font-size:14px; color:#bbb; letter-spacing:-.025em; line-height:1.7; margin-bottom:40px; max-width:460px;">
+        디자인 시스템, AI 자동화, UX 리서치를 통해 개발과 디자인이 같은 언어로 움직이는 환경을 만들어요.
+      </p>
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between;"><span>Projects</span><span style="color:#ddd;">3 works</span></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div><div class="g1" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#2d5cd8;margin-bottom:4px;">Design System</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">SDUI 대응 컴포넌트 시스템 문서화</div></div>
+        <div><div class="g2" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#7031d4;margin-bottom:4px;">AI</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">요구사항 정의서 자동화 생성</div></div>
+        <div><div class="g3" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#168f52;margin-bottom:4px;">UX Research</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">데이터 통화 조회 서비스 UX 개선</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════ C ══════════ -->
+<div class="section" id="sc">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+<div style="position:relative;">
+
+  <!-- 다크 히어로 — 키 크게 -->
+  <div style="background:#0a0a0a; height:340px; position:relative; overflow:visible;">
+    <div class="nav">
+      <div class="nav-logo">
+        <img src="/profile.webp" alt="">
+        <span class="nav-name">Hakyeong Lee</span>
+      </div>
+      <div class="nav-links">
+        <span class="nav-link">Projects</span>
+        <span class="nav-link">About</span>
+      </div>
+    </div>
+
+    <!-- 히어로 텍스트 -->
+    <div style="position:absolute; bottom:110px; left:0; right:0; text-align:center;">
+      <div style="font-size:11px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.25); margin-bottom:12px;">Product Designer · PM</div>
+      <h1 style="font-size:3rem; font-weight:700; letter-spacing:-.065em; color:#fff; line-height:1.05;">Hakyeong Lee</h1>
+      <p style="font-size:13px; color:rgba(255,255,255,.35); letter-spacing:-.025em; margin-top:10px;">디자인 시스템 · AI 자동화 · UX 리서치</p>
+    </div>
+
+    <!-- 캐릭터 크게 — 경계선 걸침 -->
+    <div style="position:absolute; bottom:-130px; left:50%; transform:translateX(-50%); z-index:5;">
+      <img src="/profile.webp" alt=""
+        style="height:260px; object-fit:contain; filter:invert(1); display:block;">
+    </div>
+  </div>
+
+  <!-- 화이트 콘텐츠 -->
+  <div style="background:#fff; padding:150px 48px 48px; position:relative;">
+    <div style="max-width:900px; margin:0 auto;">
+      <div style="font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:#ccc; font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between;"><span>Projects</span><span style="color:#ddd;">3 works</span></div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+        <div><div class="g1" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#2d5cd8;margin-bottom:4px;">Design System</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">SDUI 대응 컴포넌트 시스템 문서화</div><div style="font-size:11px;color:#bbb;margin-top:3px;">2026/01 → 02</div></div>
+        <div><div class="g2" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#7031d4;margin-bottom:4px;">AI</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">요구사항 정의서 자동화 생성</div><div style="font-size:11px;color:#bbb;margin-top:3px;">2026/02 → 03</div></div>
+        <div><div class="g3" style="border-radius:10px; aspect-ratio:16/10; margin-bottom:10px;"></div><div style="font-size:10px;font-weight:600;color:#168f52;margin-bottom:4px;">UX Research</div><div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">데이터 통화 조회 서비스 UX 개선</div><div style="font-size:11px;color:#bbb;margin-top:3px;">2025/09 → 11</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════ D ══════════ -->
+<div class="section" id="sd">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+<div style="position:relative; background:#0a0a0a; min-height:600px;">
+
+  <div class="nav">
+    <div class="nav-logo">
+      <img src="/profile.webp" alt="">
+      <span class="nav-name">Hakyeong Lee</span>
+    </div>
+    <div class="nav-links">
+      <span class="nav-link">Projects</span>
+      <span class="nav-link">About</span>
+    </div>
+  </div>
+
+  <!-- 히어로 -->
+  <div style="padding:80px 48px 0; max-width:900px; margin:0 auto; display:grid; grid-template-columns:1fr 180px; gap:32px; align-items:flex-end;">
+    <div>
+      <div style="font-size:10px; font-weight:600; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.25); margin-bottom:12px;">Product Designer · PM</div>
+      <h1 style="font-size:2.5rem; font-weight:700; letter-spacing:-.065em; color:#fff; line-height:1.1; margin-bottom:14px;">구조를 설계하고,<br>팀의 언어를 만들어요.</h1>
+      <p style="font-size:13px; color:rgba(255,255,255,.4); letter-spacing:-.025em; line-height:1.7; max-width:380px;">디자인 시스템, AI 자동화, UX 리서치를 통해 개발과 디자인이 같은 언어로 움직이는 환경을 만들어요.</p>
+    </div>
+    <!-- 캐릭터 -->
+    <div style="display:flex; align-items:flex-end; justify-content:center; height:160px;">
+      <img src="/profile.webp" alt="" style="height:160px; object-fit:contain; filter:invert(1);">
+    </div>
+  </div>
+
+  <!-- 카드들 (다크 배경 위 화이트 카드) -->
+  <div style="padding:32px 48px 48px; max-width:900px; margin:0 auto;">
+    <div style="font-size:10px; text-transform:uppercase; letter-spacing:.07em; color:rgba(255,255,255,.2); font-weight:600; margin-bottom:16px; display:flex; justify-content:space-between;"><span>Projects</span><span style="color:rgba(255,255,255,.15);">3 works</span></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+      <div style="background:#fff; border-radius:12px; overflow:hidden; cursor:pointer;">
+        <div class="g1" style="aspect-ratio:16/9;"></div>
+        <div style="padding:14px 16px 18px;">
+          <div style="font-size:10px;font-weight:600;color:#2d5cd8;margin-bottom:4px;">Design System</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">SDUI 대응 컴포넌트 시스템 문서화</div>
+          <div style="font-size:11px;color:#bbb;margin-top:5px;letter-spacing:-.02em;line-height:1.5;">서버 드리븐 UI 전환에 맞춰 컴포넌트를 재정의했어요.</div>
+        </div>
+      </div>
+      <div style="background:#fff; border-radius:12px; overflow:hidden; cursor:pointer;">
+        <div class="g2" style="aspect-ratio:16/9;"></div>
+        <div style="padding:14px 16px 18px;">
+          <div style="font-size:10px;font-weight:600;color:#7031d4;margin-bottom:4px;">AI</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">요구사항 정의서 자동화 생성</div>
+          <div style="font-size:11px;color:#bbb;margin-top:5px;letter-spacing:-.02em;line-height:1.5;">AI 파이프라인으로 반복 작업을 자동화했어요.</div>
+        </div>
+      </div>
+      <div style="background:#fff; border-radius:12px; overflow:hidden; cursor:pointer;">
+        <div class="g3" style="aspect-ratio:16/9;"></div>
+        <div style="padding:14px 16px 18px;">
+          <div style="font-size:10px;font-weight:600;color:#168f52;margin-bottom:4px;">UX Research</div>
+          <div style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.35;">데이터 통화 조회 서비스 UX 개선</div>
+          <div style="font-size:11px;color:#bbb;margin-top:5px;letter-spacing:-.02em;line-height:1.5;">히트맵과 인터뷰로 불편 지점을 도출했어요.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+
+<!-- ══════════ E ══════════ -->
+<div class="section" id="se">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+
+<!-- NAV -->
+<div style="height:52px;background:#fff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 48px;">
+  <img src="/profile.webp" style="height:28px;object-fit:contain;margin-right:10px;">
+  <span style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">Hakyeong Lee</span>
+</div>
+
+<div style="background:#fff;min-height:600px;">
+  <div style="max-width:900px;margin:0 auto;padding:0 48px;">
+
+    <!-- ── 히어로 ── -->
+    <div style="padding:52px 0 40px;border-bottom:1px solid #f0f0f0;display:grid;grid-template-columns:200px 1fr;gap:32px;align-items:center;">
+      <div>
+        <img src="/profile.webp" style="height:72px;object-fit:contain;display:block;margin-bottom:14px;">
+        <div style="font-size:1.125rem;font-weight:700;letter-spacing:-.05em;color:#111;line-height:1.2;">Hakyeong Lee</div>
+        <div style="font-size:12px;color:#bbb;letter-spacing:-.02em;margin-top:4px;">Product Designer · PM</div>
+      </div>
+      <div>
+        <p style="font-size:14px;color:#666;line-height:1.8;letter-spacing:-.025em;max-width:480px;">
+          디자인 시스템, AI 자동화, UX 리서치를 통해<br>팀이 같은 언어로 일할 수 있는 환경을 만들어요.
+        </p>
+        <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+          <span style="font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;background:#f2f2f2;color:#555;">Design System</span>
+          <span style="font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;background:#f2f2f2;color:#555;">AI Automation</span>
+          <span style="font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;background:#f2f2f2;color:#555;">UX Research</span>
+          <span style="font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;background:#f2f2f2;color:#555;">Next.js</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 프로젝트 리스트 ── -->
+    <div style="padding:40px 0 60px;">
+
+      <!-- 섹션 행 1 -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;margin-bottom:0;">
+        <div style="padding-top:4px;">
+          <div style="font-size:12px;font-weight:600;font-style:italic;color:#111;letter-spacing:-.025em;line-height:1.4;">Representative<br>Projects</div>
+          <div style="font-size:11px;color:#bbb;margin-top:4px;letter-spacing:-.02em;">대표 프로젝트</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0;">
+
+          <!-- 프로젝트 1 -->
+          <div style="padding:20px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+              <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;">요구사항 정의서 자동화 파이프라인 구축</span>
+              <span style="font-size:11px;color:#bbb;letter-spacing:-.01em;white-space:nowrap;">2026.02 ~ 2026.03</span>
+              <span style="font-size:11px;font-weight:600;color:#7031d4;margin-left:auto;cursor:pointer;white-space:nowrap;">프로젝트 링크 →</span>
+            </div>
+            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>Claude Code 기반 멀티 에이전트 파이프라인 설계·구현, Plus X 사내 워크플로우 전면 적용</span>
+              </li>
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>WBS 기준 30일 소요되던 프로세스를 3일로 단축, 팀 문서 생산 속도 10배 향상</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 프로젝트 2 -->
+          <div style="padding:20px 0;border-bottom:1px solid #f0f0f0;">
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+              <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;">SDUI 대응 컴포넌트 시스템 문서화</span>
+              <span style="font-size:11px;color:#bbb;letter-spacing:-.01em;white-space:nowrap;">2026.04 ~ 2026.06</span>
+              <span style="font-size:11px;font-weight:600;color:#2d5cd8;margin-left:auto;cursor:pointer;white-space:nowrap;">프로젝트 링크 →</span>
+            </div>
+            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>AI가 직접 참조할 수 있는 JSON 구조 기반 컴포넌트 정의 체계 설계</span>
+              </li>
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>shadcn/ui 컴포넌트를 디자인 시스템 레벨로 시스템화, 개발·디자인 간 공통 언어 문서로 기능</span>
+              </li>
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>각 컴포넌트에 Do/Don'ts 기준 문서화, UI Designer와 협업하여 실제 구축 시스템으로 정착</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- 프로젝트 3 -->
+          <div style="padding:20px 0;">
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+              <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;">데이터 통화 조회 서비스 UX 개선</span>
+              <span style="font-size:11px;color:#bbb;letter-spacing:-.01em;white-space:nowrap;">2025.09 ~ 2025.11</span>
+              <span style="font-size:11px;font-weight:600;color:#168f52;margin-left:auto;cursor:pointer;white-space:nowrap;">프로젝트 링크 →</span>
+            </div>
+            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;">
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>Hotjar 히트맵 + 사용자 인터뷰 6건으로 5개 핵심 불편 지점 도출</span>
+              </li>
+              <li style="display:flex;gap:8px;font-size:13px;color:#555;line-height:1.65;letter-spacing:-.025em;">
+                <span style="color:#bbb;flex-shrink:0;margin-top:2px;">•</span>
+                <span>정보 계층 구조 재설계 후 조회 완료율 57% → 81% 향상</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ══════════ F ══════════ -->
+<div class="section on" id="sf">
+<div class="frame">
+<div class="bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><div class="url">haeilylee-portfolio.vercel.app</div></div>
+
+<!-- NAV -->
+<div style="height:52px;background:#fff;border-bottom:1px solid #ebebeb;display:flex;align-items:center;padding:0 48px;gap:10px;">
+  <img src="/profile.webp" style="height:28px;object-fit:contain;">
+  <span style="font-size:13px;font-weight:600;letter-spacing:-.04em;color:#111;">Hakyeong Lee</span>
+</div>
+
+<div style="background:#fff;">
+  <div style="max-width:900px;margin:0 auto;padding:0 48px;">
+
+    <!-- ── 히어로 ── -->
+    <div style="padding:52px 0 44px;border-bottom:1px solid #f0f0f0;text-align:center;">
+      <img src="/profile.webp" style="height:80px;object-fit:contain;margin-bottom:18px;display:inline-block;">
+      <h1 style="font-size:2.25rem;font-weight:700;letter-spacing:-.055em;color:#111;margin:0 0 10px;line-height:1.15;">Hakyeong Lee</h1>
+      <p style="font-size:14px;color:#bbb;letter-spacing:-.025em;line-height:1.7;">
+        디자인 시스템, AI 자동화, UX 리서치를 통해 팀의 공통 언어를 설계해요.
+      </p>
+    </div>
+
+    <!-- ── 프로젝트 리스트 ── -->
+    <div style="padding:44px 0 64px;">
+
+      <!-- 헤더 -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;margin-bottom:0;">
+        <div>
+          <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#ccc;">Projects</span>
+        </div>
+        <div>
+          <span style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#ccc;">3 works</span>
+        </div>
+      </div>
+
+      <!-- 프로젝트 1 -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;border-top:1px solid #f0f0f0;margin-top:16px;">
+        <div style="padding:24px 0 24px;">
+          <div style="font-size:11px;font-weight:600;color:#7031d4;letter-spacing:-.01em;margin-bottom:4px;">AI</div>
+          <div style="font-size:11px;color:#ccc;letter-spacing:-.01em;">2026.02 – 2026.03</div>
+        </div>
+        <div style="padding:24px 0 24px;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;">
+            <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.3;">요구사항 정의서 자동화 파이프라인 구축</span>
+            <span style="font-size:11px;font-weight:600;color:#7031d4;white-space:nowrap;cursor:pointer;flex-shrink:0;">링크 →</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>Claude Code 기반 멀티 에이전트 파이프라인 설계·구현, Plus X 사내 워크플로우 전면 적용</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>WBS 기준 30일 소요되던 프로세스를 3일로 단축, 팀 문서 생산 속도 10배 향상</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 프로젝트 2 -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;border-top:1px solid #f0f0f0;">
+        <div style="padding:24px 0 24px;">
+          <div style="font-size:11px;font-weight:600;color:#2d5cd8;letter-spacing:-.01em;margin-bottom:4px;">Design System</div>
+          <div style="font-size:11px;color:#ccc;letter-spacing:-.01em;">2026.04 – 2026.06</div>
+        </div>
+        <div style="padding:24px 0 24px;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;">
+            <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.3;">SDUI 대응 컴포넌트 시스템 문서화</span>
+            <span style="font-size:11px;font-weight:600;color:#2d5cd8;white-space:nowrap;cursor:pointer;flex-shrink:0;">링크 →</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>AI가 직접 참조할 수 있는 JSON 구조 기반 컴포넌트 정의 체계 설계</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>shadcn/ui 컴포넌트를 디자인 시스템 레벨로 시스템화, 개발·디자인 간 공통 언어 문서로 기능</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>각 컴포넌트에 Do/Don'ts 기준 문서화, UI Designer와 협업하여 실제 구축 시스템으로 정착</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 프로젝트 3 -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:32px;border-top:1px solid #f0f0f0;">
+        <div style="padding:24px 0 24px;">
+          <div style="font-size:11px;font-weight:600;color:#168f52;letter-spacing:-.01em;margin-bottom:4px;">UX Research</div>
+          <div style="font-size:11px;color:#ccc;letter-spacing:-.01em;">2025.09 – 2025.11</div>
+        </div>
+        <div style="padding:24px 0 24px;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:10px;">
+            <span style="font-size:14px;font-weight:600;letter-spacing:-.04em;color:#111;line-height:1.3;">데이터 통화 조회 서비스 UX 개선</span>
+            <span style="font-size:11px;font-weight:600;color:#168f52;white-space:nowrap;cursor:pointer;flex-shrink:0;">링크 →</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>Hotjar 히트맵 + 사용자 인터뷰 6건으로 5개 핵심 불편 지점 도출</span>
+            </div>
+            <div style="display:flex;gap:10px;font-size:13px;color:#666;line-height:1.7;letter-spacing:-.025em;">
+              <span style="color:#ddd;flex-shrink:0;margin-top:1px;font-size:10px;">—</span>
+              <span>정보 계층 구조 재설계 후 조회 완료율 57% → 81% 향상</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 인사이트 박스 -->
+      <div style="margin-top:32px;background:#0f0f0f;border-radius:12px;padding:22px 28px;">
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.07em;color:#555;font-weight:600;margin-bottom:8px;">핵심 인사이트</div>
+        <div style="font-size:13px;color:rgba(255,255,255,.7);line-height:1.8;letter-spacing:-.02em;font-family:'SF Mono',monospace;">
+          "좋은 디자인 시스템은 팀 전체가 동의한 언어예요. 그 언어가 없으면 빠르게 만들수록 빠르게 무너져요."
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</div><!-- /canvas -->
+
+<script>
+function show(key, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b => b.classList.remove('on'));
+  document.getElementById('s' + key).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo(0, 44);
+}
+</script>
+</body>
+</html>
