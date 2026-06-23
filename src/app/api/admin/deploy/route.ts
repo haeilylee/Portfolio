@@ -16,7 +16,7 @@ export async function POST() {
     if (stdout.trim()) {
       await execAsync('git commit -m "Update content via admin panel"', { cwd });
     }
-    await execAsync("git push origin main", { cwd });
+    await execAsync("git push origin web-publish", { cwd });
     return NextResponse.json({ ok: true, message: "GitHub에 푸시됐어요. Vercel이 자동으로 배포를 시작해요." });
   } catch (e) {
     console.error("Deploy failed:", e);

@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         'git commit -m "Update content via admin panel"',
         { cwd }
       );
-      await execAsync("git push origin main", { cwd });
+      await execAsync("git push origin web-publish", { cwd });
     }
   } catch (e) {
     console.error("Git auto-push failed:", e);
