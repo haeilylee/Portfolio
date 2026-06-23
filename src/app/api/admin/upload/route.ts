@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFileSync, mkdirSync } from "fs";
+import { writeFile, mkdir } from "fs/promises";
 import { join, dirname } from "path";
 
 export async function POST(req: NextRequest) {
@@ -14,8 +14,8 @@ export async function POST(req: NextRequest) {
   const name = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
   const rel = `/images/${slug}/${name}`;
   const abs = join(process.cwd(), "public", rel);
-  mkdirSync(dirname(abs), { recursive: true });
-  writeFileSync(abs, buffer);
+  await mkdir(dirname(abs), { recursive: true });
+  await writeFile(abs, buffer);
 
   return NextResponse.json({ src: rel });
 }

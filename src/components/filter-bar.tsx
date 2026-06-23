@@ -20,31 +20,33 @@ export default function FilterBar({ projects, pillsOnly, gridOnly }: FilterBarPr
       ? projects
       : projects.filter((p) => p.tags.includes(active));
 
+  const pills = ALL_PILLS.map((pill) => (
+    <button
+      key={pill}
+      onClick={() => setActive(pill)}
+      style={{
+        fontSize: "12px",
+        padding: "5px 14px",
+        borderRadius: "99px",
+        border: "1px solid",
+        borderColor: active === pill ? "#111" : "#e0e0e0",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        letterSpacing: "-0.02em",
+        transition: "all 0.15s",
+        background: active === pill ? "#111" : "#fafafa",
+        color: active === pill ? "#fff" : "#666",
+        fontWeight: active === pill ? 600 : 400,
+      }}
+    >
+      {pill}
+    </button>
+  ));
+
   if (pillsOnly) {
     return (
       <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", justifyContent: "center" }}>
-        {ALL_PILLS.map((pill) => (
-          <button
-            key={pill}
-            onClick={() => setActive(pill)}
-            style={{
-              fontSize: "12px",
-              padding: "5px 14px",
-              borderRadius: "99px",
-              border: "1px solid",
-              borderColor: active === pill ? "#111" : "#e0e0e0",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              letterSpacing: "-0.02em",
-              transition: "all 0.15s",
-              background: active === pill ? "#111" : "#fafafa",
-              color: active === pill ? "#fff" : "#666",
-              fontWeight: active === pill ? 600 : 400,
-            }}
-          >
-            {pill}
-          </button>
-        ))}
+        {pills}
       </div>
     );
   }
@@ -99,28 +101,7 @@ export default function FilterBar({ projects, pillsOnly, gridOnly }: FilterBarPr
   return (
     <div>
       <div style={{ display: "flex", gap: "6px", flexWrap: "wrap", marginBottom: "24px" }}>
-        {ALL_PILLS.map((pill) => (
-          <button
-            key={pill}
-            onClick={() => setActive(pill)}
-            style={{
-              fontSize: "12px",
-              padding: "5px 14px",
-              borderRadius: "99px",
-              border: "1px solid",
-              borderColor: active === pill ? "#111" : "#e0e0e0",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              letterSpacing: "-0.02em",
-              transition: "all 0.15s",
-              background: active === pill ? "#111" : "#fafafa",
-              color: active === pill ? "#fff" : "#666",
-              fontWeight: active === pill ? 600 : 400,
-            }}
-          >
-            {pill}
-          </button>
-        ))}
+        {pills}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px 20px" }}>
         {visible.map((project) => (

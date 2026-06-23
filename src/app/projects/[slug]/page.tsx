@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { projects, getProjectBySlug } from "@/lib/projects";
@@ -6,12 +7,7 @@ import { notFound } from "next/navigation";
 import TocNav from "@/components/toc-nav";
 import CodeBlock from "@/components/code-block";
 import Reveal from "@/components/reveal";
-
-const gradientMap: Record<string, string> = {
-  "design-system": "linear-gradient(145deg, #1a4fd6 0%, #4f86f7 100%)",
-  ai: "linear-gradient(145deg, #5b21b6 0%, #a78bfa 100%)",
-  ux: "linear-gradient(145deg, #065f46 0%, #34d399 100%)",
-};
+import { gradientMap, categoryColor } from "@/lib/category-styles";
 
 function renderWithHighlights(text: string, highlights: string[] = []) {
   if (!highlights.length) return <>&ldquo;{text}&rdquo;</>;
@@ -33,6 +29,47 @@ function renderWithHighlights(text: string, highlights: string[] = []) {
   return <>&ldquo;{parts}&rdquo;</>;
 }
 
+function parseInlineCode(text: string): React.ReactNode[] {
+  const parts: React.ReactNode[] = [];
+  const re = />([^<]+)</g;
+  let last = 0;
+  let m;
+  let key = 0;
+  while ((m = re.exec(text)) !== null) {
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push(
+      <code
+        key={key++}
+        style={{
+          fontFamily: "'Geist Mono', 'SF Mono', 'Fira Code', monospace",
+          fontSize: "0.85em",
+          background: "#f2f2f2",
+          border: "1px solid #e4e4e4",
+          borderRadius: "5px",
+          padding: "1px 6px",
+          color: "#333",
+          letterSpacing: "0",
+        }}
+      >
+        {m[1]}
+      </code>
+    );
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+function renderInlineText(text: string): React.ReactNode {
+  const lines = text.split("\n");
+  return lines.map((line, i) => (
+    <React.Fragment key={i}>
+      {i > 0 && <br />}
+      {parseInlineCode(line)}
+    </React.Fragment>
+  ));
+}
+
 function renderBlock(block: Block, idx: number) {
   if (block.type === "text") {
     return (
@@ -44,18 +81,17 @@ function renderBlock(block: Block, idx: number) {
           lineHeight: 1.8,
           letterSpacing: "-0.025em",
           margin: "0 0 16px",
-          whiteSpace: "pre-line",
           wordBreak: "keep-all",
         }}
       >
-        {block.content}
+        {renderInlineText(block.content)}
       </p>
     );
   }
   if (block.type === "image") {
     return (
       <figure key={idx} style={{ margin: "24px 0" }}>
-        <div style={{ borderRadius: "10px", overflow: "hidden", background: "#f5f5f5" }}>
+        <div style={{ borderRadius: "10px", overflow: "hidden" }}>
           <Image
             src={block.src}
             alt={block.alt ?? ""}
@@ -202,12 +238,6 @@ function renderBlock(block: Block, idx: number) {
   }
   return null;
 }
-
-const categoryColor: Record<string, string> = {
-  "Design System": "#2d5cd8",
-  AI: "#7031d4",
-  "UX Research": "#168f52",
-};
 
 export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));

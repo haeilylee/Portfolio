@@ -1,22 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface Props {
   code: string;
   lang?: string;
   filename?: string;
-  highlighted?: string; // pre-rendered HTML from shiki
 }
 
-export default function CodeBlock({ code, lang = "tsx", filename, highlighted }: Props) {
+export default function CodeBlock({ code, lang = "tsx", filename }: Props) {
   const [copied, setCopied] = useState(false);
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   function copy() {
     navigator.clipboard.writeText(code);
     setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
+    if (timerRef.current) clearTimeout(timerRef.current);
+    timerRef.current = setTimeout(() => setCopied(false), 1500);
   }
+
+  React.useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   const lines = code.split("\n");
 
@@ -70,14 +73,8 @@ export default function CodeBlock({ code, lang = "tsx", filename, highlighted }:
       )}
 
       {/* 코드 본문 */}
-      {highlighted ? (
-        <div
-          style={{ padding: "16px 0", overflowX: "auto" }}
-          dangerouslySetInnerHTML={{ __html: highlighted }}
-        />
-      ) : (
-        <div style={{ padding: "16px 0", overflowX: "auto" }}>
-          <table style={{ borderCollapse: "collapse", width: "100%", tableLayout: "fixed" }}>
+      <div style={{ padding: "16px 0", overflowX: "auto" }}>
+        <table style={{ borderCollapse: "collapse", width: "100%", tableLayout: "fixed" }}>
             <tbody>
               {lines.map((line, i) => (
                 <tr key={i} style={{ lineHeight: "1.7" }}>
@@ -97,7 +94,6 @@ export default function CodeBlock({ code, lang = "tsx", filename, highlighted }:
             </tbody>
           </table>
         </div>
-      )}
     </div>
   );
 }

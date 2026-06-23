@@ -31,7 +31,7 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState(false);
   const [pw, setPw] = useState("");
   const [content, setContent] = useState<Content | null>(null);
-  const [tab, setTab] = useState<"hero" | string>("hero");
+  const [tab, setTab] = useState<string>("hero");
   const [saving, setSaving] = useState(false);
   const [deploying, setDeploying] = useState(false);
   const [msg, setMsg] = useState("");
@@ -130,7 +130,7 @@ export default function AdminPage() {
     setProject(slug, "sections", sections);
   }
   function addSection(slug: string) {
-    const next = [...getSections(slug), { id: `section-${Date.now()}`, title: "새 섹션", blocks: [{ type: "text" as const, content: "" }] }];
+    const next = [...getSections(slug), { id: crypto.randomUUID().slice(0, 8), title: "새 섹션", blocks: [{ type: "text" as const, content: "" }] }];
     setSections(slug, next);
   }
   function removeSection(slug: string, si: number) {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFileSync } from "fs";
+import { writeFile } from "fs/promises";
 import { join } from "path";
 
 export async function POST(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
 
   const body = await req.json();
   const filePath = join(process.cwd(), "src/data/content.json");
-  writeFileSync(filePath, JSON.stringify(body, null, 2), "utf-8");
+  await writeFile(filePath, JSON.stringify(body, null, 2), "utf-8");
 
   return NextResponse.json({ ok: true });
 }

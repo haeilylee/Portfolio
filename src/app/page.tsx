@@ -1,18 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { projects, hero } from "@/lib/projects";
-
-const gradientMap: Record<string, string> = {
-  "design-system": "linear-gradient(145deg, #1a4fd6 0%, #4f86f7 100%)",
-  ai: "linear-gradient(145deg, #5b21b6 0%, #a78bfa 100%)",
-  ux: "linear-gradient(145deg, #065f46 0%, #34d399 100%)",
-};
-
-const categoryColor: Record<string, string> = {
-  "Design System": "#2d5cd8",
-  AI: "#7031d4",
-  "UX Research": "#168f52",
-};
+import { gradientMap, categoryColor } from "@/lib/category-styles";
 
 const GitHubIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -65,48 +54,33 @@ export default function HomePage() {
               {hero.bio}
             </p>
             <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-              <a
-                href={hero.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  color: "#666",
-                  textDecoration: "none",
-                  padding: "5px 11px",
-                  borderRadius: "20px",
-                  background: "#f2f2f2",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                <GitHubIcon />
-                GitHub
-              </a>
-              <a
-                href={hero.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "6px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  color: "#666",
-                  textDecoration: "none",
-                  padding: "5px 11px",
-                  borderRadius: "20px",
-                  background: "#f2f2f2",
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                <LinkedInIcon />
-                LinkedIn
-              </a>
+              {[
+                { href: hero.github, Icon: GitHubIcon, label: "GitHub" },
+                { href: hero.linkedin, Icon: LinkedInIcon, label: "LinkedIn" },
+              ].map(({ href, Icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                    color: "#666",
+                    textDecoration: "none",
+                    padding: "5px 11px",
+                    borderRadius: "20px",
+                    background: "#f2f2f2",
+                    letterSpacing: "-0.01em",
+                  }}
+                >
+                  <Icon />
+                  {label}
+                </a>
+              ))}
             </div>
           </div>
         </div>
