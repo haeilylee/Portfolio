@@ -6,3 +6,5 @@ doc_build/
 *.log
 .vercel
 next-env.d.ts
+.env.local
+.env*.local
