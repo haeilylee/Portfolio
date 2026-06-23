@@ -6,9 +6,6 @@ import { promisify } from "util";
 
 const execAsync = promisify(exec);
 
-const VERCEL_DEPLOY_HOOK =
-  "https://api.vercel.com/v1/integrations/deploy/prj_Gf9gI26NRARQfRDAuEy6AUG2Qt5E/vNZmWqLxzz";
-
 export async function POST(req: NextRequest) {
   if (process.env.NODE_ENV !== "development") {
     return NextResponse.json({ error: "로컬 개발 환경에서만 사용 가능해요." }, { status: 403 });
@@ -25,7 +22,12 @@ export async function POST(req: NextRequest) {
     if (stdout.trim()) {
       await execAsync('git commit -m "Update content via admin panel"', { cwd });
       await execAsync("git push origin web-publish", { cwd });
-      await fetch(VERCEL_DEPLOY_HOOK, { method: "POST" });
+
+      // 백그라운드로 vercel --prod 실행
+      exec("vercel --prod --yes", { cwd }, (err, out, stderr) => {
+        if (err) console.error("Vercel deploy error:", stderr);
+        else console.log("Vercel deploy done:", out);
+      });
     }
   } catch (e) {
     console.error("Git auto-push failed:", e);
