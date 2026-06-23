@@ -32,7 +32,6 @@ export default function AdminPage() {
   const [pw, setPw] = useState("");
   const [content, setContent] = useState<Content | null>(null);
   const [tab, setTab] = useState<string>("hero");
-  const [saving, setSaving] = useState(false);
   const [deploying, setDeploying] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -55,16 +54,10 @@ export default function AdminPage() {
     else setMsg("비밀번호가 틀렸어요.");
   }
 
-  async function save() {
-    if (!content) return;
-    setSaving(true); setMsg("");
-    const res = await fetch("/api/admin/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(content) });
-    setSaving(false);
-    setMsg(res.ok ? "✓ 저장됐어요. 페이지를 새로고침하면 반영돼요." : "저장 실패 — 개발 서버에서만 동작해요.");
-  }
-
   async function deploy() {
+    if (!content) return;
     setDeploying(true); setMsg("");
+    await fetch("/api/admin/save", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(content) });
     const res = await fetch("/api/admin/deploy", { method: "POST" });
     const data = await res.json();
     setDeploying(false);
@@ -245,7 +238,6 @@ export default function AdminPage() {
       <div style={s.topbar}>
         <span style={s.logo}>Admin · 포트폴리오 편집</span>
         {msg && <span style={{ fontSize: "12px", color: msg.startsWith("✓") ? "#4ade80" : "#f87171" }}>{msg}</span>}
-        <button onClick={save} disabled={saving} style={s.saveBtn}>{saving ? "저장 중…" : "저장"}</button>
         <button onClick={deploy} disabled={deploying} style={s.deployBtn}>{deploying ? "배포 중…" : "Vercel 배포"}</button>
       </div>
 
