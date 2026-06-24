@@ -55,9 +55,9 @@
           "blocks": [
             {
               "type": "image",
-              "src": "/images/sdui/0.png",
+              "src": "/images/sdui/1.png",
               "alt": "",
-              "caption": "LLM에 의존하는 ai 목업 생성 프로세스"
+              "caption": "LLM 기반 문서 해석에 의존하는 방식"
             },
             {
               "type": "text",
@@ -65,7 +65,7 @@
             },
             {
               "type": "text",
-              "content": "가령 AI의 경우 Button을 html로 그대로 그리고 스크린샷으로 넣어서 생성하는 방식이었어요,\n이를 개선하기위해서 Props와 States 값에 대한 일관된 값을 넣어야한다는 의견이 모아졌어요.\n\n"
+              "content": "가령 AI의 경우 Button을 html로 그대로 그리고 스크린샷으로 넣어서 생성하는 방식이었어요, \n이를 개선하기위해서 Props와 States 값에 대한 일관된 값을 넣어야한다는 의견이 모아졌어요.\n\n"
             }
           ]
         },
