@@ -414,8 +414,6 @@ export default async function ProjectDetailPage({
             </div>
           </div>
 
-          <hr style={{ border: "none", borderTop: "1px solid #f0f0f0", margin: "0 0 40px" }} />
-
           {/* Tools & Stack */}
           <section style={{ marginBottom: "48px" }}>
             <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 16px" }}>
