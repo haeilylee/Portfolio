@@ -236,6 +236,9 @@ function renderBlock(block: Block, idx: number) {
       </div>
     );
   }
+  if (block.type === "spacer") {
+    return <div key={idx} style={{ height: `${block.height ?? 20}px` }} />;
+  }
   return null;
 }
 
