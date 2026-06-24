@@ -76,11 +76,11 @@ function renderBlock(block: Block, idx: number) {
       <p
         key={idx}
         style={{
-          fontSize: "15px",
+          fontSize: "17px",
           color: "#555",
-          lineHeight: 1.8,
+          lineHeight: 1.85,
           letterSpacing: "-0.025em",
-          margin: "0 0 16px",
+          margin: "0 0 20px",
           wordBreak: "keep-all",
         }}
       >
@@ -139,11 +139,11 @@ function renderBlock(block: Block, idx: number) {
               gap: "16px",
               padding: "14px 20px",
               borderTop: i === 0 ? "none" : "1px solid #ececf0",
-              fontSize: "14px",
-              lineHeight: 1.6,
+              fontSize: "15px",
+              lineHeight: 1.65,
             }}
           >
-            <span style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontWeight: 700, color: "#1a3fd0", fontSize: "13px" }}>
+            <span style={{ fontFamily: "'SF Mono', 'Fira Code', monospace", fontWeight: 700, color: "#1a3fd0", fontSize: "14px" }}>
               {row.term}
             </span>
             <span style={{ color: "#474c55", wordBreak: "keep-all" }}>{row.desc}</span>
@@ -163,8 +163,8 @@ function renderBlock(block: Block, idx: number) {
               padding: "14px 16px 14px 50px",
               background: "#f5f6f8",
               borderRadius: "12px",
-              fontSize: "14px",
-              lineHeight: 1.65,
+              fontSize: "16px",
+              lineHeight: 1.7,
               color: "#474c55",
               wordBreak: "keep-all",
             }}
@@ -223,9 +223,9 @@ function renderBlock(block: Block, idx: number) {
         )}
         <p
           style={{
-            fontSize: "14px",
+            fontSize: "16px",
             color: "#474c55",
-            lineHeight: 1.75,
+            lineHeight: 1.8,
             letterSpacing: "-0.02em",
             margin: 0,
             wordBreak: "keep-all",
@@ -513,11 +513,11 @@ export default async function ProjectDetailPage({
                   <Reveal>
                     <h3
                       style={{
-                        fontSize: "18px",
+                        fontSize: "26px",
                         fontWeight: 700,
                         letterSpacing: "-0.04em",
                         color: "#111",
-                        margin: "0 0 12px",
+                        margin: "0 0 16px",
                       }}
                     >
                       {section.title}
