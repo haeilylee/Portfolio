@@ -5,6 +5,7 @@ import { projects, getProjectBySlug } from "@/lib/projects";
 import type { Block, Section } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import TocNav from "@/components/toc-nav";
+import { CollapsibleSection } from "@/components/collapsible-section";
 import CodeBlock from "@/components/code-block";
 import Reveal from "@/components/reveal";
 import { gradientMap, categoryColor } from "@/lib/category-styles";
@@ -417,37 +418,24 @@ export default async function ProjectDetailPage({
           <hr style={{ border: "none", borderTop: "1px solid #f0f0f0", margin: "0 0 40px" }} />
 
           {/* Overview + Outcomes */}
-          <section id="overview" style={{ marginBottom: "48px" }}>
+          <CollapsibleSection id="overview" label="Overview / 주요 성과" style={{ marginBottom: "48px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 200px", gap: "40px" }}>
-              <div>
-                <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 14px" }}>
-                  Overview
-                </h2>
-                <p style={{ fontSize: "15px", color: "#444", lineHeight: 1.8, letterSpacing: "-0.025em", margin: 0 }}>
-                  {project.desc}
-                </p>
-              </div>
-              <div>
-                <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 14px" }}>
-                  주요 성과
-                </h2>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
-                  {project.outcomes.map((o, i) => (
-                    <li key={i} style={{ display: "flex", gap: "8px", fontSize: "13px", color: "#555", lineHeight: 1.6, letterSpacing: "-0.02em" }}>
-                      <span style={{ color: "#22c55e", fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
-                      <span>{o}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p style={{ fontSize: "15px", color: "#444", lineHeight: 1.8, letterSpacing: "-0.025em", margin: 0 }}>
+                {project.desc}
+              </p>
+              <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
+                {project.outcomes.map((o, i) => (
+                  <li key={i} style={{ display: "flex", gap: "8px", fontSize: "13px", color: "#555", lineHeight: 1.6, letterSpacing: "-0.02em" }}>
+                    <span style={{ color: "#22c55e", fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
+                    <span>{o}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </section>
+          </CollapsibleSection>
 
           {/* Tools & Stack */}
-          <section style={{ marginBottom: "48px" }}>
-            <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 16px" }}>
-              Tools &amp; Stack
-            </h2>
+          <CollapsibleSection label="Tools & Stack" style={{ marginBottom: "48px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "0" }}>
               {project.tools.map((tool, i) => (
                 <div
@@ -467,13 +455,10 @@ export default async function ProjectDetailPage({
                 </div>
               ))}
             </div>
-          </section>
+          </CollapsibleSection>
 
           {/* 핵심 인사이트 */}
-          <section style={{ marginBottom: "52px" }}>
-            <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 14px" }}>
-              핵심 인사이트
-            </h2>
+          <CollapsibleSection label="핵심 인사이트" style={{ marginBottom: "52px" }}>
             <p
               style={{
                 fontSize: "15px",
@@ -486,7 +471,7 @@ export default async function ProjectDetailPage({
             >
               {renderWithHighlights(project.insight, project.insightHighlights)}
             </p>
-          </section>
+          </CollapsibleSection>
 
           {/* 코드 스니펫 */}
           {project.codeSnippet && (
