@@ -421,7 +421,7 @@ export default async function ProjectDetailPage({
                 <h2 style={{ fontSize: "13px", textTransform: "uppercase", letterSpacing: "0.06em", color: "#ccc", fontWeight: 600, margin: "0 0 14px" }}>
                   Overview
                 </h2>
-                <p style={{ fontSize: "17px", color: "#444", lineHeight: 1.85, letterSpacing: "-0.025em", margin: 0 }}>
+                <p style={{ fontSize: "15px", color: "#444", lineHeight: 1.8, letterSpacing: "-0.025em", margin: 0 }}>
                   {project.desc}
                 </p>
               </div>
@@ -431,7 +431,7 @@ export default async function ProjectDetailPage({
                 </h2>
                 <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
                   {project.outcomes.map((o, i) => (
-                    <li key={i} style={{ display: "flex", gap: "8px", fontSize: "15px", color: "#555", lineHeight: 1.7, letterSpacing: "-0.02em" }}>
+                    <li key={i} style={{ display: "flex", gap: "8px", fontSize: "13px", color: "#555", lineHeight: 1.6, letterSpacing: "-0.02em" }}>
                       <span style={{ color: "#22c55e", fontWeight: 700, flexShrink: 0, marginTop: "1px" }}>✓</span>
                       <span>{o}</span>
                     </li>
@@ -460,8 +460,8 @@ export default async function ProjectDetailPage({
                     alignItems: "baseline",
                   }}
                 >
-                  <span style={{ fontSize: "15px", fontWeight: 600, color: "#222", letterSpacing: "-0.03em" }}>{tool.name}</span>
-                  <span style={{ fontSize: "15px", color: "#888", letterSpacing: "-0.02em", lineHeight: 1.6 }}>{tool.desc}</span>
+                  <span style={{ fontSize: "13px", fontWeight: 600, color: "#222", letterSpacing: "-0.03em" }}>{tool.name}</span>
+                  <span style={{ fontSize: "13px", color: "#888", letterSpacing: "-0.02em", lineHeight: 1.6 }}>{tool.desc}</span>
                 </div>
               ))}
             </div>
@@ -474,7 +474,7 @@ export default async function ProjectDetailPage({
             </h2>
             <p
               style={{
-                fontSize: "17px",
+                fontSize: "15px",
                 color: "#333",
                 lineHeight: 1.85,
                 letterSpacing: "-0.03em",
