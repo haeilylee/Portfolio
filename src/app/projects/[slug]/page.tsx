@@ -78,9 +78,9 @@ function renderBlock(block: Block, idx: number) {
         style={{
           fontSize: "17px",
           color: "#555",
-          lineHeight: 1.85,
-          letterSpacing: "-0.025em",
-          margin: "0 0 20px",
+          lineHeight: 1.8,
+          letterSpacing: "-0.02em",
+          margin: "0 0 28px",
           wordBreak: "keep-all",
         }}
       >
@@ -90,7 +90,7 @@ function renderBlock(block: Block, idx: number) {
   }
   if (block.type === "image") {
     return (
-      <figure key={idx} style={{ margin: "24px 0" }}>
+      <figure key={idx} style={{ margin: "32px 0" }}>
         <div style={{ borderRadius: "10px", overflow: "hidden" }}>
           <Image
             src={block.src}
@@ -110,7 +110,7 @@ function renderBlock(block: Block, idx: number) {
   }
   if (block.type === "code") {
     return (
-      <div key={idx} style={{ margin: "20px 0" }}>
+      <div key={idx} style={{ margin: "32px 0" }}>
         <CodeBlock
           code={block.code}
           lang={block.lang ?? "tsx"}
@@ -124,7 +124,7 @@ function renderBlock(block: Block, idx: number) {
       <div
         key={idx}
         style={{
-          margin: "20px 0",
+          margin: "28px 0",
           border: "1px solid #ececf0",
           borderRadius: "12px",
           overflow: "hidden",
@@ -154,7 +154,7 @@ function renderBlock(block: Block, idx: number) {
   }
   if (block.type === "list") {
     return (
-      <ol key={idx} style={{ listStyle: "none", padding: 0, margin: "20px 0", display: "flex", flexDirection: "column", gap: "8px" }}>
+      <ol key={idx} style={{ listStyle: "none", padding: 0, margin: "28px 0", display: "flex", flexDirection: "column", gap: "10px" }}>
         {block.items.map((item, i) => (
           <li
             key={i}
@@ -164,7 +164,8 @@ function renderBlock(block: Block, idx: number) {
               background: "#f5f6f8",
               borderRadius: "12px",
               fontSize: "16px",
-              lineHeight: 1.7,
+              lineHeight: 1.75,
+              letterSpacing: "-0.02em",
               color: "#474c55",
               wordBreak: "keep-all",
             }}
@@ -200,8 +201,8 @@ function renderBlock(block: Block, idx: number) {
         style={{
           background: "#f0f4ff",
           borderRadius: "12px",
-          padding: "16px 20px",
-          margin: "20px 0",
+          padding: "20px 24px",
+          margin: "28px 0",
         }}
       >
         {block.label && (
@@ -229,6 +230,7 @@ function renderBlock(block: Block, idx: number) {
             letterSpacing: "-0.02em",
             margin: 0,
             wordBreak: "keep-all",
+
           }}
         >
           {block.content}
@@ -477,7 +479,7 @@ export default async function ProjectDetailPage({
                 fontSize: "15px",
                 color: "#333",
                 lineHeight: 1.85,
-                letterSpacing: "-0.03em",
+                letterSpacing: "-0.02em",
                 margin: 0,
                 wordBreak: "keep-all",
               }}
@@ -503,12 +505,12 @@ export default async function ProjectDetailPage({
           {/* 커스텀 섹션 */}
           {sections.length > 0 && (
             <>
-              <hr style={{ border: "none", borderTop: "1px solid #f0f0f0", margin: "0 0 48px" }} />
+              <hr style={{ border: "none", borderTop: "1px solid #f0f0f0", margin: "0 0 64px" }} />
               {sections.map((section, si) => (
                 <section
                   key={section.id}
                   id={section.id}
-                  style={{ marginBottom: si < sections.length - 1 ? "44px" : 0 }}
+                  style={{ marginBottom: si < sections.length - 1 ? "64px" : 0 }}
                 >
                   <Reveal>
                     <h3
@@ -517,7 +519,7 @@ export default async function ProjectDetailPage({
                         fontWeight: 700,
                         letterSpacing: "-0.04em",
                         color: "#111",
-                        margin: "0 0 16px",
+                        margin: "0 0 20px",
                       }}
                     >
                       {section.title}
