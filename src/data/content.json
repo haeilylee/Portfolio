@@ -55,7 +55,7 @@
           "blocks": [
             {
               "type": "image",
-              "src": "/images/sdui/sdui_1.png",
+              "src": "/images/sdui/1.png",
               "alt": "",
               "caption": "LLM 기반 문서 해석에 의존하는 방식"
             },
