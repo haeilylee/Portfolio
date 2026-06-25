@@ -107,7 +107,13 @@
             {
               "type": "callout",
               "label": "Type이란?",
-              "content": ""
+              "content": "SDUI에서 쓰이는 Type을 의미해요."
+            },
+            {
+              "type": "code",
+              "code": ".",
+              "lang": "",
+              "filename": "SDUI Example"
             },
             {
               "type": "text",
