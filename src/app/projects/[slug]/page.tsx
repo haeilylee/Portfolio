@@ -31,29 +31,33 @@ function renderWithHighlights(text: string, highlights: string[] = []) {
 
 function parseInlineCode(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
-  const re = />([^<]+)</g;
+  const re = /\*\*([^*]+)\*\*|>([^<]+)</g;
   let last = 0;
   let m;
   let key = 0;
   while ((m = re.exec(text)) !== null) {
     if (m.index > last) parts.push(text.slice(last, m.index));
-    parts.push(
-      <code
-        key={key++}
-        style={{
-          fontFamily: "'Geist Mono', 'SF Mono', 'Fira Code', monospace",
-          fontSize: "0.85em",
-          background: "#f2f2f2",
-          border: "1px solid #e4e4e4",
-          borderRadius: "5px",
-          padding: "1px 6px",
-          color: "#333",
-          letterSpacing: "0",
-        }}
-      >
-        {m[1]}
-      </code>
-    );
+    if (m[1] !== undefined) {
+      parts.push(<strong key={key++} style={{ fontWeight: 700, color: "inherit" }}>{m[1]}</strong>);
+    } else {
+      parts.push(
+        <code
+          key={key++}
+          style={{
+            fontFamily: "'Geist Mono', 'SF Mono', 'Fira Code', monospace",
+            fontSize: "0.85em",
+            background: "#f2f2f2",
+            border: "1px solid #e4e4e4",
+            borderRadius: "5px",
+            padding: "1px 6px",
+            color: "#333",
+            letterSpacing: "0",
+          }}
+        >
+          {m[2]}
+        </code>
+      );
+    }
     last = m.index + m[0].length;
   }
   if (last < text.length) parts.push(text.slice(last));
