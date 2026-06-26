@@ -107,11 +107,11 @@
             {
               "type": "callout",
               "label": "Type이란?",
-              "content": "SDUI에서 쓰이는 Type을 의미해요."
+              "content": "SDUI에서 화면을 렌더링할 때 어떤 컴포넌트를 사용할지 결정하는 식별자입니다. Type을 기준으로 디자인 시스템에서 정의한 Variant, State, Property가 함께 구성되어 하나의 컴포넌트를 완성해요."
             },
             {
               "type": "code",
-              "code": ".",
+              "code": "{\n  \"type\": \"textField\",\n  \"variant\": \"outlined\",\n  \"state\": \"error\",\n  \"properties\": {\n    \"label\": \"이메일\",\n    \"placeholder\": \"example@email.com\",\n    \"helperText\": \"올바른 이메일 형식을 입력하세요.\",\n    \"required\": true,\n    \"value\": \"\"\n  }\n}",
               "lang": "",
               "filename": "SDUI Example"
             },
