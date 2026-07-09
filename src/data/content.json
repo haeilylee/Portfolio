@@ -122,18 +122,9 @@
           ]
         },
         {
-          "id": "ai와-나의-시스템-이해도-일치시키기",
-          "title": "AI와 나의 시스템 이해도 일치시키기",
+          "id": "1-shadcn-기준으로-type-체계를-세워요",
+          "title": "1. shadcn 기준으로 Type 체계를 세워요.",
           "blocks": [
-            {
-              "type": "list",
-              "items": [
-                {
-                  "title": "설계",
-                  "content": "Shadcn/ui 를 기준으로 Type을 그룹화하자."
-                }
-              ]
-            },
             {
               "type": "image",
               "src": "/images/sdui/sdui_3.png",
