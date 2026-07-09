@@ -131,9 +131,13 @@
             },
             {
               "type": "image",
-              "src": "/images/sdui/sdui_3.png",
+              "src": "/images/sdui/____.png",
               "alt": "",
               "caption": ""
+            },
+            {
+              "type": "text",
+              "content": ""
             },
             {
               "type": "text",
