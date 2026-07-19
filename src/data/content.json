@@ -132,6 +132,18 @@
               "caption": ""
             },
             {
+              "type": "image",
+              "src": "/images/sdui/sdui_5.png",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "src": "/images/sdui/3.png",
+              "alt": "",
+              "caption": ""
+            },
+            {
               "type": "text",
               "content": "Shadcn/ui를 기반으로 컴포넌트를 일관되게 정리했어요."
             },
