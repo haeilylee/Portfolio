@@ -22,6 +22,9 @@ export default function CodeBlock({ code, lang = "tsx", filename }: Props) {
   React.useEffect(() => () => { if (timerRef.current) clearTimeout(timerRef.current); }, []);
 
   const lines = code.split("\n");
+  const MAX_VISIBLE_LINES = 12;
+  const LINE_HEIGHT_PX = 13 * 1.7;
+  const isOverflowing = lines.length > MAX_VISIBLE_LINES;
 
   return (
     <div style={{
@@ -73,7 +76,11 @@ export default function CodeBlock({ code, lang = "tsx", filename }: Props) {
       )}
 
       {/* 코드 본문 */}
-      <div style={{ padding: "16px 0", overflowX: "auto" }}>
+      <div style={{
+        padding: "16px 0",
+        overflowX: "auto",
+        ...(isOverflowing ? { maxHeight: `${16 * 2 + MAX_VISIBLE_LINES * LINE_HEIGHT_PX}px`, overflowY: "auto" as const } : {}),
+      }}>
         <table style={{ borderCollapse: "collapse", width: "100%", tableLayout: "fixed" }}>
             <tbody>
               {lines.map((line, i) => (
