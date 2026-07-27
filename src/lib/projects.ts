@@ -12,7 +12,8 @@ export type Block =
   | { type: "callout"; label: string; content: string }
   | { type: "list"; items: { title?: string; content: string }[] }
   | { type: "table"; rows: { term: string; desc: string }[] }
-  | { type: "spacer"; height?: number };
+  | { type: "spacer"; height?: number }
+  | { type: "divider" };
 
 export interface Section {
   id: string;

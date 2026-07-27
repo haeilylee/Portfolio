@@ -6,7 +6,7 @@ const PASS = "hakyeong2026";
 
 type Tool = { name: string; desc: string };
 type Block = {
-  type: "text" | "image" | "code" | "callout" | "list" | "table" | "spacer";
+  type: "text" | "image" | "code" | "callout" | "list" | "table" | "spacer" | "divider";
   content?: string;
   src?: string; alt?: string; caption?: string;
   code?: string; lang?: string; filename?: string;
@@ -151,6 +151,7 @@ export default function AdminPage() {
       type === "list" ? { type: "list", items: [{ title: "", content: "" }] } :
       type === "table" ? { type: "table", rows: [{ term: "", desc: "" }] } :
       type === "spacer" ? { type: "spacer", height: 20 } :
+      type === "divider" ? { type: "divider" } :
       { type: "code", code: "", lang: "", filename: "" };
     const next = sections.map((s, i) => i === si ? { ...s, blocks: [...s.blocks, newBlock] } : s);
     setSections(slug, next);
@@ -378,7 +379,7 @@ export default function AdminPage() {
                         </div>
                         <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: ".04em", textTransform: "uppercase", flex: 1,
                           color: block.type === "callout" ? "#1a3fd0" : block.type === "list" ? "#0d7a4e" : block.type === "table" ? "#7c3aed" : "#aaa" }}>
-                          {block.type === "text" ? "텍스트" : block.type === "image" ? "이미지" : block.type === "callout" ? "콜아웃" : block.type === "list" ? "넘버링 리스트" : block.type === "table" ? "정의 표" : block.type === "spacer" ? "여백" : "코드"}
+                          {block.type === "text" ? "텍스트" : block.type === "image" ? "이미지" : block.type === "callout" ? "콜아웃" : block.type === "list" ? "넘버링 리스트" : block.type === "table" ? "정의 표" : block.type === "spacer" ? "여백" : block.type === "divider" ? "구분선" : "코드"}
                         </span>
                         <button style={{ ...s.rmBtn, color: "#f87171", fontSize: "14px" }} onClick={() => removeBlock(activeProject.slug, si, bi)}>×</button>
                       </div>
@@ -496,6 +497,9 @@ export default function AdminPage() {
                           <div style={{ flex: 1, borderTop: "2px dashed #e0e0e0", opacity: 0.6 }} />
                         </div>
                       )}
+                      {block.type === "divider" && (
+                        <div style={{ borderTop: "1px solid #e0e0e0" }} />
+                      )}
                       {block.type === "image" && (
                         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                           <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -551,6 +555,7 @@ export default function AdminPage() {
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "image")}>+ 이미지</button>
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "code")}>+ 코드</button>
                     <button style={{ ...s.addBtn, fontSize: "11px", borderColor: "#d0d0d0", color: "#888" }} onClick={() => addBlock(activeProject.slug, si, "spacer")}>+ 여백</button>
+                    <button style={{ ...s.addBtn, fontSize: "11px", borderColor: "#d0d0d0", color: "#888" }} onClick={() => addBlock(activeProject.slug, si, "divider")}>+ 구분선</button>
                   </div>
                 </div>
               ))}

@@ -245,6 +245,9 @@ function renderBlock(block: Block, idx: number) {
   if (block.type === "spacer") {
     return <div key={idx} style={{ height: `${block.height ?? 20}px` }} />;
   }
+  if (block.type === "divider") {
+    return <hr key={idx} style={{ border: "none", borderTop: "1px solid #ebebeb", margin: "32px 0" }} />;
+  }
   return null;
 }
 
