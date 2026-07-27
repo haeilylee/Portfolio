@@ -161,7 +161,7 @@
             },
             {
               "type": "text",
-              "content": "해당 과정을 거친 컴포넌트들은 Component Template을 통해 일관된 기준으로 파일화되어 정리되었어요. 기존에 디자인 시스템에서의 값이 어긋나는 부분은 UI팀과 함께 조율하며 기준을 맞췄고, 그 과정에서 해당 md파일들은  UI 디자인팀만의 DS Portal(Design System Portal)을 만들어 공유할 수 있었어요."
+              "content": "해당 과정을 거친 컴포넌트들은 위처럼 Component Template을 통해 일관된 기준으로 정리했었어요. 기존에 디자인 시스템에서의 값이 어긋나는 부분은 UI팀과 함께 조율하며 기준을 맞췄고, 그 과정에서 해당 md파일들은  UI 디자인팀만의 DS Portal(Design System Portal)을 만들어 공유할 수 있었어요."
             }
           ]
         },
