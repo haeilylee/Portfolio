@@ -180,6 +180,12 @@
             {
               "type": "text",
               "content": "최종적으로, "
+            },
+            {
+              "type": "image",
+              "src": "/images/sdui/__.png",
+              "alt": "",
+              "caption": ""
             }
           ]
         }
