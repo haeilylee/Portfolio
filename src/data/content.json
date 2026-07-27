@@ -178,14 +178,14 @@
           "title": "용용 테스트",
           "blocks": [
             {
+              "type": "text",
+              "content": "최종적으로, "
+            },
+            {
               "type": "image",
               "src": "/images/sdui/sdui_5.png",
               "alt": "",
               "caption": ""
-            },
-            {
-              "type": "text",
-              "content": "최종적으로, "
             }
           ]
         }
