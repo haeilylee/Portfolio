@@ -285,6 +285,7 @@ export default async function ProjectDetailPage({
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       <div
+        className="project-detail-container"
         style={{
           maxWidth: "1200px",
           margin: "0 auto",

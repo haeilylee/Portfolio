@@ -18,10 +18,11 @@ const LinkedInIcon = () => (
 export default function HomePage() {
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
-      <div style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 56px" }}>
+      <div className="home-container" style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 56px" }}>
 
         {/* ── Hero (E형: 2컬럼) ── */}
         <div
+          className="home-hero"
           style={{
             padding: "52px 0 40px",
             borderBottom: "1px solid #f0f0f0",
@@ -86,7 +87,7 @@ export default function HomePage() {
         </div>
 
         {/* ── Projects list ── */}
-        <div style={{ padding: "40px 0 80px", display: "grid", gridTemplateColumns: "180px 1fr", gap: "32px" }}>
+        <div className="home-projects-grid" style={{ padding: "40px 0 80px", display: "grid", gridTemplateColumns: "180px 1fr", gap: "32px" }}>
 
           {/* 맨 왼쪽: 섹션 레이블 */}
           <div style={{ paddingTop: "4px" }}>
@@ -103,6 +104,7 @@ export default function HomePage() {
             {projects.map((project, idx) => (
               <div
                 key={project.slug}
+                className="home-project-row"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "200px 1fr auto",
@@ -114,6 +116,7 @@ export default function HomePage() {
               >
                 {/* 썸네일 */}
                 <div
+                  className="home-project-thumb"
                   style={{
                     borderRadius: "8px",
                     aspectRatio: "4/3",

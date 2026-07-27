@@ -42,3 +42,39 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
   opacity: 1;
   transform: none;
 }
+
+/* ── Mobile responsive overrides (desktop layout stays untouched above 768px) ── */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 0 20px !important;
+  }
+  .home-hero {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 32px 0 28px !important;
+  }
+  .home-projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .home-project-row {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    padding: 20px 0 !important;
+  }
+  .home-project-thumb {
+    aspect-ratio: 16 / 9 !important;
+  }
+
+  .project-detail-container {
+    flex-direction: column !important;
+    padding: 0 20px !important;
+    gap: 0 !important;
+  }
+  .toc-nav {
+    display: none !important;
+  }
+  .site-nav {
+    padding: 0 20px !important;
+  }
+}

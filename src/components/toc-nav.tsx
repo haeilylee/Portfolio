@@ -30,6 +30,7 @@ export default function TocNav({ items }: { items: TocItem[] }) {
 
   return (
     <div
+      className="toc-nav"
       style={{
         width: "220px",
         flexShrink: 0,
