@@ -373,28 +373,38 @@ export default async function ProjectDetailPage({
               borderRadius: "14px",
               overflow: "hidden",
               marginBottom: "40px",
-              background: gradientMap[project.catClass] ?? "#ccc",
+              background: project.thumbnail ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
               position: "relative",
             }}
           >
-            <div style={{ position: "absolute", top: "-50px", right: "-50px", width: "240px", height: "240px", borderRadius: "50%", background: "rgba(255,255,255,0.07)" }} />
-            <div style={{ position: "absolute", bottom: "-70px", left: "60px", width: "180px", height: "180px", borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
-            <div
-              style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                color: "rgba(255,255,255,0.18)",
-                fontSize: "56px",
-                fontWeight: 700,
-                letterSpacing: "-0.04em",
-                whiteSpace: "nowrap",
-                userSelect: "none",
-              }}
-            >
-              {project.title}
-            </div>
+            {project.thumbnail ? (
+              <img
+                src={project.thumbnail}
+                alt={project.title}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            ) : (
+              <>
+                <div style={{ position: "absolute", top: "-50px", right: "-50px", width: "240px", height: "240px", borderRadius: "50%", background: "rgba(255,255,255,0.07)" }} />
+                <div style={{ position: "absolute", bottom: "-70px", left: "60px", width: "180px", height: "180px", borderRadius: "50%", background: "rgba(255,255,255,0.05)" }} />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    color: "rgba(255,255,255,0.18)",
+                    fontSize: "56px",
+                    fontWeight: 700,
+                    letterSpacing: "-0.04em",
+                    whiteSpace: "nowrap",
+                    userSelect: "none",
+                  }}
+                >
+                  {project.title}
+                </div>
+              </>
+            )}
           </div>
 
           {/* Skills used */}

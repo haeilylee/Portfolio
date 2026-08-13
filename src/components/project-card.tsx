@@ -54,33 +54,43 @@ export default function ProjectCard({ project }: { project: Project }) {
           style={{
             width: "100%",
             height: "100%",
-            background: gradientMap[project.catClass] ?? "#ccc",
+            background: project.thumbnail ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
             transition: "transform 0.3s ease",
             position: "relative",
           }}
         >
-          <div
-            style={{
-              position: "absolute",
-              top: "-30px",
-              right: "-30px",
-              width: "130px",
-              height: "130px",
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.07)",
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              bottom: "-40px",
-              left: "30px",
-              width: "100px",
-              height: "100px",
-              borderRadius: "50%",
-              background: "rgba(255,255,255,0.05)",
-            }}
-          />
+          {project.thumbnail ? (
+            <img
+              src={project.thumbnail}
+              alt={project.title}
+              style={{ width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "-30px",
+                  right: "-30px",
+                  width: "130px",
+                  height: "130px",
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.07)",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: "-40px",
+                  left: "30px",
+                  width: "100px",
+                  height: "100px",
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.05)",
+                }}
+              />
+            </>
+          )}
         </div>
       </div>
 

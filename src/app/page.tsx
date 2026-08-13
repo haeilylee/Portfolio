@@ -120,9 +120,18 @@ export default function HomePage() {
                   style={{
                     borderRadius: "8px",
                     aspectRatio: "4/3",
-                    background: gradientMap[project.catClass] ?? "#ccc",
+                    overflow: "hidden",
+                    background: project.thumbnail ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
                   }}
-                />
+                >
+                  {project.thumbnail && (
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                  )}
+                </div>
 
                 {/* 내용 */}
                 <div>
