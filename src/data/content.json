@@ -9,8 +9,6 @@
   "projects": [
     {
       "slug": "sdui",
-      "thumbnail": "/images/sdui/thumbnail.png",
-      "heroThumbnail": "/images/sdui/thumbnail-detail.png",
       "title": "AI 목업 생성의 선행 조건, 컴포넌트 레지스트리 만들기",
       "category": "AI Design System",
       "catClass": "design-system",
@@ -220,8 +218,8 @@
         "Github",
         "Markdown"
       ],
-      "preview": "기획자가 매번 수동으로 작성하던 요구사항 정의서를 AI 파이프라인으로 자동화했어요.",
-      "desc": "기획자가 매번 수동으로 작성하던 요구사항 정의서를 AI 파이프라인으로 자동화했어요.",
+      "preview": "작업자들이 불필요한 문서 작업이 아닌, 업무 요점에 집중할 수 있는 워크플로우 구축",
+      "desc": "작업자들이 불필요한 문서 작업이 아닌, 업무 요점에 집중할 수 있는 워크플로우 구축",
       "outcomes": [
         "요구사항 정의서 초안 작성 시간 평균 4시간 → 20분으로 단축",
         "GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소",
@@ -257,12 +255,18 @@
       },
       "sections": [
         {
-          "id": "background",
-          "title": "배경",
+          "id": "수작업에-의존하는-요구사항-정의서-ai로-해결할-순-없을까",
+          "title": "수작업에 의존하는 요구사항 정의서, AI로 해결할 순 없을까?",
           "blocks": [
             {
+              "type": "image",
+              "src": "/images/ai-requirements/6.png",
+              "alt": "",
+              "caption": ""
+            },
+            {
               "type": "text",
-              "content": "기획자들은 새로운 기능이 논의될 때마다 동일한 구조의 요구사항 정의서를 반복적으로 작성해야 했습니다. 이 작업은 창의적 판단이 필요하지 않은 반복 업무임에도 매번 평균 4시간 이상이 소요되었어요."
+              "content": "구축 프로젝트에 들어가며, UX 운영 단의 요구사항(PRD) 정의서를 써야했어요. 하나를 쓰더라도, 4-5개의 문서를 교차하며 작성해야하는 문제 상황을 발견하였습니다. **단일 문서만 봐서는 발견하기 어려운 요구사항을 AI를 통해 체계적으로 발굴**하고자 했어요. "
             }
           ]
         },
