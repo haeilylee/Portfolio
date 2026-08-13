@@ -24,6 +24,7 @@ export interface Section {
 export interface Project {
   slug: string;
   thumbnail?: string;
+  heroThumbnail?: string;
   title: string;
   category: string;
   catClass: "design-system" | "ai" | "ux";

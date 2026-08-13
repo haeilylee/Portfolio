@@ -373,13 +373,13 @@ export default async function ProjectDetailPage({
               borderRadius: "14px",
               overflow: "hidden",
               marginBottom: "40px",
-              background: project.thumbnail ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
+              background: (project.heroThumbnail ?? project.thumbnail) ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
               position: "relative",
             }}
           >
-            {project.thumbnail ? (
+            {(project.heroThumbnail ?? project.thumbnail) ? (
               <img
-                src={project.thumbnail}
+                src={project.heroThumbnail ?? project.thumbnail}
                 alt={project.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
