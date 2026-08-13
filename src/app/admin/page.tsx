@@ -19,6 +19,7 @@ type Section = { id: string; title: string; blocks: Block[] };
 type Project = {
   slug: string; title: string; category: string; catClass: string;
   date: string; tags: string[]; preview: string; desc: string;
+  thumbnail?: string; heroThumbnail?: string;
   outcomes: string[]; tools: Tool[]; insight: string;
   insightHighlights: string[];
   codeSnippet?: { filename?: string; lang?: string; code?: string };
@@ -298,6 +299,67 @@ export default function AdminPage() {
 
               <label style={s.label}>프리뷰 / 설명</label>
               <textarea style={s.textarea} rows={3} value={activeProject.desc} onChange={(e) => { setProject(activeProject.slug, "desc", e.target.value); setProject(activeProject.slug, "preview", e.target.value); }} />
+
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                <div>
+                  <label style={s.label}>썸네일 (목록형 · 홈/카드)</label>
+                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px" }}>
+                    <input
+                      style={{ ...s.input, marginBottom: 0, flex: 1 }}
+                      value={activeProject.thumbnail ?? ""}
+                      placeholder="/images/프로젝트/파일명.png"
+                      onChange={(e) => setProject(activeProject.slug, "thumbnail", e.target.value)}
+                    />
+                    <label style={{ ...s.addBtn, cursor: "pointer", display: "inline-block", whiteSpace: "nowrap" }}>
+                      파일 선택
+                      <input type="file" accept="image/*" style={{ display: "none" }}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const fd = new FormData();
+                          fd.append("file", file);
+                          fd.append("slug", activeProject.slug);
+                          const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+                          const data = await res.json();
+                          if (data.src) setProject(activeProject.slug, "thumbnail", data.src);
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {activeProject.thumbnail && (
+                    <img src={activeProject.thumbnail} alt="" style={{ width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: "8px", border: "1px solid #f0f0f0", marginBottom: "16px" }} />
+                  )}
+                </div>
+                <div>
+                  <label style={s.label}>썸네일 (상세 페이지 히어로)</label>
+                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px" }}>
+                    <input
+                      style={{ ...s.input, marginBottom: 0, flex: 1 }}
+                      value={activeProject.heroThumbnail ?? ""}
+                      placeholder="/images/프로젝트/파일명.png"
+                      onChange={(e) => setProject(activeProject.slug, "heroThumbnail", e.target.value)}
+                    />
+                    <label style={{ ...s.addBtn, cursor: "pointer", display: "inline-block", whiteSpace: "nowrap" }}>
+                      파일 선택
+                      <input type="file" accept="image/*" style={{ display: "none" }}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const fd = new FormData();
+                          fd.append("file", file);
+                          fd.append("slug", activeProject.slug);
+                          const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
+                          const data = await res.json();
+                          if (data.src) setProject(activeProject.slug, "heroThumbnail", data.src);
+                        }}
+                      />
+                    </label>
+                  </div>
+                  {activeProject.heroThumbnail && (
+                    <img src={activeProject.heroThumbnail} alt="" style={{ width: "100%", aspectRatio: "16/7", objectFit: "cover", borderRadius: "8px", border: "1px solid #f0f0f0", marginBottom: "16px" }} />
+                  )}
+                </div>
+              </div>
 
               <hr style={s.divider} />
               <div style={{ ...s.sectionTitle, fontSize: "13px" }}>성과 (불릿)</div>
