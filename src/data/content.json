@@ -9,7 +9,6 @@
   "projects": [
     {
       "slug": "sdui",
-      "thumbnail": "/images/sdui/thumbnail.png",
       "title": "AI 목업 생성의 선행 조건, 컴포넌트 레지스트리 만들기",
       "category": "AI Design System",
       "catClass": "design-system",
@@ -65,7 +64,7 @@
             },
             {
               "type": "image",
-              "src": "/images/sdui/__.png",
+              "src": "/images/sdui/헬로우.png",
               "alt": "",
               "caption": ""
             },
@@ -137,7 +136,7 @@
             },
             {
               "type": "image",
-              "src": "/images/sdui/sdui_5.png",
+              "src": "/images/sdui/2-1.png",
               "alt": "",
               "caption": ""
             },
