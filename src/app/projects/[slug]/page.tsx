@@ -8,6 +8,7 @@ import TocNav from "@/components/toc-nav";
 import CodeBlock from "@/components/code-block";
 import Reveal from "@/components/reveal";
 import { gradientMap, categoryColor } from "@/lib/category-styles";
+import { renderTitle, stripTitleBreaks } from "@/lib/format-title";
 
 function renderWithHighlights(text: string, highlights: string[] = []) {
   if (!highlights.length) return <>&ldquo;{text}&rdquo;</>;
@@ -262,7 +263,7 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
-  return { title: project ? `${project.title} — Hakyeong Lee` : "Not Found" };
+  return { title: project ? `${stripTitleBreaks(project.title)} — Hakyeong Lee` : "Not Found" };
 }
 
 export default async function ProjectDetailPage({
@@ -346,7 +347,7 @@ export default async function ProjectDetailPage({
               lineHeight: 1.2,
             }}
           >
-            {project.title}
+            {renderTitle(project.title)}
           </h1>
 
           {/* Meta */}
@@ -380,7 +381,7 @@ export default async function ProjectDetailPage({
             {(project.heroThumbnail ?? project.thumbnail) ? (
               <img
                 src={project.heroThumbnail ?? project.thumbnail}
-                alt={project.title}
+                alt={stripTitleBreaks(project.title)}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
             ) : (
@@ -401,7 +402,7 @@ export default async function ProjectDetailPage({
                     userSelect: "none",
                   }}
                 >
-                  {project.title}
+                  {renderTitle(project.title)}
                 </div>
               </>
             )}
