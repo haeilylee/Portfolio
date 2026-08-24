@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects, hero } from "@/lib/projects";
 import { gradientMap, categoryColor } from "@/lib/category-styles";
+import { renderTitle, stripTitleBreaks } from "@/lib/format-title";
 
 const GitHubIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -127,7 +128,7 @@ export default function HomePage() {
                   {project.thumbnail && (
                     <img
                       src={project.thumbnail}
-                      alt={project.title}
+                      alt={stripTitleBreaks(project.title)}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   )}
@@ -143,7 +144,7 @@ export default function HomePage() {
                     <span style={{ fontSize: "11px", color: "#ccc" }}>{project.date}</span>
                   </div>
                   <div style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "-0.04em", color: "#111", lineHeight: 1.3, marginBottom: "10px" }}>
-                    {project.title}
+                    {renderTitle(project.title)}
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                     {project.outcomes.map((outcome, i) => (

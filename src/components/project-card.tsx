@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Project } from "@/lib/projects";
+import { renderTitle, stripTitleBreaks } from "@/lib/format-title";
 
 const gradientMap: Record<string, string> = {
   "design-system": "linear-gradient(145deg, #1a4fd6, #4f86f7)",
@@ -62,7 +63,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.thumbnail ? (
             <img
               src={project.thumbnail}
-              alt={project.title}
+              alt={stripTitleBreaks(project.title)}
               style={{ width: "100%", height: "100%", objectFit: "cover" }}
             />
           ) : (
@@ -116,7 +117,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             lineHeight: 1.35,
           }}
         >
-          {project.title}
+          {renderTitle(project.title)}
         </h3>
         <p
           style={{

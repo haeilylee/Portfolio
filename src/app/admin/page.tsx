@@ -297,6 +297,19 @@ export default function AdminPage() {
                 </div>
               </div>
 
+              <label style={s.label}>Skills used (쉼표로 구분)</label>
+              <input
+                style={s.input}
+                value={activeProject.tags.join(", ")}
+                onChange={(e) =>
+                  setProject(
+                    activeProject.slug,
+                    "tags",
+                    e.target.value.split(",").map((t) => t.trim()).filter(Boolean)
+                  )
+                }
+              />
+
               <label style={s.label}>프리뷰 / 설명</label>
               <textarea style={s.textarea} rows={3} value={activeProject.desc} onChange={(e) => { setProject(activeProject.slug, "desc", e.target.value); setProject(activeProject.slug, "preview", e.target.value); }} />
 

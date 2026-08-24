@@ -8,19 +8,19 @@ const PROJECT_ID = "prj_Gf9gI26NRARQfRDAuEy6AUG2Qt5E";
 const TEAM_ID = "team_DUr4OblprLC5Vj13jfHIjOz6";
 const PROD_DOMAIN = "haeilylee-portfolio.vercel.app";
 
-async function aliasLatestDeployment(token: string) {
+async function aliasDeployment(token: string, deploymentUrl: string) {
   const res = await fetch(
-    `https://api.vercel.com/v6/deployments?projectId=${PROJECT_ID}&teamId=${TEAM_ID}&target=production&limit=1`,
-    { headers: { Authorization: `Bearer ${token}` } }
+    `https://api.vercel.com/v2/deployments/${deploymentUrl}/aliases?teamId=${TEAM_ID}`,
+    {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ alias: PROD_DOMAIN }),
+    }
   );
-  const data = await res.json();
-  const url = data.deployments?.[0]?.url;
-  if (!url) return;
-  await fetch(`https://api.vercel.com/v2/now/aliases`, {
-    method: "POST",
-    headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ alias: PROD_DOMAIN, deployment: url }),
-  });
+  if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`Alias failed (${res.status}): ${body}`);
+  }
 }
 
 export async function POST() {
@@ -47,9 +47,15 @@ export async function POST() {
       { cwd },
       async (err, out, stderr) => {
         if (err) { console.error("Vercel deploy error:", stderr); return; }
-        console.log("Vercel deploy done:", out);
-        await aliasLatestDeployment(token);
-        console.log(`Aliased ${PROD_DOMAIN} to latest production deployment`);
+        const deploymentUrl = out.trim().split("\n").pop()?.replace(/^https?:\/\//, "");
+        if (!deploymentUrl) { console.error("Vercel deploy: could not parse deployment URL from output:", out); return; }
+        console.log("Vercel deploy done:", deploymentUrl);
+        try {
+          await aliasDeployment(token, deploymentUrl);
+          console.log(`Aliased ${PROD_DOMAIN} -> ${deploymentUrl}`);
+        } catch (e) {
+          console.error("Alias failed:", e);
+        }
       }
     );
 
