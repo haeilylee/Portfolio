@@ -43,7 +43,7 @@ export async function POST() {
     await execAsync("git push origin web-publish", { cwd });
 
     exec(
-      "/Users/plusx/.npm-global/bin/vercel --prod --yes",
+      `vercel --prod --yes --token=${token}`,
       { cwd },
       async (err, out, stderr) => {
         if (err) { console.error("Vercel deploy error:", stderr); return; }

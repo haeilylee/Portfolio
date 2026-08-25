@@ -24,10 +24,15 @@ export async function POST(req: NextRequest) {
       await execAsync("git push origin web-publish", { cwd });
 
       // 백그라운드로 vercel --prod 실행
-      exec("vercel --prod --yes", { cwd }, (err, out, stderr) => {
-        if (err) console.error("Vercel deploy error:", stderr);
-        else console.log("Vercel deploy done:", out);
-      });
+      const token = process.env.VERCEL_TOKEN;
+      if (!token) {
+        console.error("Vercel deploy skipped: .env.local에 VERCEL_TOKEN이 없어요.");
+      } else {
+        exec(`vercel --prod --yes --token=${token}`, { cwd }, (err, out, stderr) => {
+          if (err) console.error("Vercel deploy error:", stderr);
+          else console.log("Vercel deploy done:", out);
+        });
+      }
     }
   } catch (e) {
     console.error("Git auto-push failed:", e);
