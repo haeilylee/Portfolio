@@ -8,6 +8,25 @@ const PROJECT_ID = "prj_Gf9gI26NRARQfRDAuEy6AUG2Qt5E";
 const TEAM_ID = "team_DUr4OblprLC5Vj13jfHIjOz6";
 const PROD_DOMAIN = "haeilylee-portfolio.vercel.app";
 
+// Vercel CLI는 버전에 따라 배포 URL만 한 줄로 출력하거나 JSON 객체를 출력한다.
+// 둘 다 받아서 호스트명만 돌려준다.
+function parseDeploymentUrl(out: string): string | null {
+  const strip = (u: string) => u.trim().replace(/^https?:\/\//, "").replace(/\/$/, "");
+
+  try {
+    const json = JSON.parse(out);
+    const url = json?.deployment?.url ?? json?.url;
+    if (typeof url === "string" && url) return strip(url);
+  } catch {
+    // JSON이 아니면 아래 평문 처리로 넘어간다.
+  }
+
+  const match = out.match(/https?:\/\/[^\s"']+\.vercel\.app/g);
+  if (match?.length) return strip(match[match.length - 1]);
+
+  return null;
+}
+
 async function aliasDeployment(token: string, deploymentUrl: string) {
   const res = await fetch(
     `https://api.vercel.com/v2/deployments/${deploymentUrl}/aliases?teamId=${TEAM_ID}`,
@@ -43,11 +62,11 @@ export async function POST() {
     await execAsync("git push origin web-publish", { cwd });
 
     exec(
-      "/Users/plusx/.npm-global/bin/vercel --prod --yes",
+      `vercel --prod --yes --token=${token}`,
       { cwd },
       async (err, out, stderr) => {
         if (err) { console.error("Vercel deploy error:", stderr); return; }
-        const deploymentUrl = out.trim().split("\n").pop()?.replace(/^https?:\/\//, "");
+        const deploymentUrl = parseDeploymentUrl(out);
         if (!deploymentUrl) { console.error("Vercel deploy: could not parse deployment URL from output:", out); return; }
         console.log("Vercel deploy done:", deploymentUrl);
         try {

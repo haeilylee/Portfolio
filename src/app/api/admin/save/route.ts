@@ -22,12 +22,9 @@ export async function POST(req: NextRequest) {
     if (stdout.trim()) {
       await execAsync('git commit -m "Update content via admin panel"', { cwd });
       await execAsync("git push origin web-publish", { cwd });
-
-      // 백그라운드로 vercel --prod 실행
-      exec("vercel --prod --yes", { cwd }, (err, out, stderr) => {
-        if (err) console.error("Vercel deploy error:", stderr);
-        else console.log("Vercel deploy done:", out);
-      });
+      // 실제 배포와 도메인 alias는 /api/admin/deploy가 담당한다.
+      // 여기서 vercel을 또 실행하면 프로덕션 빌드가 두 개 뜨고,
+      // 그중 하나는 alias되지 않아 어느 배포가 실서비스인지 알 수 없게 된다.
     }
   } catch (e) {
     console.error("Git auto-push failed:", e);
