@@ -13,7 +13,8 @@ export type Block =
   | { type: "list"; items: { title?: string; content: string }[] }
   | { type: "table"; rows: { term: string; desc: string }[] }
   | { type: "spacer"; height?: number }
-  | { type: "divider" };
+  | { type: "divider" }
+  | { type: "step"; step?: string; title: string; tag?: string; tagColor?: string; content: string };
 
 export interface Section {
   id: string;
