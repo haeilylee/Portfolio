@@ -6,7 +6,7 @@ const PASS = "hakyeong2026";
 
 type Tool = { name: string; desc: string };
 type Block = {
-  type: "text" | "image" | "code" | "callout" | "list" | "table" | "spacer" | "divider";
+  type: "text" | "image" | "code" | "callout" | "list" | "table" | "spacer" | "divider" | "step";
   content?: string;
   src?: string; alt?: string; caption?: string;
   code?: string; lang?: string; filename?: string;
@@ -14,6 +14,7 @@ type Block = {
   items?: { title?: string; content: string }[];
   rows?: { term: string; desc: string }[];
   height?: number;
+  step?: string; title?: string; tag?: string; tagColor?: string;
 };
 type Section = { id: string; title: string; blocks: Block[] };
 type Project = {
@@ -153,6 +154,7 @@ export default function AdminPage() {
       type === "table" ? { type: "table", rows: [{ term: "", desc: "" }] } :
       type === "spacer" ? { type: "spacer", height: 20 } :
       type === "divider" ? { type: "divider" } :
+      type === "step" ? { type: "step", step: "", title: "", tag: "", tagColor: "gray", content: "" } :
       { type: "code", code: "", lang: "", filename: "" };
     const next = sections.map((s, i) => i === si ? { ...s, blocks: [...s.blocks, newBlock] } : s);
     setSections(slug, next);
@@ -453,8 +455,8 @@ export default function AdminPage() {
                             onClick={() => moveBlock(activeProject.slug, si, bi, 1)} disabled={bi === sec.blocks.length - 1}>↓</button>
                         </div>
                         <span style={{ fontSize: "11px", fontWeight: 600, letterSpacing: ".04em", textTransform: "uppercase", flex: 1,
-                          color: block.type === "callout" ? "#1a3fd0" : block.type === "list" ? "#0d7a4e" : block.type === "table" ? "#7c3aed" : "#aaa" }}>
-                          {block.type === "text" ? "텍스트" : block.type === "image" ? "이미지" : block.type === "callout" ? "콜아웃" : block.type === "list" ? "넘버링 리스트" : block.type === "table" ? "정의 표" : block.type === "spacer" ? "여백" : block.type === "divider" ? "구분선" : "코드"}
+                          color: block.type === "callout" ? "#1a3fd0" : block.type === "list" ? "#0d7a4e" : block.type === "table" ? "#7c3aed" : block.type === "step" ? "#c76a12" : "#aaa" }}>
+                          {block.type === "text" ? "텍스트" : block.type === "image" ? "이미지" : block.type === "callout" ? "콜아웃" : block.type === "list" ? "넘버링 리스트" : block.type === "table" ? "정의 표" : block.type === "spacer" ? "여백" : block.type === "divider" ? "구분선" : block.type === "step" ? "스텝" : "코드"}
                         </span>
                         <button style={{ ...s.rmBtn, color: "#f87171", fontSize: "14px" }} onClick={() => removeBlock(activeProject.slug, si, bi)}>×</button>
                       </div>
@@ -604,6 +606,50 @@ export default function AdminPage() {
                           </div>
                         </div>
                       )}
+                      {block.type === "step" && (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                          <div style={{ display: "grid", gridTemplateColumns: "70px 1fr", gap: "8px" }}>
+                            <input
+                              style={{ ...s.input, marginBottom: 0 }}
+                              value={block.step ?? ""}
+                              placeholder="0"
+                              onChange={(e) => setBlock(activeProject.slug, si, bi, { ...block, step: e.target.value })}
+                            />
+                            <input
+                              style={{ ...s.input, marginBottom: 0, fontWeight: 600 }}
+                              value={block.title ?? ""}
+                              placeholder="제목 (예: 구조화 파일 파싱)"
+                              onChange={(e) => setBlock(activeProject.slug, si, bi, { ...block, title: e.target.value })}
+                            />
+                          </div>
+                          <div style={{ display: "grid", gridTemplateColumns: "1fr 120px", gap: "8px" }}>
+                            <input
+                              style={{ ...s.input, marginBottom: 0 }}
+                              value={block.tag ?? ""}
+                              placeholder="태그 (예: SCRIPT, LLM)"
+                              onChange={(e) => setBlock(activeProject.slug, si, bi, { ...block, tag: e.target.value })}
+                            />
+                            <select
+                              style={{ ...s.input, marginBottom: 0 }}
+                              value={block.tagColor ?? "gray"}
+                              onChange={(e) => setBlock(activeProject.slug, si, bi, { ...block, tagColor: e.target.value })}
+                            >
+                              <option value="gray">회색</option>
+                              <option value="green">초록</option>
+                              <option value="purple">보라</option>
+                              <option value="blue">파랑</option>
+                              <option value="orange">주황</option>
+                            </select>
+                          </div>
+                          <textarea
+                            style={{ ...s.textarea, marginBottom: 0, minHeight: "70px" }}
+                            rows={3}
+                            value={block.content ?? ""}
+                            placeholder="본문 텍스트 (**볼드**, >코드< 지원)"
+                            onChange={(e) => setBlock(activeProject.slug, si, bi, { ...block, content: e.target.value })}
+                          />
+                        </div>
+                      )}
                       {block.type === "code" && (
                         <div>
                           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "8px" }}>
@@ -624,6 +670,7 @@ export default function AdminPage() {
                   {/* 블록 추가 */}
                   <div style={{ display: "flex", gap: "6px", marginTop: "4px", flexWrap: "wrap" }}>
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "text")}>+ 텍스트</button>
+                    <button style={{ ...s.addBtn, fontSize: "11px", borderColor: "#ffd8ab", color: "#c76a12" }} onClick={() => addBlock(activeProject.slug, si, "step")}>+ 스텝</button>
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "callout")}>+ 콜아웃</button>
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "list")}>+ 넘버링</button>
                     <button style={{ ...s.addBtn, fontSize: "11px" }} onClick={() => addBlock(activeProject.slug, si, "table")}>+ 정의 표</button>

@@ -75,7 +75,54 @@ function renderInlineText(text: string): React.ReactNode {
   ));
 }
 
+const stepTagColors: Record<string, { bg: string; fg: string }> = {
+  green: { bg: "#e7f6ec", fg: "#1f8a4c" },
+  purple: { bg: "#efeafd", fg: "#6d3fd6" },
+  blue: { bg: "#e8f1ff", fg: "#1a5fd0" },
+  orange: { bg: "#fff2e3", fg: "#c76a12" },
+  gray: { bg: "#f0f0f0", fg: "#666" },
+};
+
 function renderBlock(block: Block, idx: number) {
+  if (block.type === "step") {
+    const colors = stepTagColors[block.tagColor ?? "gray"] ?? stepTagColors.gray;
+    return (
+      <div key={idx} style={{ margin: "0 0 28px" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
+          <span style={{ fontSize: "16px", fontWeight: 700, color: "#111", letterSpacing: "-0.03em" }}>
+            {block.step ? `Step ${block.step} · ` : ""}{block.title}
+          </span>
+          {block.tag && (
+            <span
+              style={{
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "0.02em",
+                padding: "3px 10px",
+                borderRadius: "20px",
+                background: colors.bg,
+                color: colors.fg,
+              }}
+            >
+              {block.tag}
+            </span>
+          )}
+        </div>
+        <p
+          style={{
+            fontSize: "17px",
+            color: "#555",
+            lineHeight: 1.8,
+            letterSpacing: "-0.02em",
+            margin: 0,
+            wordBreak: "keep-all",
+          }}
+        >
+          {renderInlineText(block.content)}
+        </p>
+      </div>
+    );
+  }
   if (block.type === "text") {
     return (
       <p
