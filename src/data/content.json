@@ -250,9 +250,9 @@
         "AI가 적재적소에 활용될 수 있도록 각 문서의 기준을 명확히 정의하고, 데이터를 정제하는 작업이 가장 중요"
       ],
       "codeSnippet": {
-        "filename": "generate-requirements.py",
-        "lang": "python",
-        "code": "import anthropic\n\nclient = anthropic.Anthropic()\n\ndef generate_requirements(pr_diff: str) -> str:\n    message = client.messages.create(\n        model=\"claude-opus-4-5\",\n        max_tokens=2048,\n        messages=[\n            {\n                \"role\": \"user\",\n                \"content\": f\"다음 PR diff를 분석해 요구사항 정의서를 작성하세요:\\n\\n{pr_diff}\"\n            }\n        ]\n    )\n    return message.content[0].text"
+        "filename": "",
+        "lang": "",
+        "code": ""
       },
       "sections": [
         {
@@ -281,28 +281,65 @@
           ]
         },
         {
-          "id": "problem",
-          "title": "문제",
+          "id": "수작업에-의존하던-요구사항-정의서-자동화해보면-어떨까",
+          "title": "수작업에 의존하던 요구사항 정의서, 자동화해보면 어떨까?",
           "blocks": [
             {
+              "type": "text",
+              "content": "이렇게 수작업으로 만들던 요구사항 정의서를 AI 워크플로우로 만들자는 목소리가 점점 나온 이후,\n수작업의 문제는 다음과 같이 정리됐어요."
+            },
+            {
+              "type": "list",
+              "items": [
+                {
+                  "title": "누락 위험",
+                  "content": "한 담당자가 하나의 관점에서만 문서를 검토하면 교차 지점에서 발생하는 요구사항을 놓치기 쉽습니다. 또한 검토해야 할 리소스가 많아질수록 검토 부담은 기하급수적으로 커져요.."
+                },
+                {
+                  "title": "비효율",
+                  "content": "여러 문서를 사람이 수작업으로 대조하느라 시간이 과하게 소요돼요."
+                },
+                {
+                  "title": "추적 불가",
+                  "content": "\"이 요구사항이 어떤 근거에서 나왔지?\"를 역추적할 수 없고, 변경 시 영향 범위 파악도 불가능해요."
+                }
+              ]
+            },
+            {
               "type": "image",
-              "src": "/images/ai-requirements/룰랄라.png",
+              "src": "/images/ai-requirements/03_vicious-loop.png",
+              "alt": "",
+              "caption": "수작업 구조에서 반복되는 악순환"
+            },
+            {
+              "type": "text",
+              "content": "이러한 일련의 과정을 지켜보며, **AI 자동화를 통해 교차 검토 자체를 시스템이 수행하고, 이를 바탕으로 요구사항 정의서 초안까지 생성하는 워크플로우를 구축하면 어떨까?**라는 계획을 세울 수 있었습니다."
+            }
+          ]
+        },
+        {
+          "id": "첫-실패-원문만-넣으면-9만-살아남는다",
+          "title": "첫 실패: 원문만 넣으면 9%만 살아남는다",
+          "blocks": [
+            {
+              "type": "text",
+              "content": "처음에는 AI가 기능내역서와 IA 등의 원문만 제공해도 요구사항을 스스로 파악하고 추출할 수 있을 것이라 기대했어요. 하지만 결과는 기대에 크게 미치지 못했습니다."
+            },
+            {
+              "type": "image",
+              "src": "/images/ai-requirements/ㅇㅇㅇ.png",
+              "alt": "",
+              "caption": ""
+            },
+            {
+              "type": "image",
+              "src": "/images/ai-requirements/04_pivot-test.png",
               "alt": "",
               "caption": ""
             },
             {
               "type": "text",
-              "content": "수동 작성 방식의 문제는 단순한 시간 낭비에 그치지 않았습니다. 작성자마다 양식이 달라 일관성이 부족했고, 누락 항목이 발생하면 개발 착수 후에야 발견되어 재작업으로 이어지는 경우가 많았어요."
-            }
-          ]
-        },
-        {
-          "id": "process",
-          "title": "해결 과정",
-          "blocks": [
-            {
-              "type": "text",
-              "content": "GitHub PR이 생성될 때 자동으로 트리거되는 Actions 워크플로우를 구성했습니다. PR의 변경 내용을 분석해 Claude API로 요구사항 초안을 생성하고, 표준화된 Markdown 양식으로 포맷팅한 뒤 PR 코멘트로 자동 첨부되도록 파이프라인을 설계했어요."
+              "content": "이를 통해 원문 기반 정제되지 않은 문서를 넣던 방향에서 나악, **세그먼트 단위로 사용자 맥락을 선 정의 후 ai 초안을 생성하는 워크플로우를 도입**했습니다."
             }
           ]
         },
