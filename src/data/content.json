@@ -223,9 +223,9 @@
       "preview": "구축 프로젝트에 들어가며, UX 운영 단의 요구사항 정의서(PRD)를 써야했습니다. 하나를 쓰더라도 4-5개의 문서를 교차하며, 단일 문서만 봐서는 발견하기 어려운 요구사항을 AI를 통해 체계적으로 발굴하고자 했습니다. ",
       "desc": "구축 프로젝트에 들어가며, UX 운영 단의 요구사항 정의서(PRD)를 써야했습니다. 하나를 쓰더라도 4-5개의 문서를 교차하며, 단일 문서만 봐서는 발견하기 어려운 요구사항을 AI를 통해 체계적으로 발굴하고자 했습니다. ",
       "outcomes": [
-        "요구사항 정의서 초안 작성 시간 평균 4시간 → 20분으로 단축 (재작성 필요)",
-        "GitHub PR 기반 자동 생성으로 누락 항목 발생률 85% 감소 (재작성 필요)",
-        "기획-개발 간 요구사항 오해로 인한 재작업 건수 월 평균 6건 → 1건으로 감소 (재작성 필요)"
+        "수작업으로 진행되던 요구사항 정의 프로세스를 AI 워크플로우로 자동화, 실제 WBS 기준 30일 → 3일로 단축",
+        "세그먼트 × 퍼널 전수 조합을 병렬 분석, 단일 관점 검토의 누락을 보완",
+        "역할별 전담 에이전트와 관점별 프롬프트를 설계하는 워크플로우 구축"
       ],
       "tools": [
         {
@@ -249,6 +249,11 @@
       "insightHighlights": [
         "AI가 적재적소에 활용될 수 있도록 각 문서의 기준을 명확히 정의하고, 데이터를 정제하는 작업이 가장 중요"
       ],
+      "codeSnippet": {
+        "filename": "",
+        "lang": "",
+        "code": ""
+      },
       "sections": [
         {
           "id": "들어가기-전에-요구사항-정의서는-어떻게-만들어질까",
@@ -580,8 +585,8 @@
       ],
       "github_url": "https://github.com",
       "download_url": "#",
-      "thumbnail": "/images/ai-requirements/thumb_B3_sheet.png",
-      "heroThumbnail": "/images/ai-requirements/01_thumbnail_policy-to-requirements.png"
+      "heroThumbnail": "/images/ai-requirements/01_thumbnail_policy-to-requirements.png",
+      "thumbnail": "/images/ai-requirements/thumb_B3_sheet.png"
     }
   ]
 }
