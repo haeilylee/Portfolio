@@ -4,6 +4,50 @@ import React, { useEffect, useState } from "react";
 
 type TocItem = { id: string; label: string; group?: string };
 
+function renderItem(
+  item: TocItem,
+  active: string,
+  scrollTo: (id: string) => void,
+  inCluster = false
+) {
+  const isActive = active === item.id;
+  return (
+    <button
+      key={item.id}
+      onClick={() => scrollTo(item.id)}
+      style={{
+        all: "unset",
+        display: "block",
+        padding: inCluster ? "6px 8px" : "9px 12px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        textAlign: "left",
+        userSelect: "none",
+        WebkitTapHighlightColor: "transparent",
+        background: isActive ? (inCluster ? "#ffffff" : "#f2f2f2") : "transparent",
+        boxShadow: isActive && inCluster ? "0 1px 2px rgba(0,0,0,0.06)" : "none",
+        transition: "background 0.15s",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "14px",
+          letterSpacing: "-0.03em",
+          lineHeight: 1.45,
+          color: isActive ? "#111" : "#aaa",
+          fontWeight: isActive ? 600 : 400,
+          transition: "color 0.15s",
+          wordBreak: "keep-all",
+          display: "block",
+        }}
+      >
+        {item.label}
+      </span>
+    </button>
+  );
+}
+
 export default function TocNav({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState(items[0]?.id ?? "");
 
@@ -54,62 +98,54 @@ export default function TocNav({ items }: { items: TocItem[] }) {
         목차
       </div>
 
-      <nav style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-        {items.map((item, i) => {
-          const isActive = active === item.id;
-          const prevGroup = i > 0 ? items[i - 1].group : undefined;
-          const showGroupHeader = item.group && item.group !== prevGroup;
-          return (
-            <React.Fragment key={item.id}>
-              {showGroupHeader && (
+      <nav style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+        {(() => {
+          const nodes: React.ReactNode[] = [];
+          let i = 0;
+          while (i < items.length) {
+            const item = items[i];
+            if (!item.group) {
+              nodes.push(renderItem(item, active, scrollTo));
+              i++;
+              continue;
+            }
+            const groupName = item.group;
+            const clusterItems: TocItem[] = [];
+            while (i < items.length && items[i].group === groupName) {
+              clusterItems.push(items[i]);
+              i++;
+            }
+            nodes.push(
+              <div
+                key={`group-${groupName}`}
+                style={{
+                  background: "#f5f6f8",
+                  borderRadius: "10px",
+                  padding: "8px 8px 9px",
+                  marginTop: "10px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0px",
+                }}
+              >
                 <div
                   style={{
                     fontSize: "10px",
                     textTransform: "uppercase",
                     letterSpacing: "0.07em",
-                    color: "#d5d5d5",
+                    color: "#b7b7bf",
                     fontWeight: 700,
-                    padding: i === 0 ? "0 12px 6px" : "16px 12px 6px",
+                    padding: "2px 8px 5px",
                   }}
                 >
-                  {item.group}
+                  {groupName}
                 </div>
-              )}
-              <button
-                onClick={() => scrollTo(item.id)}
-                style={{
-                  all: "unset",
-                  display: "block",
-                  padding: "9px 12px",
-                  paddingLeft: item.group ? "20px" : "12px",
-                  borderRadius: "9px",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  textAlign: "left",
-                  userSelect: "none",
-                  WebkitTapHighlightColor: "transparent",
-                  background: isActive ? "#f2f2f2" : "transparent",
-                  transition: "background 0.15s",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize: "14px",
-                    letterSpacing: "-0.03em",
-                    lineHeight: 1.45,
-                    color: isActive ? "#111" : "#aaa",
-                    fontWeight: isActive ? 600 : 400,
-                    transition: "color 0.15s",
-                    wordBreak: "keep-all",
-                    display: "block",
-                  }}
-                >
-                  {item.label}
-                </span>
-              </button>
-            </React.Fragment>
-          );
-        })}
+                {clusterItems.map((clusterItem) => renderItem(clusterItem, active, scrollTo, true))}
+              </div>
+            );
+          }
+          return nodes;
+        })()}
       </nav>
     </div>
   );
