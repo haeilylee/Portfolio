@@ -20,7 +20,7 @@ function renderItem(
         position: "relative",
         display: "block",
         padding: "6px 0 6px 12px",
-        marginLeft: indented ? "14px" : 0,
+        marginLeft: indented ? "10px" : 0,
         cursor: "pointer",
         fontFamily: "inherit",
         textAlign: "left",
@@ -43,9 +43,9 @@ function renderItem(
       )}
       <span
         style={{
-          fontSize: "14px",
+          fontSize: "13px",
           letterSpacing: "-0.02em",
-          lineHeight: 1.5,
+          lineHeight: 1.45,
           color: isActive ? "#111" : "#999",
           fontWeight: isActive ? 700 : 400,
           transition: "color 0.15s",
@@ -87,7 +87,7 @@ export default function TocNav({ items }: { items: TocItem[] }) {
     <div
       className="toc-nav"
       style={{
-        width: "220px",
+        width: "160px",
         flexShrink: 0,
         position: "sticky",
         top: "calc(var(--nav-h) + 48px)",
@@ -143,7 +143,7 @@ export default function TocNav({ items }: { items: TocItem[] }) {
               <div key={`group-${groupName}`} style={{ marginTop: "10px" }}>
                 <div
                   style={{
-                    fontSize: "14px",
+                    fontSize: "13px",
                     fontWeight: 700,
                     letterSpacing: "-0.02em",
                     color: "#111",

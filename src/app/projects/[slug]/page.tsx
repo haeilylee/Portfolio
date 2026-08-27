@@ -332,11 +332,11 @@ export default async function ProjectDetailPage({
       <div
         className="project-detail-container"
         style={{
-          maxWidth: "1200px",
+          maxWidth: "1260px",
           margin: "0 auto",
           padding: "0 24px",
           display: "flex",
-          gap: "56px",
+          gap: "40px",
           alignItems: "flex-start",
         }}
       >
@@ -346,7 +346,7 @@ export default async function ProjectDetailPage({
           style={{
             flex: 1,
             minWidth: 0,
-            maxWidth: "680px",
+            maxWidth: "760px",
             padding: "48px 0 80px",
           }}
         >
