@@ -8,7 +8,7 @@ function renderItem(
   item: TocItem,
   active: string,
   scrollTo: (id: string) => void,
-  inCluster = false
+  indented = false
 ) {
   const isActive = active === item.id;
   return (
@@ -17,26 +17,37 @@ function renderItem(
       onClick={() => scrollTo(item.id)}
       style={{
         all: "unset",
+        position: "relative",
         display: "block",
-        padding: inCluster ? "6px 8px" : "9px 12px",
-        borderRadius: "8px",
+        padding: "6px 0 6px 12px",
+        marginLeft: indented ? "14px" : 0,
         cursor: "pointer",
         fontFamily: "inherit",
         textAlign: "left",
         userSelect: "none",
         WebkitTapHighlightColor: "transparent",
-        background: isActive ? (inCluster ? "#ffffff" : "#f2f2f2") : "transparent",
-        boxShadow: isActive && inCluster ? "0 1px 2px rgba(0,0,0,0.06)" : "none",
-        transition: "background 0.15s",
       }}
     >
+      {isActive && (
+        <span
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "4px",
+            bottom: "4px",
+            width: "2px",
+            borderRadius: "2px",
+            background: "#111",
+          }}
+        />
+      )}
       <span
         style={{
           fontSize: "14px",
-          letterSpacing: "-0.03em",
-          lineHeight: 1.45,
-          color: isActive ? "#111" : "#aaa",
-          fontWeight: isActive ? 600 : 400,
+          letterSpacing: "-0.02em",
+          lineHeight: 1.5,
+          color: isActive ? "#111" : "#999",
+          fontWeight: isActive ? 700 : 400,
           transition: "color 0.15s",
           wordBreak: "keep-all",
           display: "block",
@@ -90,12 +101,10 @@ export default function TocNav({ items }: { items: TocItem[] }) {
     >
       <div
         style={{
-          fontSize: "11px",
-          textTransform: "uppercase",
-          letterSpacing: "0.08em",
-          color: "#c0c0c0",
-          fontWeight: 700,
-          marginBottom: "14px",
+          fontSize: "13px",
+          color: "#bbb",
+          fontWeight: 400,
+          marginBottom: "16px",
           paddingLeft: "12px",
           flexShrink: 0,
         }}
@@ -131,26 +140,15 @@ export default function TocNav({ items }: { items: TocItem[] }) {
               i++;
             }
             nodes.push(
-              <div
-                key={`group-${groupName}`}
-                style={{
-                  background: "#f5f6f8",
-                  borderRadius: "10px",
-                  padding: "8px 8px 9px",
-                  marginTop: "10px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "0px",
-                }}
-              >
+              <div key={`group-${groupName}`} style={{ marginTop: "10px" }}>
                 <div
                   style={{
-                    fontSize: "10px",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.07em",
-                    color: "#b7b7bf",
+                    fontSize: "14px",
                     fontWeight: 700,
-                    padding: "2px 8px 5px",
+                    letterSpacing: "-0.02em",
+                    color: "#111",
+                    padding: "6px 0 6px 12px",
+                    wordBreak: "keep-all",
                   }}
                 >
                   {groupName}
