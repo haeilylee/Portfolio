@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+
+const CLOSE_MS = 260;
 
 export default function ImageZoom({
   src,
@@ -11,11 +13,29 @@ export default function ImageZoom({
   alt?: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [show, setShow] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openOverlay = () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    setOpen(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => setShow(true)));
+  };
+
+  const closeOverlay = () => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setShow(false);
+    if (reduced) {
+      setOpen(false);
+      return;
+    }
+    closeTimer.current = setTimeout(() => setOpen(false), CLOSE_MS);
+  };
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") closeOverlay();
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -23,13 +43,18 @@ export default function ImageZoom({
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
+
+  useEffect(() => () => {
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  }, []);
 
   return (
     <>
       <div
         style={{ borderRadius: "10px", overflow: "hidden", cursor: "zoom-in" }}
-        onClick={() => setOpen(true)}
+        onClick={openOverlay}
         role="button"
         aria-label="이미지 확대"
       >
@@ -44,24 +69,25 @@ export default function ImageZoom({
 
       {open && (
         <div
-          onClick={() => setOpen(false)}
+          onClick={closeOverlay}
           style={{
             position: "fixed",
             inset: 0,
             background: "rgba(0,0,0,0.85)",
+            opacity: show ? 1 : 0,
+            transition: "opacity 220ms ease",
             zIndex: 1000,
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
             padding: "32px",
             cursor: "zoom-out",
-            animation: "image-zoom-fade 0.15s ease-out",
           }}
         >
           <button
             onClick={(e) => {
               e.stopPropagation();
-              setOpen(false);
+              closeOverlay();
             }}
             aria-label="닫기"
             style={{
@@ -96,17 +122,13 @@ export default function ImageZoom({
               borderRadius: "8px",
               boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
               cursor: "default",
+              opacity: show ? 1 : 0,
+              transform: show ? "translateY(0)" : "translateY(28px)",
+              transition: "opacity 260ms cubic-bezier(.16,1,.3,1), transform 260ms cubic-bezier(.16,1,.3,1)",
             }}
           />
         </div>
       )}
-
-      <style>{`
-        @keyframes image-zoom-fade {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-      `}</style>
     </>
   );
 }
