@@ -579,7 +579,9 @@
         }
       ],
       "github_url": "https://github.com",
-      "download_url": "#"
+      "download_url": "#",
+      "thumbnail": "/images/ai-requirements/thumb_B3_sheet.png",
+      "heroThumbnail": "/images/ai-requirements/01_thumbnail_policy-to-requirements.png"
     }
   ]
 }
