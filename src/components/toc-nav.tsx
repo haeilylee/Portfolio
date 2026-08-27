@@ -141,9 +141,11 @@ export default function TocNav({ items }: { items: TocItem[] }) {
               <div key={`group-${groupName}`} style={{ marginTop: "10px" }}>
                 <div
                   style={{
+                    fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif",
+                    fontStyle: "italic",
                     fontSize: "13px",
-                    fontWeight: 700,
-                    letterSpacing: "-0.02em",
+                    fontWeight: 500,
+                    letterSpacing: "-0.01em",
                     color: "#111",
                     padding: "6px 0 6px 12px",
                     wordBreak: "keep-all",
