@@ -78,6 +78,11 @@ export default function TocNav({ items }: { items: TocItem[] }) {
   }, [items]);
 
   const scrollTo = (id: string) => {
+    if (id === "overview") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      setActive(id);
+      return;
+    }
     const el = document.getElementById(id);
     if (!el) return;
     el.scrollIntoView({ behavior: "smooth", block: "start" });
