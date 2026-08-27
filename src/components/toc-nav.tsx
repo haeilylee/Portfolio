@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-type TocItem = { id: string; label: string };
+type TocItem = { id: string; label: string; group?: string };
 
 export default function TocNav({ items }: { items: TocItem[] }) {
   const [active, setActive] = useState(items[0]?.id ?? "");
@@ -55,41 +55,59 @@ export default function TocNav({ items }: { items: TocItem[] }) {
       </div>
 
       <nav style={{ display: "flex", flexDirection: "column", gap: "1px" }}>
-        {items.map((item) => {
+        {items.map((item, i) => {
           const isActive = active === item.id;
+          const prevGroup = i > 0 ? items[i - 1].group : undefined;
+          const showGroupHeader = item.group && item.group !== prevGroup;
           return (
-            <button
-              key={item.id}
-              onClick={() => scrollTo(item.id)}
-              style={{
-                all: "unset",
-                display: "block",
-                padding: "9px 12px",
-                borderRadius: "9px",
-                cursor: "pointer",
-                fontFamily: "inherit",
-                textAlign: "left",
-                userSelect: "none",
-                WebkitTapHighlightColor: "transparent",
-                background: isActive ? "#f2f2f2" : "transparent",
-                transition: "background 0.15s",
-              }}
-            >
-              <span
+            <React.Fragment key={item.id}>
+              {showGroupHeader && (
+                <div
+                  style={{
+                    fontSize: "10px",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.07em",
+                    color: "#d5d5d5",
+                    fontWeight: 700,
+                    padding: i === 0 ? "0 12px 6px" : "16px 12px 6px",
+                  }}
+                >
+                  {item.group}
+                </div>
+              )}
+              <button
+                onClick={() => scrollTo(item.id)}
                 style={{
-                  fontSize: "14px",
-                  letterSpacing: "-0.03em",
-                  lineHeight: 1.45,
-                  color: isActive ? "#111" : "#aaa",
-                  fontWeight: isActive ? 600 : 400,
-                  transition: "color 0.15s",
-                  wordBreak: "keep-all",
+                  all: "unset",
                   display: "block",
+                  padding: "9px 12px",
+                  paddingLeft: item.group ? "20px" : "12px",
+                  borderRadius: "9px",
+                  cursor: "pointer",
+                  fontFamily: "inherit",
+                  textAlign: "left",
+                  userSelect: "none",
+                  WebkitTapHighlightColor: "transparent",
+                  background: isActive ? "#f2f2f2" : "transparent",
+                  transition: "background 0.15s",
                 }}
               >
-                {item.label}
-              </span>
-            </button>
+                <span
+                  style={{
+                    fontSize: "14px",
+                    letterSpacing: "-0.03em",
+                    lineHeight: 1.45,
+                    color: isActive ? "#111" : "#aaa",
+                    fontWeight: isActive ? 600 : 400,
+                    transition: "color 0.15s",
+                    wordBreak: "keep-all",
+                    display: "block",
+                  }}
+                >
+                  {item.label}
+                </span>
+              </button>
+            </React.Fragment>
           );
         })}
       </nav>

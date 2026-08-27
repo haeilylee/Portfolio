@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { projects, getProjectBySlug } from "@/lib/projects";
 import type { Block, Section } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import TocNav from "@/components/toc-nav";
 import CodeBlock from "@/components/code-block";
 import Reveal from "@/components/reveal";
+import ImageZoom from "@/components/image-zoom";
 import { gradientMap, categoryColor } from "@/lib/category-styles";
 import { renderTitle, stripTitleBreaks } from "@/lib/format-title";
 
@@ -143,15 +143,7 @@ function renderBlock(block: Block, idx: number) {
   if (block.type === "image") {
     return (
       <figure key={idx} style={{ margin: "32px 0" }}>
-        <div style={{ borderRadius: "10px", overflow: "hidden" }}>
-          <Image
-            src={block.src}
-            alt={block.alt ?? ""}
-            width={680}
-            height={400}
-            style={{ width: "100%", height: "auto", display: "block" }}
-          />
-        </div>
+        <ImageZoom src={block.src} alt={block.alt ?? ""} />
         {block.caption && (
           <figcaption style={{ fontSize: "12px", color: "#bbb", textAlign: "center", marginTop: "8px", letterSpacing: "-0.02em" }}>
             {block.caption}
@@ -285,7 +277,7 @@ function renderBlock(block: Block, idx: number) {
 
           }}
         >
-          {block.content}
+          {renderInlineText(block.content)}
         </p>
       </div>
     );
@@ -325,9 +317,14 @@ export default async function ProjectDetailPage({
   const sections: Section[] = project.sections ?? [];
   const catColor = categoryColor[project.category] ?? "#888";
 
+  const sectionGroups: Record<string, string[]> = {
+    "ai-requirements": ["Background", "Background", "Problem", "Solution", "Solution", "Workflow", "Workflow", "Insight"],
+  };
+  const groups = sectionGroups[project.slug];
+
   const tocItems = [
     { id: "overview", label: "Overview" },
-    ...sections.map((s) => ({ id: s.id, label: s.title })),
+    ...sections.map((s, i) => ({ id: s.id, label: s.title, group: groups?.[i] })),
   ];
 
   return (
