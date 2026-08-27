@@ -82,6 +82,10 @@ export default function TocNav({ items }: { items: TocItem[] }) {
         top: "calc(var(--nav-h) + 48px)",
         alignSelf: "flex-start",
         paddingTop: "48px",
+        maxHeight: "calc(100vh - var(--nav-h) - 48px - 32px)",
+        display: "flex",
+        flexDirection: "column",
+        minHeight: 0,
       }}
     >
       <div
@@ -93,12 +97,23 @@ export default function TocNav({ items }: { items: TocItem[] }) {
           fontWeight: 700,
           marginBottom: "14px",
           paddingLeft: "12px",
+          flexShrink: 0,
         }}
       >
         목차
       </div>
 
-      <nav style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
+      <nav
+        className="toc-nav-scroll"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "2px",
+          overflowY: "auto",
+          paddingBottom: "24px",
+          minHeight: 0,
+        }}
+      >
         {(() => {
           const nodes: React.ReactNode[] = [];
           let i = 0;

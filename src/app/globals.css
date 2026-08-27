@@ -13,6 +13,21 @@
   --sidebar-w: 220px;
 }
 
+.toc-nav-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
+}
+.toc-nav-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.toc-nav-scroll::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+}
+.toc-nav-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 body {
   font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
   letter-spacing: -0.03em;
