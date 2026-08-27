@@ -87,12 +87,10 @@ export default function TocNav({ items }: { items: TocItem[] }) {
     <div
       className="toc-nav"
       style={{
-        width: "160px",
-        flexShrink: 0,
-        position: "sticky",
+        width: "180px",
+        position: "fixed",
         top: "calc(var(--nav-h) + 48px)",
-        alignSelf: "flex-start",
-        paddingTop: "48px",
+        right: "48px",
         maxHeight: "calc(100vh - var(--nav-h) - 48px - 32px)",
         display: "flex",
         flexDirection: "column",

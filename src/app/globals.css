@@ -86,10 +86,15 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
     padding: 0 20px !important;
     gap: 0 !important;
   }
-  .toc-nav {
-    display: none !important;
-  }
   .site-nav {
     padding: 0 20px !important;
+  }
+}
+
+/* TOC is fixed to the viewport's right edge; hide once the window is too
+   narrow for it to sit clear of the centered article column. */
+@media (max-width: 1320px) {
+  .toc-nav {
+    display: none !important;
   }
 }

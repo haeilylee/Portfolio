@@ -329,24 +329,18 @@ export default async function ProjectDetailPage({
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
+      <TocNav items={tocItems} />
+
       <div
         className="project-detail-container"
         style={{
-          maxWidth: "1260px",
+          maxWidth: "808px",
           margin: "0 auto",
           padding: "0 24px",
-          display: "flex",
-          gap: "40px",
-          alignItems: "flex-start",
         }}
       >
-        <TocNav items={tocItems} />
-
         <article
           style={{
-            flex: 1,
-            minWidth: 0,
-            maxWidth: "760px",
             padding: "48px 0 80px",
           }}
         >
