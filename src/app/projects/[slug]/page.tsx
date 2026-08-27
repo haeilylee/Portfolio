@@ -318,7 +318,7 @@ export default async function ProjectDetailPage({
   const catColor = categoryColor[project.category] ?? "#888";
 
   const sectionGroups: Record<string, string[]> = {
-    "ai-requirements": ["Background", "Background", "Problem & Solution", "Problem & Solution", "Problem & Solution", "Workflow", "Workflow", "Insight"],
+    "ai-requirements": ["Background", "Background", "Problem & Solution", "Problem & Solution", "Workflow", "Workflow", "Workflow", "Insight"],
     "sdui": ["Problem", "Solution", "Workflow", "Insight"],
   };
   const groups = sectionGroups[project.slug];
