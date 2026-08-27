@@ -7,5 +7,6 @@ export const gradientMap: Record<string, string> = {
 export const categoryColor: Record<string, string> = {
   "Design System": "#2d5cd8",
   AI: "#7031d4",
+  "AI Workflow": "#888888",
   "UX Research": "#168f52",
 };
