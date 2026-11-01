@@ -19,7 +19,7 @@ function renderItem(
         all: "unset",
         position: "relative",
         display: "block",
-        padding: "6px 0 6px 12px",
+        padding: "6px 10px",
         marginLeft: indented ? "10px" : 0,
         cursor: "pointer",
         fontFamily: "inherit",
@@ -28,26 +28,13 @@ function renderItem(
         WebkitTapHighlightColor: "transparent",
       }}
     >
-      {isActive && (
-        <span
-          style={{
-            position: "absolute",
-            left: 0,
-            top: "4px",
-            bottom: "4px",
-            width: "2px",
-            borderRadius: "2px",
-            background: "#111",
-          }}
-        />
-      )}
       <span
         style={{
-          fontSize: "13px",
+          fontSize: "var(--toc-item-size)",
           letterSpacing: "-0.02em",
           lineHeight: 1.45,
-          color: isActive ? "#111" : "#999",
-          fontWeight: isActive ? 700 : 400,
+          color: isActive ? "#111" : "var(--toc-item-color)",
+          fontWeight: isActive ? 600 : 400,
           transition: "color 0.15s",
           wordBreak: "keep-all",
           display: "block",
@@ -92,10 +79,13 @@ export default function TocNav({ items }: { items: TocItem[] }) {
     <div
       className="toc-nav"
       style={{
-        width: "180px",
+        width: "var(--toc-w)",
         position: "fixed",
         top: "calc(var(--nav-h) + 48px)",
-        right: "48px",
+        // horizontal position comes from the page layout (see globals.css)
+        left: "var(--toc-left)",
+        zIndex: 2,
+        padding: "16px 8px 4px",
         maxHeight: "calc(100vh - var(--nav-h) - 48px - 32px)",
         display: "flex",
         flexDirection: "column",
@@ -104,11 +94,11 @@ export default function TocNav({ items }: { items: TocItem[] }) {
     >
       <div
         style={{
-          fontSize: "13px",
-          color: "#bbb",
-          fontWeight: 400,
-          marginBottom: "16px",
-          paddingLeft: "12px",
+          fontSize: "var(--toc-title-size)",
+          color: "var(--toc-title-color)",
+          fontWeight: 700,
+          marginBottom: "10px",
+          paddingLeft: "10px",
           flexShrink: 0,
         }}
       >
@@ -152,7 +142,7 @@ export default function TocNav({ items }: { items: TocItem[] }) {
                     fontWeight: 500,
                     letterSpacing: "-0.01em",
                     color: "#111",
-                    padding: "6px 0 6px 12px",
+                    padding: "6px 10px",
                     wordBreak: "keep-all",
                   }}
                 >

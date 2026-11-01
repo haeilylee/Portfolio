@@ -4,6 +4,7 @@ import { projects, getProjectBySlug } from "@/lib/projects";
 import type { Block, Section } from "@/lib/projects";
 import { notFound } from "next/navigation";
 import TocNav from "@/components/toc-nav";
+import ReadingProgress from "@/components/reading-progress";
 import CodeBlock from "@/components/code-block";
 import Reveal from "@/components/reveal";
 import ImageZoom from "@/components/image-zoom";
@@ -329,8 +330,9 @@ export default async function ProjectDetailPage({
   ];
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div className="project-detail-page" style={{ background: "#fff", minHeight: "100vh" }}>
       <TocNav items={tocItems} />
+      <ReadingProgress />
 
       <div
         className="project-detail-container"

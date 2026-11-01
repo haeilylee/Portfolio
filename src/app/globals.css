@@ -11,6 +11,16 @@
   --bd: rgba(0, 0, 0, 0.08);
   --nav-h: 56px;
   --sidebar-w: 220px;
+  /* project detail: gray left aside (TOC) + white article area to the right */
+  --aside-w: clamp(380px, 28vw, 460px);
+  --toc-w: 260px;
+  --toc-left: calc((var(--aside-w) - var(--toc-w)) / 2);
+  --aside-bg: #fbfcfd;
+  --gutter-r: 96px;
+  --toc-item-size: 14px;
+  --toc-item-color: #6b7078;
+  --toc-title-size: 18px;
+  --toc-title-color: #8b8f96;
 }
 
 /* Scrolls with wheel/trackpad, but no visible track — keeps the sidebar
@@ -86,10 +96,27 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
   }
 }
 
-/* TOC is fixed to the viewport's right edge; hide once the window is too
+/* TOC is fixed to the viewport's left side; hide once the window is too
    narrow for it to sit clear of the centered article column. */
 @media (max-width: 1320px) {
   .toc-nav {
     display: none !important;
   }
 }
+
+/* Project detail: gray floor, TOC centered in the left aside, article on a
+   white panel with a gray gutter on the right (recatch-style) */
+@media (min-width: 1321px) {
+  .project-detail-page {
+    background: var(--aside-bg) !important;
+  }
+  .project-detail-container {
+    background: #fff;
+    margin: 0 var(--gutter-r) 0 var(--aside-w) !important;
+    max-width: none !important;
+    /* keeps the 808px article column centered inside the panel */
+    padding: 0 max(48px, calc((100vw - var(--aside-w) - var(--gutter-r) - 808px) / 2)) !important;
+    min-height: calc(100vh - var(--nav-h));
+  }
+}
+
