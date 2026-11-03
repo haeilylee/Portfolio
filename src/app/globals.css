@@ -120,3 +120,145 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
   }
 }
 
+
+/* ══════════════════════════════════════════════════════════════
+   카테고리 칩 · 시리즈 목록(홈) · 상세 메타 · 박수 버튼
+   ══════════════════════════════════════════════════════════════ */
+
+/* 칩 (Admin 선택 / 홈 시리즈 바로가기) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 99px;
+  border: 1px solid #e6e6e6;
+  background: #fafafa;
+  color: #666;
+  font-family: inherit;
+  letter-spacing: -0.02em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  white-space: nowrap;
+  text-decoration: none;
+}
+.chip:hover { border-color: #ccc; background: #f2f2f2; }
+.chip:active { transform: scale(0.97); }
+.chip[data-active="true"] {
+  background: var(--chip-color, #111);
+  border-color: var(--chip-color, #111);
+  color: #fff;
+  font-weight: 600;
+}
+.chip[data-tone="soft"] {
+  background: var(--chip-soft, #f2f2f2);
+  border-color: transparent;
+  color: var(--chip-color, #666);
+  font-weight: 600;
+  font-size: 11px;
+  padding: 3px 9px;
+}
+.chip[data-tone="soft"]:hover { filter: brightness(0.96); }
+
+/* 홈 — 시리즈(좌: 소개 sticky / 우: 에피소드) */
+.series {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 48px;
+  padding: 48px 0;
+  border-top: 1px solid #f0f0f0;
+}
+.series-intro {
+  position: sticky;
+  top: calc(var(--nav-h) + 24px);
+  align-self: start;
+}
+.series-episode {
+  display: grid;
+  grid-template-columns: 40px 160px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  align-items: start;
+  text-decoration: none;
+  color: inherit;
+}
+.series-episode:first-child { border-top: none; padding-top: 0; }
+.series-episode:hover .series-episode-title { text-decoration: underline; text-underline-offset: 3px; }
+
+/* 상세 — Skills / Tools 2단 */
+.detail-meta { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; }
+
+/* 상세 — 우하단 박수 (1인 1회) */
+.clap-float {
+  position: fixed;
+  right: 28px;
+  bottom: 32px;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.clap-btn {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  border: 1px solid #e6e6e6;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  cursor: pointer;
+  font-size: 22px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.12s, border-color 0.15s, background 0.15s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.clap-btn:hover { border-color: #111; }
+.clap-btn:active { transform: scale(0.9); }
+.clap-btn:disabled, .clap-btn[data-done="true"] {
+  background: #f2f2f2; border-color: #e6e6e6; cursor: default; filter: grayscale(1) opacity(0.6);
+}
+.clap-count { font-size: 13px; font-weight: 700; color: #111; letter-spacing: -0.03em; line-height: 1; }
+.clap-count[data-done="true"] { color: #bbb; }
+.clap-burst {
+  position: absolute;
+  top: -8px; left: 50%; transform: translateX(-50%);
+  font-size: 12px; font-weight: 700; color: #fff; background: #111;
+  padding: 3px 8px; border-radius: 99px;
+  animation: clap-rise 0.6s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes clap-rise {
+  from { opacity: 1; transform: translate(-50%, 0); }
+  to   { opacity: 0; transform: translate(-50%, -28px); }
+}
+
+/* 목차 — 'ON THIS PAGE' 수준으로 작게 */
+:root {
+  --toc-w: 200px;
+  --toc-item-size: 12.5px;
+  --toc-item-color: #8b8f96;
+  --toc-title-size: 11px;
+  --toc-title-color: #9a9ea5;
+}
+.toc-nav { padding: 8px 4px 4px !important; }
+.toc-nav > div:first-child {
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600 !important;
+  margin-bottom: 6px !important; padding-left: 8px !important;
+}
+.toc-nav nav { gap: 0 !important; }
+.toc-nav button { padding: 3px 8px !important; }
+.toc-nav button span { line-height: 1.5 !important; }
+.toc-nav nav > div { margin-top: 6px !important; }
+.toc-nav nav > div > div:first-child { font-size: 12px !important; padding: 3px 8px !important; color: #4b4f56 !important; }
+
+@media (max-width: 768px) {
+  .series { grid-template-columns: 1fr; gap: 24px; padding: 32px 0; }
+  .series-intro { position: static; }
+  .series-episode { grid-template-columns: 28px 1fr; }
+  .series-episode-thumb { grid-column: 2; }
+  .series-episode-body { grid-column: 2; }
+  .detail-meta { grid-template-columns: 1fr; gap: 20px; }
+  .clap-float { right: 16px; bottom: 20px; }
+}

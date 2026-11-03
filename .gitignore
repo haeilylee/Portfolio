@@ -11,3 +11,5 @@ next-env.d.ts
 
 # preview reaction dev store (local only)
 src/data/reactions.dev.json
+.env*
+src/data/claps.dev.json

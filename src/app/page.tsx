@@ -1,8 +1,6 @@
 import Image from "next/image";
-import Link from "next/link";
 import { projects, hero } from "@/lib/projects";
-import { gradientMap, categoryColor } from "@/lib/category-styles";
-import { renderTitle, stripTitleBreaks } from "@/lib/format-title";
+import SeriesList from "@/components/series-list";
 
 const GitHubIcon = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
@@ -33,7 +31,6 @@ export default function HomePage() {
             alignItems: "center",
           }}
         >
-          {/* 왼쪽: 아바타 + 이름 + 직함 */}
           <div>
             <Image
               src="/profile.webp"
@@ -50,7 +47,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* 오른쪽: 바이오 + GitHub/LinkedIn */}
           <div>
             <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.8, letterSpacing: "-0.025em", maxWidth: "480px", marginBottom: "16px", whiteSpace: "pre-line" }}>
               {hero.bio}
@@ -87,88 +83,9 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* ── Projects list ── */}
-        <div className="home-projects-grid" style={{ padding: "40px 0 80px", display: "grid", gridTemplateColumns: "180px 1fr", gap: "32px" }}>
-
-          {/* 맨 왼쪽: 섹션 레이블 */}
-          <div style={{ paddingTop: "4px" }}>
-            <div style={{ fontSize: "12px", fontWeight: 600, fontStyle: "italic", color: "#111", letterSpacing: "-0.025em", lineHeight: 1.4 }}>
-              Representative<br />Projects
-            </div>
-            <div style={{ fontSize: "11px", color: "#bbb", marginTop: "4px", letterSpacing: "-0.02em" }}>
-              대표 프로젝트
-            </div>
-          </div>
-
-          {/* 오른쪽: 프로젝트 행들 (썸네일 | 내용 | 링크) */}
-          <div>
-            {projects.map((project, idx) => (
-              <div
-                key={project.slug}
-                className="home-project-row"
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "200px 1fr auto",
-                  gap: "24px",
-                  borderTop: idx === 0 ? "none" : "1px solid #f0f0f0",
-                  padding: "24px 0",
-                  alignItems: "flex-start",
-                }}
-              >
-                {/* 썸네일 */}
-                <div
-                  className="home-project-thumb"
-                  style={{
-                    borderRadius: "8px",
-                    aspectRatio: "4/3",
-                    overflow: "hidden",
-                    background: project.thumbnail ? "#eee" : gradientMap[project.catClass] ?? "#ccc",
-                  }}
-                >
-                  {project.thumbnail && (
-                    <img
-                      src={project.thumbnail}
-                      alt={stripTitleBreaks(project.title)}
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
-                  )}
-                </div>
-
-                {/* 내용 */}
-                <div>
-                  <div style={{ display: "flex", gap: "8px", alignItems: "center", marginBottom: "8px" }}>
-                    <span style={{ fontSize: "11px", fontWeight: 600, color: categoryColor[project.category] ?? "#888" }}>
-                      {project.category}
-                    </span>
-                    <span style={{ fontSize: "11px", color: "#e0e0e0" }}>·</span>
-                    <span style={{ fontSize: "11px", color: "#ccc" }}>{project.date}</span>
-                  </div>
-                  <div style={{ fontSize: "15px", fontWeight: 600, letterSpacing: "-0.04em", color: "#111", lineHeight: 1.3, marginBottom: "10px" }}>
-                    {renderTitle(project.title)}
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-                    {project.outcomes.map((outcome, i) => (
-                      <div key={i} style={{ display: "flex", gap: "10px", fontSize: "13px", color: "#666", lineHeight: 1.7, letterSpacing: "-0.025em" }}>
-                        <span style={{ color: "#bbb", flexShrink: 0, fontSize: "10px", marginTop: "3px" }}>•</span>
-                        <span>{outcome}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* 링크 */}
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="proj-link"
-                  style={{ fontSize: "11px", fontWeight: 600, color: "#000", whiteSpace: "nowrap", letterSpacing: "-0.01em", paddingTop: "2px" }}
-                >
-                  프로젝트 링크 →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
-
+        {/* ── Projects — 카테고리를 시리즈로 묶어 읽는 목록 ── */}
+        <SeriesList projects={projects} />
+        <div style={{ height: "80px" }} />
       </div>
     </div>
   );

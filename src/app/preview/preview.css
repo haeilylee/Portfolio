@@ -476,3 +476,42 @@ html[data-embed="1"] .pv-root { padding-bottom: 24px; }
   .pv-clap-bar { bottom: 56px; }
   .pv-clap-bar-inner { margin-left: 12px; margin-right: 12px; padding: 8px 10px 8px 14px; }
 }
+
+/* ── Clap 플로팅: 우하단 고정 (데스크톱·모바일 공통) ── */
+.pv-clap-float {
+  left: auto !important; top: auto !important; transform: none !important;
+  right: 28px; bottom: 84px;              /* Navigator 위 */
+  flex-direction: column;
+}
+html[data-embed="1"] .pv-clap-float { bottom: 24px; right: 16px; }
+@media (max-width: 768px) {
+  .pv-clap-float { right: 16px; bottom: 76px; flex-direction: column; }
+}
+
+/* 상세 최종 뷰: Skills / Tools 2단 → 모바일 1단 */
+.pv-detail-meta { display: grid; grid-template-columns: 1fr 1.4fr; gap: 28px; }
+@media (max-width: 768px) { .pv-detail-meta { grid-template-columns: 1fr; gap: 20px; } }
+
+/* ── TOC 스케일 축소 (junghyeonsu.com 'ON THIS PAGE' 수준) — 시안 영역에서만 ── */
+.pv-root {
+  --toc-w: 200px;
+  --toc-item-size: 12.5px;
+  --toc-item-color: #8b8f96;
+  --toc-title-size: 11px;
+  --toc-title-color: #9a9ea5;
+}
+.pv-root .toc-nav { padding: 8px 4px 4px !important; }
+.pv-root .toc-nav > div:first-child {
+  letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600 !important;
+  margin-bottom: 6px !important; padding-left: 8px !important;
+}
+.pv-root .toc-nav nav { gap: 0 !important; }
+.pv-root .toc-nav button { padding: 3px 8px !important; }
+.pv-root .toc-nav button span { line-height: 1.5 !important; }
+.pv-root .toc-nav nav > div { margin-top: 6px !important; }
+.pv-root .toc-nav nav > div > div:first-child {
+  font-size: 12px !important; padding: 3px 8px !important; color: #4b4f56 !important;
+}
+
+/* Clap: 한도 도달 시 비활성만 */
+.pv-clap-btn:disabled { cursor: not-allowed; }

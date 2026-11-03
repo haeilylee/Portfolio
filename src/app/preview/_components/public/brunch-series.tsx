@@ -142,25 +142,26 @@ export default function BrunchSeries({ projects }: { projects: Project[] }) {
   );
 }
 
+/**
+ * 시리즈 포커스 헤더 — Toss Tech 카테고리 페이지처럼 배경 없이
+ * 제목 + 한 줄 소개만. ("Engineering / 토스 엔지니어들이 기술로 문제를 정의하고 해결해 가는 여정을 만나보세요")
+ */
 function Cover({ def, count, onBack }: { def: SeriesDef; count: number; onBack: () => void }) {
   return (
-    <div style={{ margin: "20px 0 0", borderRadius: "16px", background: def.soft, padding: "40px 40px 36px", position: "relative", overflow: "hidden" }}>
+    <div style={{ padding: "40px 0 8px" }}>
       <button
         onClick={onBack}
-        style={{ fontSize: "12px", color: "#666", background: "rgba(255,255,255,0.7)", border: "none", borderRadius: "99px", padding: "5px 12px", cursor: "pointer", fontFamily: "inherit", marginBottom: "24px", letterSpacing: "-0.02em" }}
+        style={{ fontSize: "13px", color: "#aaa", background: "none", border: "none", padding: 0, cursor: "pointer", fontFamily: "inherit", marginBottom: "28px", letterSpacing: "-0.02em" }}
       >
         ← 모든 시리즈
       </button>
-      <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: def.color, marginBottom: "10px" }}>
-        Series · {count}편
-      </div>
-      <h1 style={{ fontSize: "32px", fontWeight: 700, letterSpacing: "-0.055em", color: "#111", margin: "0 0 10px", lineHeight: 1.15 }}>
+      <h1 style={{ fontSize: "28px", fontWeight: 700, letterSpacing: "-0.05em", color: "#111", margin: "0 0 8px", lineHeight: 1.2 }}>
         {def.title}
       </h1>
-      <p style={{ fontSize: "15px", color: "#444", letterSpacing: "-0.025em", lineHeight: 1.7, margin: 0, maxWidth: "520px" }}>
+      <p style={{ fontSize: "14px", color: "#666", letterSpacing: "-0.025em", lineHeight: 1.7, margin: 0, maxWidth: "520px" }}>
         {def.subtitle}
       </p>
-      <div style={{ position: "absolute", right: "-40px", bottom: "-60px", width: "200px", height: "200px", borderRadius: "50%", background: def.color, opacity: 0.08 }} />
+      <div style={{ fontSize: "12px", color: "#bbb", letterSpacing: "-0.01em", marginTop: "14px" }}>{count}편</div>
     </div>
   );
 }

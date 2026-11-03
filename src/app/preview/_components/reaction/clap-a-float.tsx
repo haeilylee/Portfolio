@@ -1,8 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { track } from "@vercel/analytics";
 import { useLimitedClap } from "./use-reactions";
+
+/** 페이지 하단에 <div id="pv-log-slot" />를 두면 로그 패널이 거기로 들어간다 (플로팅 버튼과 분리) */
+function useLogSlot() {
+  const [slot, setSlot] = useState<HTMLElement | null>(null);
+  useEffect(() => { setSlot(document.getElementById("pv-log-slot")); }, []);
+  return slot;
+}
 
 /**
  * Clap A — 플로팅 + 남은 횟수 점 5개 · 로그는 Vercel Analytics 이벤트.
@@ -13,6 +21,7 @@ export default function ClapAFloat({ slug }: { slug: string }) {
   const { clap, limit, used, remaining, total } = useLimitedClap(slug, "analytics");
   const [burst, setBurst] = useState<number | null>(null);
   const [events, setEvents] = useState<string[]>([]);
+  const slot = useLogSlot();
 
   function onClap() {
     if (!clap()) return;
@@ -32,39 +41,37 @@ export default function ClapAFloat({ slug }: { slug: string }) {
           {burst !== null && (
             <span key={burst} className="pv-clap-burst" onAnimationEnd={() => setBurst(null)}>+1</span>
           )}
+          {/* 하루 5회를 다 쓰면 그냥 비활성 — 진척도는 노출하지 않는다 */}
           <button
             className="pv-clap-btn"
             data-clapped={used > 0}
             data-done={done}
+            disabled={done}
             onClick={onClap}
             aria-label="박수"
-            title={done ? "오늘 박수를 다 보냈어요. 내일 또 만나요!" : `박수 보내기 (오늘 ${remaining}번 남음)`}
+            aria-disabled={done}
+            title={done ? "오늘 박수를 다 보냈어요" : "박수 보내기"}
           >
-            <span style={{ filter: used > 0 ? "grayscale(1) brightness(10)" : "none" }}>👏</span>
+            <span style={{ filter: used > 0 && !done ? "grayscale(1) brightness(10)" : "none" }}>👏</span>
           </button>
         </div>
         <div style={{ textAlign: "center", lineHeight: 1.2 }}>
-          <div style={{ fontSize: "14px", fontWeight: 700, color: "#111", letterSpacing: "-0.03em" }}>{total}</div>
-          {/* 남은 횟수 — 점 5개 */}
-          <div className="pv-clap-dots" aria-label={`오늘 ${used}/${limit}`}>
-            {Array.from({ length: limit }).map((_, i) => (
-              <span key={i} data-on={i < used} />
-            ))}
-          </div>
-          <div style={{ fontSize: "10px", color: done ? "#111" : "#bbb", letterSpacing: "-0.01em", marginTop: "4px", fontWeight: done ? 600 : 400 }}>
-            {done ? "내일 또!" : `오늘 ${remaining}번`}
-          </div>
+          <div style={{ fontSize: "14px", fontWeight: 700, color: done ? "#bbb" : "#111", letterSpacing: "-0.03em" }}>{total}</div>
         </div>
       </div>
 
-      {/* 로그 방식 설명 + 실제로 나간 이벤트 */}
-      <LogPanel
-        title="로그 · Vercel Analytics 이벤트"
-        desc="이미 설치된 @vercel/analytics의 track()으로 박수마다 이벤트를 쏴요. 별도 DB·대시보드 없이 Vercel → Analytics → Events에서 slug별 집계를 봐요. 개인 식별 정보는 보내지 않아요."
-        pros="추가 인프라 없음 · 무료 티어로 충분 · 운영 코드 1줄"
-        cons="개별 로그 조회는 Vercel 대시보드에서만 · 이벤트 속성은 숫자/짧은 문자열만"
-        lines={events.length ? events : ["(박수를 누르면 여기에 이벤트가 찍혀요)"]}
-      />
+      {/* 로그 방식 설명 + 실제로 나간 이벤트 — 페이지 하단 슬롯으로 */}
+      {slot &&
+        createPortal(
+          <LogPanel
+            title="로그 · Vercel Analytics 이벤트"
+            desc="이미 설치된 @vercel/analytics의 track()으로 박수마다 이벤트를 쏴요. 별도 DB·대시보드 없이 Vercel → Analytics → Events에서 slug별 집계를 봐요. 개인 식별 정보는 보내지 않아요."
+            pros="추가 인프라 없음 · 무료 티어로 충분 · 운영 코드 1줄"
+            cons="개별 로그 조회는 Vercel 대시보드에서만 · 이벤트 속성은 숫자/짧은 문자열만"
+            lines={events.length ? events : ["(박수를 누르면 여기에 이벤트가 찍혀요)"]}
+          />,
+          slot
+        )}
     </>
   );
 }

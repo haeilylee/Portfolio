@@ -12,7 +12,7 @@ export default async function ClapA() {
   return (
     <>
       <div className="pv-container"><ReferenceBadge id="clap-a" /></div>
-      <ArticleFrame project={project}>
+      <ArticleFrame project={project} afterBody={<div id="pv-log-slot" style={{ borderTop: "1px solid #f0f0f0", paddingTop: "28px" }} />}>
         <ClapAFloat slug={`${project.slug}#clap-a`} />
       </ArticleFrame>
     </>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import CollectionChips from "@/components/collection-chips";
+import { isCollectionId } from "@/lib/collections";
 
 const PASS = "hakyeong2026";
 
@@ -19,6 +21,8 @@ type Block = {
 type Section = { id: string; title: string; blocks: Block[] };
 type Project = {
   slug: string; title: string; category: string; catClass: string;
+  /** 상위 분류(시리즈). 미지정이면 없음 */
+  collection?: string;
   date: string; tags: string[]; preview: string; desc: string;
   thumbnail?: string; heroThumbnail?: string;
   outcomes: string[]; tools: Tool[]; insight: string;
@@ -288,13 +292,22 @@ export default function AdminPage() {
               <label style={s.label}>제목</label>
               <input style={s.input} value={activeProject.title} onChange={(e) => setProject(activeProject.slug, "title", e.target.value)} />
 
+              {/* 상위 분류(시리즈) — 홈에서 이 기준으로 묶인다. undefined로 두면 저장 시 키가 빠진다 */}
+              <div style={{ marginBottom: "16px" }}>
+                <label style={s.label}>카테고리 (상위 분류)</label>
+                <CollectionChips
+                  value={isCollectionId(activeProject.collection) ? activeProject.collection : undefined}
+                  onChange={(next) => setProject(activeProject.slug, "collection", next)}
+                />
+              </div>
+
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
                   <label style={s.label}>기간</label>
                   <input style={s.input} value={activeProject.date} onChange={(e) => setProject(activeProject.slug, "date", e.target.value)} />
                 </div>
                 <div>
-                  <label style={s.label}>카테고리</label>
+                  <label style={s.label}>카테고리 레이블 (표시용 텍스트)</label>
                   <input style={s.input} value={activeProject.category} onChange={(e) => setProject(activeProject.slug, "category", e.target.value)} />
                 </div>
               </div>

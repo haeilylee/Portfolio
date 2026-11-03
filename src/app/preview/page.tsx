@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { VARIANTS, GROUP_LABEL } from "./_components/variants";
+import { VARIANTS, GROUP_LABEL, GROUPS } from "./_components/variants";
 import { COLLECTIONS } from "@/lib/collections";
 import { readContentLive } from "@/lib/content-live";
 
 export default async function PreviewIndex() {
   const { projects } = await readContentLive();
-  const groups = (["admin", "public", "reaction"] as const).map((g) => ({
+  const groups = GROUPS.map((g) => ({
     group: g,
     items: VARIANTS.filter((v) => v.group === g),
   }));
@@ -58,6 +58,8 @@ export default async function PreviewIndex() {
               {group === "admin" && "카테고리 지정 UI"}
               {group === "public" && "카테고리 탐색 UI"}
               {group === "reaction" && "좋아요 · 댓글 UI"}
+              {group === "clap" && "하루 5회 제한 Clap · 로그 방식 3종"}
+              {group === "detail" && "상세 페이지 최종 뷰"}
             </span>
           </div>
           <div className="pv-index-grid">
@@ -66,6 +68,7 @@ export default async function PreviewIndex() {
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "10px" }}>
                   <span className="pv-ref-tag">{v.letter}</span>
                   <span style={{ fontSize: "14px", fontWeight: 700, letterSpacing: "-0.04em", color: "#111" }}>{v.name}</span>
+                  {v.chosen && <span style={{ fontSize: "10px", fontWeight: 700, color: "#168f52", background: "#e7f6ec", borderRadius: "5px", padding: "2px 6px" }}>선택됨</span>}
                 </div>
                 <div style={{ fontSize: "13px", color: "#666", lineHeight: 1.6, letterSpacing: "-0.02em", marginBottom: "10px" }}>
                   {v.summary}

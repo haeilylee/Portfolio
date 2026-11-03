@@ -1,8 +1,8 @@
 /** 시안 목록 — Navigator, 인덱스, 각 페이지의 Reference 배지가 공유한다. */
 export interface Variant {
   id: string;
-  group: "admin" | "public" | "reaction" | "clap";
-  letter: "A" | "B" | "C";
+  group: "admin" | "public" | "reaction" | "clap" | "detail";
+  letter: "A" | "B" | "C" | "F";
   href: string;
   name: string;
   summary: string;
@@ -123,6 +123,15 @@ export const VARIANTS: Variant[] = [
     summary: "하단 고정 바(모바일 친화) · 로그는 Slack/Discord 알림",
     reference: { site: "Toss Tech", pattern: "모바일 하단 액션 바 + 웹훅", url: "https://toss.tech" },
   },
+  {
+    id: "detail-final",
+    group: "detail",
+    letter: "F",
+    href: "/preview/detail/sdui",
+    name: "Detail Final",
+    summary: "상세 페이지 본문을 reaction/a 뷰로 재구성한 최종안 (TOC·진행바 유지, 우하단 Clap)",
+    reference: { site: "Medium", pattern: "글 중심 본문 + 플로팅 Clap", url: "https://medium.com" },
+  },
 ];
 
 export const GROUP_LABEL: Record<Variant["group"], string> = {
@@ -130,9 +139,10 @@ export const GROUP_LABEL: Record<Variant["group"], string> = {
   public: "Public",
   reaction: "Reaction",
   clap: "Clap 5/day",
+  detail: "Detail",
 };
 
-export const GROUPS = ["admin", "public", "reaction", "clap"] as const;
+export const GROUPS = ["admin", "public", "reaction", "clap", "detail"] as const;
 
 export function getVariant(id: string) {
   return VARIANTS.find((v) => v.id === id);
