@@ -1,12 +1,14 @@
 /** 시안 목록 — Navigator, 인덱스, 각 페이지의 Reference 배지가 공유한다. */
 export interface Variant {
   id: string;
-  group: "admin" | "public" | "reaction";
+  group: "admin" | "public" | "reaction" | "clap";
   letter: "A" | "B" | "C";
   href: string;
   name: string;
   summary: string;
   reference: { site: string; pattern: string; url: string };
+  /** 1차 검토에서 선택된 시안 */
+  chosen?: boolean;
 }
 
 export const VARIANTS: Variant[] = [
@@ -18,6 +20,7 @@ export const VARIANTS: Variant[] = [
     name: "Inline Chips",
     summary: "편집 필드 사이에 칩으로 카테고리를 고른다",
     reference: { site: "Velog", pattern: "글 상단 태그 칩", url: "https://velog.io" },
+    chosen: true,
   },
   {
     id: "admin-b",
@@ -54,6 +57,7 @@ export const VARIANTS: Variant[] = [
     name: "Editorial Series",
     summary: "카테고리를 하나의 연재 시리즈처럼 읽는다",
     reference: { site: "Brunchbook", pattern: "주제형 연재 구조", url: "https://brunch.co.kr/brunchbook/338280" },
+    chosen: true,
   },
   {
     id: "public-c",
@@ -72,6 +76,7 @@ export const VARIANTS: Variant[] = [
     name: "Clap Button",
     summary: "플로팅 박수 버튼 — 여러 번 눌러 응원",
     reference: { site: "Medium", pattern: "Clap 반응", url: "https://medium.com" },
+    chosen: true,
   },
   {
     id: "reaction-b",
@@ -91,13 +96,43 @@ export const VARIANTS: Variant[] = [
     summary: "닉네임 + 한 줄 댓글 방명록",
     reference: { site: "Velog", pattern: "글 하단 댓글", url: "https://velog.io" },
   },
+  {
+    id: "clap-a",
+    group: "clap",
+    letter: "A",
+    href: "/preview/clap/a",
+    name: "Float + Analytics",
+    summary: "플로팅 버튼 + 남은 횟수 점 5개 · 로그는 Vercel Analytics 이벤트",
+    reference: { site: "Medium", pattern: "Clap + Vercel Analytics", url: "https://vercel.com/docs/analytics/custom-events" },
+  },
+  {
+    id: "clap-b",
+    group: "clap",
+    letter: "B",
+    href: "/preview/clap/b",
+    name: "Inline + Ledger",
+    summary: "본문 끝 큰 버튼 + 오늘 n/5 · 로그는 서버 장부(KV)",
+    reference: { site: "Brunch", pattern: "글 하단 라이킷 + 서버 로그", url: "https://brunch.co.kr" },
+  },
+  {
+    id: "clap-c",
+    group: "clap",
+    letter: "C",
+    href: "/preview/clap/c",
+    name: "Bottom Bar + Webhook",
+    summary: "하단 고정 바(모바일 친화) · 로그는 Slack/Discord 알림",
+    reference: { site: "Toss Tech", pattern: "모바일 하단 액션 바 + 웹훅", url: "https://toss.tech" },
+  },
 ];
 
 export const GROUP_LABEL: Record<Variant["group"], string> = {
   admin: "Admin",
   public: "Public",
   reaction: "Reaction",
+  clap: "Clap 5/day",
 };
+
+export const GROUPS = ["admin", "public", "reaction", "clap"] as const;
 
 export function getVariant(id: string) {
   return VARIANTS.find((v) => v.id === id);
