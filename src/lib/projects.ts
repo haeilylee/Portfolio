@@ -1,4 +1,5 @@
 import contentData from "@/data/content.json";
+import type { CollectionId } from "@/lib/collections";
 
 export interface Tool {
   name: string;
@@ -29,6 +30,8 @@ export interface Project {
   title: string;
   category: string;
   catClass: "design-system" | "ai" | "ux";
+  /** 상위 분류. 미지정이면 undefined — 목록에서는 그대로 노출된다. */
+  collection?: CollectionId;
   date: string;
   tags: string[];
   preview: string;

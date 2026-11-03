@@ -16,7 +16,13 @@ const categoryColor: Record<string, string> = {
   "UX Research": "#168f52",
 };
 
-export default function ProjectCard({ project }: { project: Project }) {
+interface ProjectCardProps {
+  project: Project;
+  /** 카테고리 레이블 자리를 다른 요소(칩 등)로 바꿀 때 사용. 생략하면 기존 category 텍스트. */
+  eyebrow?: React.ReactNode;
+}
+
+export default function ProjectCard({ project, eyebrow }: ProjectCardProps) {
   return (
     <Link
       href={`/projects/${project.slug}`}
@@ -97,16 +103,20 @@ export default function ProjectCard({ project }: { project: Project }) {
 
       {/* Text — no box, just typography */}
       <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-        <span
-          style={{
-            fontSize: "11px",
-            fontWeight: 600,
-            letterSpacing: "-0.01em",
-            color: categoryColor[project.category] ?? "#888",
-          }}
-        >
-          {project.category}
-        </span>
+        {eyebrow !== undefined ? (
+          <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "2px" }}>{eyebrow}</div>
+        ) : (
+          <span
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              letterSpacing: "-0.01em",
+              color: categoryColor[project.category] ?? "#888",
+            }}
+          >
+            {project.category}
+          </span>
+        )}
         <h3
           style={{
             fontSize: "15px",
