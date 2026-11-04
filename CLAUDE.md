@@ -35,6 +35,8 @@
   - 반영 순서: push → `vercel ls haeilylee-portfolio`로 최신 배포 확인 → `vercel alias set <최신 배포 URL> haeilylee-portfolio.vercel.app`
 - 로컬 `.vercel/`은 다른 프로젝트(`portfolio`)에 연결돼 있다. 여기서 `vercel --prod`를 실행해도 운영 사이트에는 반영되지 않으니 쓰지 않는다.
 - 운영에 반영하는 작업(push, alias 변경)은 사용자에게 확인을 받은 뒤에 실행한다.
+- Admin 저장은 화면에 불러온 데이터 전체로 `content.json`을 덮어쓴다. 코드에서 데이터 구조(필드)를 바꾼 뒤에는 Admin을 새로고침하고 편집해야 한다. 그렇지 않으면 새 필드가 지워진다(2026-11-04 목차 그룹이 지워져 복구함). 커밋 전에 `git diff src/data/content.json`으로 의도치 않게 지워진 필드가 없는지 확인한다.
+- Admin 저장은 로컬 커밋까지만 만들고, push가 안 되는 경우가 있다. 배포할 때 `git log origin/main..main`으로 남은 커밋을 확인한다.
 - Admin 배포 버튼은 git remote URL에 넣어 둔 PAT로 push한다. "배포 중 오류"가 나면 PAT가 만료된 경우가 많다.
 
 ## 4. Git
