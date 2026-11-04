@@ -18,7 +18,7 @@ type Block = {
   height?: number;
   step?: string; title?: string; tag?: string; tagColor?: string;
 };
-type Section = { id: string; title: string; group?: string; kind?: "next"; nextSlug?: string; blocks: Block[] };
+type Section = { id: string; title: string; group?: string; subgroup?: string; kind?: "next"; nextSlug?: string; blocks: Block[] };
 type Project = {
   slug: string; title: string; category: string; catClass: string;
   /** 상위 분류(시리즈). 미지정이면 없음 */
@@ -152,6 +152,10 @@ export default function AdminPage() {
   }
   function setSectionGroup(slug: string, si: number, group: string) {
     const next = getSections(slug).map((s, i) => (i === si ? { ...s, group: group || undefined } : s));
+    setSections(slug, next);
+  }
+  function setSectionSubgroup(slug: string, si: number, subgroup: string) {
+    const next = getSections(slug).map((s, i) => (i === si ? { ...s, subgroup: subgroup || undefined } : s));
     setSections(slug, next);
   }
   function setSectionNext(slug: string, si: number, patch: Partial<Pick<Section, "kind" | "nextSlug">>) {
@@ -474,13 +478,22 @@ export default function AdminPage() {
                         onChange={(e) => renameSectionTitle(activeProject.slug, si, e.target.value)}
                       />
                     </div>
-                    <div style={{ width: "180px" }}>
+                    <div style={{ width: "150px" }}>
                       <label style={s.label}>목차 그룹</label>
                       <input
                         style={{ ...s.input, marginBottom: 0 }}
                         value={sec.group ?? ""}
-                        placeholder="Problem / Solution …"
+                        placeholder="Background / Problem / Solution / Outcome"
                         onChange={(e) => setSectionGroup(activeProject.slug, si, e.target.value)}
+                      />
+                    </div>
+                    <div style={{ width: "120px" }}>
+                      <label style={s.label}>세부 분류 (배지)</label>
+                      <input
+                        style={{ ...s.input, marginBottom: 0 }}
+                        value={sec.subgroup ?? ""}
+                        placeholder="예: Workflow"
+                        onChange={(e) => setSectionSubgroup(activeProject.slug, si, e.target.value)}
                       />
                     </div>
                     <button style={{ ...s.rmBtn, color: "#f87171", paddingBottom: "10px" }} onClick={() => removeSection(activeProject.slug, si)}>×</button>

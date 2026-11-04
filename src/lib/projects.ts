@@ -22,6 +22,8 @@ export interface Section {
   title: string;
   /** 목차 그룹 레이블 (Admin에서 직접 입력). 같은 값이 이어지면 한 그룹으로 묶인다 */
   group?: string;
+  /** 목차 세부 분류 (예: Solution 안의 Workflow). 같은 group 안에서 같은 값이 이어지면 한 묶음 */
+  subgroup?: string;
   /** "next"면 본문 밖 '다음 이야기'(시리즈 로드맵)로 그린다. 목차에서도 빠진다 */
   kind?: "next";
   /** 다음 이야기와 이어지는 공개 프로젝트 slug. 비어 있으면 '작업 중'(흑백·링크 없음) */

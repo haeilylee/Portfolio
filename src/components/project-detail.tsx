@@ -31,7 +31,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
 
   const tocItems = [
     { id: "overview", label: project.overviewLabel || "Overview" },
-    ...sections.map((s) => ({ id: s.id, label: s.title, group: s.group })),
+    ...sections.map((s) => ({ id: s.id, label: s.title, group: s.group, subgroup: s.subgroup })),
   ];
 
   const h2: React.CSSProperties = { fontSize: "18px", fontWeight: 700, letterSpacing: "-0.045em", color: "#111", margin: "0 0 14px" };

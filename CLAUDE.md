@@ -15,7 +15,11 @@
 - **상위 분류(Collection)**는 `knowledge-systems` / `design-systems` 두 가지이며, `src/lib/collections.ts`에 정의한다. 지정은 Admin의 칩으로 한다.
   - 기존 `category`(AI, AI Design System 등)는 별도의 소분류 레이블이다.
 
-- **목차(TOC)는 Admin에서 직접 입력한다.** 섹션마다 "목차 그룹"(`sections[].group`, 예: Problem / Solution)을 자유롭게 쓰고, 같은 값이 이어지면 한 그룹으로 묶인다. 첫 항목 이름은 `overviewLabel`(비우면 Overview)이다. 코드에 슬러그별 그룹 배열을 하드코딩하지 않는다.
+- **목차(TOC)는 2단 구조이고 Admin에서 직접 입력한다.** 코드에 슬러그별 그룹 배열을 하드코딩하지 않는다.
+  - 상위 분류 `sections[].group`: 기본 구성은 **Background → Problem → Solution → Outcome**. 목차에서 Helvetica 검정 이탤릭으로 나온다
+  - 세부 분류 `sections[].subgroup`(예: Solution 안의 Workflow, 시행착오): 연회색 채움 배지로 나오고, 그 구간을 읽는 중이면 한 톤 진해진다. 그 아래 항목은 한 단계 더 들여쓴다
+  - 첫 항목 이름은 `overviewLabel`(비우면 Overview)
+  - 목차를 클릭하면 섹션 제목이 상단 내비게이션 바로 아래(본문 최상단, 내비 높이 + 32px)에 오도록 스크롤한다 — `src/components/toc-nav.tsx`
 - **다음 이야기(Next)는 본문에 넣지 않는다.** Admin에서 섹션의 "다음 이야기로 표시"(`sections[].kind = "next"`)를 체크하면, 본문과 목차에서 빠지고 본문 끝·댓글 위에 **시리즈 로드맵**(01 지금 읽은 글 → 02 다음 이야기)으로 나온다 — `src/components/next-roadmap.tsx`
   - 연결할 공개 프로젝트(`nextSlug`)가 없으면 "작업 중": 흑백·점선·링크 없음, 첫 단락만 보이고 나머지는 "구상 내용 더 보기"로 펼친다
   - 연결하면 색이 돌아오고 해당 프로젝트로 링크된다
@@ -29,6 +33,7 @@
 - 시안은 기본 **3개**로 제안한다. 확정되면 `/preview` 시안 코드와 이력은 지운다(2026-11-04에 전부 정리함). 새 시안이 필요하면 `/preview/<group>/{a,b,c}`(개발 환경 전용)로 다시 만든다.
 - 각 시안에는 참고한 레퍼런스(사이트·패턴·URL)를 표시한다.
 - 실제 데이터가 부족해서 넣은 항목(목록을 늘린 예시, mock 숫자·댓글)에는 화면에 "예시"라고 표시한다.
+- 개발 서버(Turbopack)가 `globals.css` 변경을 놓치는 경우가 있다. 스타일이 안 먹으면 `.next`를 지우고 `npm run dev`를 재시작한다.
 - 운영에 반영하기 전에 로컬(`npm run dev` → localhost:3000)에서 홈부터 상세까지 읽는 흐름을 먼저 보여주고 확인을 받는다.
 
 ## 3. 배포

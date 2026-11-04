@@ -226,6 +226,12 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
 .toc-nav button span { line-height: 1.5 !important; }
 .toc-nav nav > div { margin-top: 6px !important; }
 .toc-nav nav > div > div:first-child { font-size: 12px !important; padding: 3px 8px !important; color: #4b4f56 !important; }
+/* 상위 분류: 이탤릭 / 세부 분류: 연회색 채움 배지 */
+.toc-group { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: italic; font-weight: 500; letter-spacing: -0.01em; word-break: keep-all; }
+.toc-sub { display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: -0.01em; color: #777; background: #f1f1f1; border-radius: 5px; padding: 2px 7px; transition: background .15s, color .15s; }
+.toc-sub[data-reading="true"] { color: #333; background: #e9e9e9; }
+/* 목차·해시 링크로 이동했을 때 섹션 제목이 내비게이션 바로 아래에 오도록 */
+.project-detail-page section[id] { scroll-margin-top: calc(var(--nav-h) + 32px); }
 
 @media (max-width: 768px) {
   .detail-meta { grid-template-columns: 1fr; gap: 20px; }
