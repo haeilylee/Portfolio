@@ -270,3 +270,16 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
   .home-row { grid-template-columns: 1fr 96px; gap: 14px; }
   .home-aside { position: static; }
 }
+
+/* ── 다음 이야기 — 시리즈 로드맵 ── */
+.roadmap { margin-top: 72px; }
+.roadmap-list { list-style: none; margin: 0; padding: 0; position: relative; }
+.roadmap-list::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 2px; background: #e3e3e3; }
+.roadmap-item { display: grid; grid-template-columns: 24px 1fr; gap: 16px; position: relative; padding-bottom: 28px; }
+.roadmap-item:last-child { padding-bottom: 0; }
+.roadmap-dot { width: 24px; height: 24px; border-radius: 50%; box-sizing: border-box; background: #fff; border: 2px dashed #ccc; color: #aaa; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.roadmap-dot[data-live="true"] { background: #111; border: none; color: #fff; }
+.roadmap-title { display: block; font-size: 15px; font-weight: 700; letter-spacing: -0.04em; line-height: 1.4; margin-bottom: 8px; text-decoration: none; }
+a.roadmap-title:hover { text-decoration: underline; text-underline-offset: 3px; }
+.roadmap-text { font-size: 13px; line-height: 1.75; letter-spacing: -0.02em; margin: 0; }
+.roadmap-toggle { margin-top: 10px; background: none; border: none; padding: 0; font-family: inherit; font-size: 12px; font-weight: 600; color: #888; cursor: pointer; }

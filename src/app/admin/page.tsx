@@ -18,7 +18,7 @@ type Block = {
   height?: number;
   step?: string; title?: string; tag?: string; tagColor?: string;
 };
-type Section = { id: string; title: string; group?: string; blocks: Block[] };
+type Section = { id: string; title: string; group?: string; kind?: "next"; nextSlug?: string; blocks: Block[] };
 type Project = {
   slug: string; title: string; category: string; catClass: string;
   /** 상위 분류(시리즈). 미지정이면 없음 */
@@ -152,6 +152,16 @@ export default function AdminPage() {
   }
   function setSectionGroup(slug: string, si: number, group: string) {
     const next = getSections(slug).map((s, i) => (i === si ? { ...s, group: group || undefined } : s));
+    setSections(slug, next);
+  }
+  function setSectionNext(slug: string, si: number, patch: Partial<Pick<Section, "kind" | "nextSlug">>) {
+    const next = getSections(slug).map((s, i) => {
+      if (i !== si) return s;
+      const merged: Section = { ...s, ...patch };
+      if (!merged.kind) { delete merged.kind; delete merged.nextSlug; }
+      if (!merged.nextSlug) delete merged.nextSlug;
+      return merged;
+    });
     setSections(slug, next);
   }
   function addBlock(slug: string, si: number, type: Block["type"]) {
@@ -474,6 +484,30 @@ export default function AdminPage() {
                       />
                     </div>
                     <button style={{ ...s.rmBtn, color: "#f87171", paddingBottom: "10px" }} onClick={() => removeSection(activeProject.slug, si)}>×</button>
+                  </div>
+
+                  {/* 다음 이야기 (본문 밖 · 시리즈 로드맵) */}
+                  <div style={{ display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap", margin: "-4px 0 12px", fontSize: "12px", color: "#666" }}>
+                    <label style={{ display: "inline-flex", gap: "6px", alignItems: "center", cursor: "pointer" }}>
+                      <input
+                        type="checkbox"
+                        checked={sec.kind === "next"}
+                        onChange={(e) => setSectionNext(activeProject.slug, si, { kind: e.target.checked ? "next" : undefined })}
+                      />
+                      다음 이야기로 표시 (본문 밖 · 시리즈 로드맵, 목차 제외)
+                    </label>
+                    {sec.kind === "next" && (
+                      <select
+                        style={{ ...s.input, marginBottom: 0, width: "auto", padding: "4px 8px", fontSize: "12px" }}
+                        value={sec.nextSlug ?? ""}
+                        onChange={(e) => setSectionNext(activeProject.slug, si, { nextSlug: e.target.value || undefined })}
+                      >
+                        <option value="">작업 중 (연결할 프로젝트 없음)</option>
+                        {content?.projects.filter((p) => p.slug !== activeProject.slug).map((p) => (
+                          <option key={p.slug} value={p.slug}>공개 → {p.slug}</option>
+                        ))}
+                      </select>
+                    )}
                   </div>
 
                   {/* 블록 목록 */}
