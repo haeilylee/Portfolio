@@ -31,8 +31,10 @@
 
 - 운영 도메인: **https://haeilylee-portfolio.vercel.app/**
   - 이 도메인은 Vercel 프로젝트 **`haeilylee-portfolio`**(GitHub `haeilylee/Portfolio`의 `main`에 연결)에 붙어 있다.
-  - `main`에 push하면 자동으로 빌드되지만, 도메인이 수동 alias로 고정돼 있어서 **새 배포로 자동으로 옮겨가지 않는다.**
-  - 반영 순서: push → `vercel ls haeilylee-portfolio`로 최신 배포 확인 → `vercel alias set <최신 배포 URL> haeilylee-portfolio.vercel.app`
+  - 2026-11-04부터 이 주소는 프로젝트의 **정식 운영 도메인**으로 등록돼 있다. `main`에 push하면 빌드가 끝나는 대로 자동 반영되고, 누구나 로그인 없이 볼 수 있다.
+  - 예전처럼 `vercel alias set`으로 수동 연결하지 않는다. 수동 alias 주소는 Vercel 보호(로그인) 대상이 되어 외부에서 볼 수 없다.
+  - 배포 확인: `vercel ls haeilylee-portfolio`로 최신 배포가 Ready인지 보고, 로그인하지 않은 상태에서 `curl`로 운영 주소를 열어 확인한다.
+- 이 프로젝트에는 아직 Upstash Redis 환경변수가 없다. 그래서 운영에서는 박수 버튼, 댓글, 홈 인기·댓글 구좌가 숨겨져 있다. Vercel Marketplace에서 Upstash를 `haeilylee-portfolio` 프로젝트에 연결하면 켜진다.
 - 로컬 `.vercel/`은 다른 프로젝트(`portfolio`)에 연결돼 있다. 여기서 `vercel --prod`를 실행해도 운영 사이트에는 반영되지 않으니 쓰지 않는다.
 - 운영에 반영하는 작업(push, alias 변경)은 사용자에게 확인을 받은 뒤에 실행한다.
 - Admin 저장은 화면에 불러온 데이터 전체로 `content.json`을 덮어쓴다. 코드에서 데이터 구조(필드)를 바꾼 뒤에는 Admin을 새로고침하고 편집해야 한다. 그렇지 않으면 새 필드가 지워진다(2026-11-04 목차 그룹이 지워져 복구함). 커밋 전에 `git diff src/data/content.json`으로 의도치 않게 지워진 필드가 없는지 확인한다.
