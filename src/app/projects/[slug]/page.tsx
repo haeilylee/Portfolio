@@ -12,6 +12,7 @@ import ReadingProgress from "@/components/reading-progress";
 import Reveal from "@/components/reveal";
 import CodeBlock from "@/components/code-block";
 import ClapFloat from "@/components/clap-float";
+import CommentSection from "@/components/comment-section";
 
 export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 /**
  * 프로젝트 상세 — 글 중심 본문 구성.
- *  · 상단: 컬렉션·카테고리·기간 eyebrow → 제목 → 요약 → 히어로 → 주요 성과 → 핵심 인사이트(인용)
+ *  · 상단: 컬렉션·카테고리·기간 eyebrow → 제목 → 요약 → 히어로 → 핵심 인사이트(인용)
  *  · 중단: Skills / Tools 컴팩트 2단
  *  · 하단: 섹션·블록 (TOC·읽기 진행바)
  *  · 우하단: 박수(1인 1회)
@@ -39,14 +40,9 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const collection = getCollection(project.collection);
   const hero = project.heroThumbnail ?? project.thumbnail;
 
-  const sectionGroups: Record<string, string[]> = {
-    "ai-requirements": ["Background", "Background", "Problem & Solution", "Problem & Solution", "Workflow", "Workflow", "Workflow", "Insight"],
-    sdui: ["Problem", "Solution", "Workflow", "Insight"],
-  };
-  const groups = sectionGroups[project.slug];
   const tocItems = [
-    { id: "overview", label: "Overview" },
-    ...sections.map((s, i) => ({ id: s.id, label: s.title, group: groups?.[i] })),
+    { id: "overview", label: project.overviewLabel || "Overview" },
+    ...sections.map((s) => ({ id: s.id, label: s.title, group: s.group })),
   ];
 
   const h2: React.CSSProperties = { fontSize: "18px", fontWeight: 700, letterSpacing: "-0.045em", color: "#111", margin: "0 0 14px" };
@@ -80,23 +76,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           <h1 style={{ fontSize: "30px", fontWeight: 700, letterSpacing: "-0.055em", color: "#111", lineHeight: 1.25, margin: "0 0 16px" }}>
             {renderTitle(project.title)}
           </h1>
-          <p style={{ fontSize: "15px", color: "#555", lineHeight: 1.8, letterSpacing: "-0.025em", margin: "0 0 28px" }}>
-            {project.desc}
-          </p>
 
           <div style={{ borderRadius: "12px", overflow: "hidden", aspectRatio: "16/8", background: hero ? "#eee" : gradientMap[project.catClass] ?? "#ccc", marginBottom: "36px" }}>
             {hero && <img src={hero} alt={stripTitleBreaks(project.title)} style={{ width: "100%", height: "100%", objectFit: "cover" }} />}
           </div>
 
-          <h2 style={h2}>주요 성과</h2>
-          <ul style={{ margin: "0 0 32px", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "8px" }}>
-            {project.outcomes.map((o, i) => (
-              <li key={i} style={{ display: "flex", gap: "10px", fontSize: "14px", color: "#555", lineHeight: 1.7, letterSpacing: "-0.025em" }}>
-                <span style={{ color: "#bbb", fontSize: "10px", marginTop: "4px" }}>•</span>
-                <span>{o}</span>
-              </li>
-            ))}
-          </ul>
 
           <h2 style={h2}>핵심 인사이트</h2>
           <blockquote style={{ margin: "0 0 36px", padding: "18px 22px", borderLeft: "3px solid #111", background: "#fafafa", fontSize: "14px", color: "#444", lineHeight: 1.8, letterSpacing: "-0.025em", wordBreak: "keep-all" }}>
@@ -148,6 +132,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
               ))}
             </>
           )}
+
+          <div id="comments" style={{ scrollMarginTop: "80px" }}>
+            <CommentSection slug={project.slug} />
+          </div>
         </article>
       </div>
     </div>

@@ -25,6 +25,8 @@ export interface ClapState {
 export interface ClapStore {
   get(slug: string, visitor: string): Promise<ClapState>;
   clap(slug: string, visitor: string): Promise<ClapState & { accepted: number }>;
+  /** 여러 프로젝트의 박수 합계 */
+  totals(slugs: string[]): Promise<Record<string, number>>;
 }
 
 const safe = (s: string) => s.replace(/[^a-zA-Z0-9_#-]/g, "").slice(0, 64);
@@ -32,7 +34,7 @@ const keyTotal = (slug: string) => `clap:${safe(slug)}`;
 const keyMine = (slug: string, visitor: string) => `clap:${safe(slug)}:v:${safe(visitor)}`;
 
 /* ── Upstash Redis ── */
-function redisClient(): Redis | null {
+export function redisClient(): Redis | null {
   const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
   if (!url || !token) return null;
@@ -59,6 +61,11 @@ function redisStore(redis: Redis): ClapStore {
         redis.incr(keyMine(slug, visitor)),
       ]);
       return { claps: Number(claps), mine: Number(nextMine), limit: CLAP_LIMIT, accepted: 1 };
+    },
+    async totals(slugs) {
+      if (!slugs.length) return {};
+      const vals = await redis.mget<(number | null)[]>(...slugs.map(keyTotal));
+      return Object.fromEntries(slugs.map((s, i) => [s, Number(vals[i] ?? 0)]));
     },
   };
 }
@@ -88,6 +95,10 @@ const fileStore: ClapStore = {
     db.mine[keyMine(slug, visitor)] = mine + 1;
     await persist(db);
     return { claps: db.totals[keyTotal(slug)], mine: mine + 1, limit: CLAP_LIMIT, accepted: 1 };
+  },
+  async totals(slugs) {
+    const db = await load();
+    return Object.fromEntries(slugs.map((s) => [s, db.totals[keyTotal(s)] ?? 0]));
   },
 };
 

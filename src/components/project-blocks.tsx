@@ -5,7 +5,7 @@ import ImageZoom from "@/components/image-zoom";
 
 /**
  * 프로젝트 상세 본문 블록 렌더러.
- * /projects/[slug] 와 /preview/detail/[slug](최종 뷰 시안)가 같은 렌더링을 공유한다.
+ * /projects/[slug] 상세 본문 블록 렌더링.
  */
 
 export function renderWithHighlights(text: string, highlights: string[] = []) {
@@ -18,7 +18,7 @@ export function renderWithHighlights(text: string, highlights: string[] = []) {
     if (idx === -1) continue;
     if (idx > 0) parts.push(remaining.slice(0, idx));
     parts.push(
-      <span key={key++} style={{ background: "linear-gradient(transparent 55%, #fff176 55%)", padding: "0 1px" }}>
+      <span key={key++} style={{ background: "linear-gradient(transparent 55%, rgba(49, 130, 246, 0.23) 55%)", padding: "0 1px", fontWeight: 700, color: "#111" }}>
         {phrase}
       </span>
     );

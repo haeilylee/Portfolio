@@ -18,17 +18,19 @@ type Block = {
   height?: number;
   step?: string; title?: string; tag?: string; tagColor?: string;
 };
-type Section = { id: string; title: string; blocks: Block[] };
+type Section = { id: string; title: string; group?: string; blocks: Block[] };
 type Project = {
   slug: string; title: string; category: string; catClass: string;
   /** 상위 분류(시리즈). 미지정이면 없음 */
   collection?: string;
-  date: string; tags: string[]; preview: string; desc: string;
+  date: string; tags: string[];
   thumbnail?: string; heroThumbnail?: string;
   outcomes: string[]; tools: Tool[]; insight: string;
   insightHighlights: string[];
   codeSnippet?: { filename?: string; lang?: string; code?: string };
   sections?: Section[];
+  /** 목차 첫 항목(상단 요약 영역) 이름. 비우면 Overview */
+  overviewLabel?: string;
   github_url: string; download_url: string;
 };
 type Hero = { name: string; role: string; bio: string; github: string; linkedin: string };
@@ -146,6 +148,10 @@ export default function AdminPage() {
   function renameSectionTitle(slug: string, si: number, title: string) {
     const id = title.toLowerCase().replace(/[\s/]+/g, "-").replace(/[^a-z0-9-가-힣]/g, "") || `section-${si}`;
     const next = getSections(slug).map((s, i) => i === si ? { ...s, title, id } : s);
+    setSections(slug, next);
+  }
+  function setSectionGroup(slug: string, si: number, group: string) {
+    const next = getSections(slug).map((s, i) => (i === si ? { ...s, group: group || undefined } : s));
     setSections(slug, next);
   }
   function addBlock(slug: string, si: number, type: Block["type"]) {
@@ -325,9 +331,6 @@ export default function AdminPage() {
                 }
               />
 
-              <label style={s.label}>프리뷰 / 설명</label>
-              <textarea style={s.textarea} rows={3} value={activeProject.desc} onChange={(e) => { setProject(activeProject.slug, "desc", e.target.value); setProject(activeProject.slug, "preview", e.target.value); }} />
-
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
                 <div>
                   <label style={s.label}>썸네일 (목록형 · 홈/카드)</label>
@@ -435,6 +438,13 @@ export default function AdminPage() {
                 <div style={{ ...s.sectionTitle, fontSize: "13px", marginBottom: 0 }}>상세 섹션</div>
                 <button style={s.addBtn} onClick={() => addSection(activeProject.slug)}>+ 섹션 추가</button>
               </div>
+              <label style={s.label}>목차 첫 항목 이름 (상단 요약 영역)</label>
+              <input
+                style={{ ...s.input, maxWidth: "240px" }}
+                value={activeProject.overviewLabel ?? ""}
+                placeholder="Overview"
+                onChange={(e) => setProject(activeProject.slug, "overviewLabel", e.target.value || undefined)}
+              />
               {(activeProject.sections ?? []).map((sec, si) => (
                 <div key={si} style={{ border: "1px solid #f0f0f0", borderRadius: "10px", padding: "16px", marginBottom: "12px", background: "#fafafa" }}>
                   {/* 섹션 헤더 */}
@@ -452,6 +462,15 @@ export default function AdminPage() {
                         value={sec.title}
                         placeholder="배경 / 문제 / 해결 과정 / 결과"
                         onChange={(e) => renameSectionTitle(activeProject.slug, si, e.target.value)}
+                      />
+                    </div>
+                    <div style={{ width: "180px" }}>
+                      <label style={s.label}>목차 그룹</label>
+                      <input
+                        style={{ ...s.input, marginBottom: 0 }}
+                        value={sec.group ?? ""}
+                        placeholder="Problem / Solution …"
+                        onChange={(e) => setSectionGroup(activeProject.slug, si, e.target.value)}
                       />
                     </div>
                     <button style={{ ...s.rmBtn, color: "#f87171", paddingBottom: "10px" }} onClick={() => removeSection(activeProject.slug, si)}>×</button>

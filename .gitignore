@@ -13,3 +13,4 @@ next-env.d.ts
 src/data/reactions.dev.json
 .env*
 src/data/claps.dev.json
+src/data/comments.dev.json

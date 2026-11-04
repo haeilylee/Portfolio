@@ -129,21 +129,6 @@ export default function ProjectCard({ project, eyebrow }: ProjectCardProps) {
         >
           {renderTitle(project.title)}
         </h3>
-        <p
-          style={{
-            fontSize: "13px",
-            color: "#888",
-            margin: 0,
-            lineHeight: 1.6,
-            letterSpacing: "-0.02em",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            overflow: "hidden",
-          }}
-        >
-          {project.preview}
-        </p>
         <span style={{ fontSize: "12px", color: "#bbb", letterSpacing: "-0.01em", marginTop: "2px" }}>
           {project.date}
         </span>

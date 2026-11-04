@@ -20,6 +20,8 @@ export type Block =
 export interface Section {
   id: string;
   title: string;
+  /** 목차 그룹 레이블 (Admin에서 직접 입력). 같은 값이 이어지면 한 그룹으로 묶인다 */
+  group?: string;
   blocks: Block[];
 }
 
@@ -34,14 +36,14 @@ export interface Project {
   collection?: CollectionId;
   date: string;
   tags: string[];
-  preview: string;
-  desc: string;
   outcomes: string[];
   tools: Tool[];
   insight: string;
   insightHighlights?: string[];
   codeSnippet?: { code: string; lang?: string; filename?: string };
   sections?: Section[];
+  /** 목차 첫 항목 이름. 비우면 Overview */
+  overviewLabel?: string;
   github_url: string;
   download_url: string;
 }

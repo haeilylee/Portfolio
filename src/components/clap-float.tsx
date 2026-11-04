@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { track } from "@vercel/analytics";
+import { getVisitorId } from "@/lib/visitor";
 
 /**
  * 우하단 플로팅 박수 버튼 — 1인 1회.
@@ -9,20 +10,6 @@ import { track } from "@vercel/analytics";
  * - 누르면 서버 카운트 +1, 버튼은 비활성. 로그는 Vercel Analytics 이벤트로 남긴다
  * - 저장소가 설정되지 않았으면(503) 버튼을 아예 그리지 않는다
  */
-function getVisitorId(): string | null {
-  try {
-    const k = "visitor-id";
-    let v = localStorage.getItem(k);
-    if (!v) {
-      v = crypto.randomUUID().replace(/-/g, "");
-      localStorage.setItem(k, v);
-    }
-    return v;
-  } catch {
-    return null;
-  }
-}
-
 export default function ClapFloat({ slug }: { slug: string }) {
   const [state, setState] = useState<{ claps: number; mine: number } | null>(null);
   const [hidden, setHidden] = useState(false);
