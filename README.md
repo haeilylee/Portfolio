@@ -16,7 +16,7 @@ localhost:3000/admin → 저장하기 / Vercel 배포 버튼
     → content.json 업데이트
     → git push origin web-publish
     → Vercel 자동 빌드 & 배포
-    → https://haeilylee-portfolio.vercel.app/
+    → https://haeilydesign-portfolio.vercel.app/
 ```
 
 ## 로컬 실행
