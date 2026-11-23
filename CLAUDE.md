@@ -38,7 +38,16 @@
 
 ## 3. 배포
 
-- 운영 도메인: **https://haeilylee-portfolio.vercel.app/**
+- **사이트 2개 = 브랜치 2개** (2026-11-23)
+  | 브랜치 | Vercel 프로젝트 | 도메인 |
+  |---|---|---|
+  | `main` | `haeilylee-portfolio` | https://haeilylee-portfolio.vercel.app/ |
+  | `design` | `haeilydesign-portfolio` | https://haeilydesign-portfolio.vercel.app/ |
+  - 각 프로젝트는 자기 브랜치를 production으로 자동 배포한다. 다른 브랜치 push는 preview로만 빌드된다.
+  - Admin은 **지금 체크아웃된 브랜치**에 커밋·푸시한다(`src/lib/site-target.ts`). 편집할 사이트는 `git switch main` / `git switch design`으로 고르고, Admin 상단 배지로 대상을 확인한다.
+  - 두 사이트에 공통인 코드 변경은 `main`에 커밋한 뒤 `design`에 merge한다. 콘텐츠(`content.json`)는 브랜치별로 다르게 유지한다.
+  - 확인: `vercel ls <프로젝트> --scope haeilylees-projects` → Ready, 로그인 없이 `curl`로 200.
+- 아래는 `haeilylee-portfolio` 기준의 이전 설명이다.
   - 이 도메인은 Vercel 프로젝트 **`haeilylee-portfolio`**(GitHub `haeilylee/Portfolio`의 `main`에 연결)에 붙어 있다.
   - 2026-11-04부터 이 주소는 프로젝트의 **정식 운영 도메인**으로 등록돼 있다. `main`에 push하면 빌드가 끝나는 대로 자동 반영되고, 누구나 로그인 없이 볼 수 있다.
   - 예전처럼 `vercel alias set`으로 수동 연결하지 않는다. 수동 alias 주소는 Vercel 보호(로그인) 대상이 되어 외부에서 볼 수 없다.
