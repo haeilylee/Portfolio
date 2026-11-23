@@ -16,18 +16,18 @@ export interface Collection {
 
 export const COLLECTIONS: Collection[] = [
   {
-    id: "ai-workflow",
-    title: "AI Workflow",
-    subtitle: "AI를 활용해 반복되는 비효율을 개선하고, 재사용 가능한 업무 구조를 설계합니다.",
-    color: "#7031d4",
-    soft: "#f3eefc",
-  },
-  {
     id: "product-design",
     title: "Product Design",
     subtitle: "고객의 문제를 발견하고, 복잡한 요구사항을 실제 제품 경험으로 구체화합니다.",
     color: "#2d5cd8",
     soft: "#eaf0fd",
+  },
+  {
+    id: "ai-workflow",
+    title: "AI Workflow",
+    subtitle: "AI를 활용해 반복되는 비효율을 개선하고, 재사용 가능한 업무 구조를 설계합니다.",
+    color: "#7031d4",
+    soft: "#f3eefc",
   },
 ];
 
