@@ -11,20 +11,18 @@ import Reveal from "@/components/reveal";
 import CodeBlock from "@/components/code-block";
 import ClapFloat from "@/components/clap-float";
 import CommentSection from "@/components/comment-section";
-import NextRoadmap from "@/components/next-roadmap";
-import { getProjectBySlug } from "@/lib/projects";
 
 /**
  * 프로젝트 상세 — 글 중심 본문 구성.
  *  · 상단: 컬렉션·카테고리·기간 eyebrow → 제목 → 요약 → 히어로 → 핵심 인사이트(인용)
  *  · 중단: Skills / Tools 컴팩트 2단
- *  · 하단: 섹션·블록 (TOC·읽기 진행바) → 다음 이야기(시리즈 로드맵) → 댓글
+ *  · 하단: 섹션·블록 (TOC·읽기 진행바) → 다른 프로젝트(more 슬롯) → 댓글
+ *  · design 사이트는 시리즈 로드맵(다음 이야기)을 쓰지 않는다 — kind:"next" 섹션은 본문·목차에서만 빠진다
  *  · 우하단: 박수(1인 1회)
  */
-export default function ProjectDetail({ project }: { project: Project }) {
+export default function ProjectDetail({ project, more }: { project: Project; more?: React.ReactNode }) {
   const all: Section[] = project.sections ?? [];
-  // kind: "next" 섹션은 본문·목차에서 빼고, 본문 끝 시리즈 로드맵으로 그린다
-  const nextSections = all.filter((s) => s.kind === "next");
+  // kind: "next" 섹션은 본문·목차에서 뺀다 (design 사이트는 로드맵을 그리지 않음)
   const sections = all.filter((s) => s.kind !== "next");
   const collection = getCollection(project.collection);
   const hero = project.heroThumbnail ?? project.thumbnail;
@@ -122,16 +120,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
             </>
           )}
 
-          {nextSections.length > 0 && (
-            <NextRoadmap
-              seriesTitle={collection?.title}
-              currentTitle={stripTitleBreaks(project.title)}
-              items={nextSections.map((section) => {
-                const linked = section.nextSlug ? getProjectBySlug(section.nextSlug) : undefined;
-                return { section, linked: linked ? { slug: linked.slug, title: stripTitleBreaks(linked.title) } : undefined };
-              })}
-            />
-          )}
+          {more}
 
           <div id="comments" style={{ scrollMarginTop: "80px" }}>
             <CommentSection slug={project.slug} />

@@ -289,3 +289,53 @@ a.proj-link:hover { text-decoration: underline !important; text-underline-offset
 a.roadmap-title:hover { text-decoration: underline; text-underline-offset: 3px; }
 .roadmap-text { font-size: 13px; line-height: 1.75; letter-spacing: -0.02em; margin: 0; }
 .roadmap-toggle { margin-top: 10px; background: none; border: none; padding: 0; font-family: inherit; font-size: 12px; font-weight: 600; color: #888; cursor: pointer; }
+
+/* ══ 다른 프로젝트 보러가기 (상세 하단) ══ */
+.mp { margin: 64px 0 8px; padding-top: 32px; border-top: 1px solid #f0f0f0; }
+.mp-head { font-size: 16px; font-weight: 700; letter-spacing: -0.045em; color: #111; margin-bottom: 16px; }
+.mp-head-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.mp-count { font-size: 13px; font-weight: 600; color: #bbb; margin-left: 4px; }
+.mp-all { font-size: 12px; font-weight: 600; color: #888; text-decoration: none; }
+.mp-all:hover { color: #111; }
+.mp-thumb { border-radius: 10px; overflow: hidden; border: 1px solid #f0f0f0; }
+.mp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mp-thumb[data-draft="true"] { filter: grayscale(1); opacity: 0.5; }
+.mp-eyebrow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; font-size: 11px; font-weight: 600; color: #999; letter-spacing: -0.01em; }
+.mp-dot { color: #e0e0e0; }
+.mp-soon { font-size: 10px; font-weight: 700; color: #999; background: #f2f2f2; border-radius: 4px; padding: 1px 6px; }
+
+/* A next */
+.mp-next { display: grid; grid-template-columns: 1fr 200px; gap: 24px; align-items: center; padding: 20px; border: 1px solid #ececec; border-radius: 14px; text-decoration: none; color: inherit; transition: border-color .15s, box-shadow .15s; }
+.mp-next:hover { border-color: #111; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+.mp-next-label { font-size: 12px; font-weight: 700; color: #3182f6; margin-bottom: 10px; }
+.mp-next-title { font-size: 18px; font-weight: 700; letter-spacing: -0.05em; color: #111; line-height: 1.35; margin-top: 6px; word-break: keep-all; }
+.mp-pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.mp-pager-link { font-size: 12px; color: #999; text-decoration: none; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mp-pager-link[data-strong] { font-weight: 600; color: #666; }
+.mp-pager-link:hover { color: #111; }
+
+/* B grid */
+.mp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.mp-card { display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; }
+.mp-card-title { font-size: 14px; font-weight: 600; letter-spacing: -0.04em; color: #111; line-height: 1.4; word-break: keep-all; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+a.mp-card:hover .mp-card-title { text-decoration: underline; text-underline-offset: 3px; }
+.mp-card[data-draft] .mp-card-title { color: #aaa; }
+
+/* C list */
+.mp-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid #f0f0f0; }
+.mp-row { display: grid; grid-template-columns: 32px 112px 1fr 20px; gap: 12px; align-items: center; padding: 14px 4px; border-bottom: 1px solid #f0f0f0; text-decoration: none; color: inherit; }
+.mp-no { font-size: 12px; font-weight: 700; color: #ccc; font-variant-numeric: tabular-nums; }
+.mp-list-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mp-list-title { font-size: 14.5px; font-weight: 600; letter-spacing: -0.04em; color: #111; word-break: keep-all; }
+.mp-list-thumb .mp-thumb { border-radius: 8px; }
+.mp-arrow { color: #ccc; font-size: 14px; transition: transform .15s, color .15s; }
+a.mp-row:hover .mp-arrow { color: #111; transform: translateX(3px); }
+a.mp-row:hover .mp-list-title { text-decoration: underline; text-underline-offset: 3px; }
+.mp-row[data-draft] .mp-list-title { color: #aaa; }
+
+@media (max-width: 768px) {
+  .mp-row { grid-template-columns: 24px 80px 1fr 16px; gap: 10px; }
+  .mp-next { grid-template-columns: 1fr; }
+  .mp-next-thumb { order: -1; }
+  .mp-grid { grid-template-columns: 1fr; }
+}

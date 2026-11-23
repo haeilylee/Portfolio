@@ -42,11 +42,15 @@ function Bar() {
       )}
       <div className="pv-nav">
         <div className="pv-nav-inner">
-          <span className="pv-nav-label">Story</span>
-          {VARIANTS.map((v) => (
-            <Link key={v.id} href={v.href} className="pv-nav-link" data-active={pathname === v.href} title={v.name}>
-              {v.id.toUpperCase()}
-            </Link>
+          {[...new Set(VARIANTS.map((v) => v.group))].map((g) => (
+            <span key={g} style={{ display: "inline-flex", alignItems: "center", gap: "4px", marginRight: "8px" }}>
+              <span className="pv-nav-label">{g}</span>
+              {VARIANTS.filter((v) => v.group === g).map((v) => (
+                <Link key={v.id} href={v.href} className="pv-nav-link" data-active={pathname === v.href} title={v.name}>
+                  {v.letter}
+                </Link>
+              ))}
+            </span>
           ))}
           <span className="pv-nav-sep" />
           <LangToggle compact />
@@ -63,10 +67,10 @@ export function ReferenceBadge({ id, note }: { id: string; note?: string }) {
   if (!v) return null;
   return (
     <div className="pv-ref">
-      <span className="pv-ref-tag">Story {v.id.toUpperCase()}</span>
+      <span className="pv-ref-tag">{v.group} {v.letter}</span>
       <b>{v.name}</b>
       <span>· Reference: {v.ref}</span>
-      <a href="https://api.metadata.co.kr/" target="_blank" rel="noopener noreferrer">원본 보기 ↗</a>
+      {v.group === "Story" && <a href="https://api.metadata.co.kr/" target="_blank" rel="noopener noreferrer">원본 보기 ↗</a>}
       {note && <span className="pv-ref-note">{note}</span>}
     </div>
   );

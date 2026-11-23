@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { projects, getProjectBySlug } from "@/lib/projects";
 import { stripTitleBreaks } from "@/lib/format-title";
 import ProjectDetail from "@/components/project-detail";
+import MoreProjects from "@/components/more-projects";
 
 export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -17,5 +18,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) notFound();
-  return <ProjectDetail project={project} />;
+  // 본문 끝 '다른 프로젝트 보러가기' — 번호 리스트 + 썸네일 (2026-11-23 확정, 시안 C)
+  return <ProjectDetail project={project} more={<MoreProjects current={slug} variant="list" />} />;
 }
