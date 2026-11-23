@@ -44,7 +44,7 @@ export default function HomeHero({ hero }: { hero: Hero }) {
       </div>
 
       <div>
-        <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.8, letterSpacing: "-0.025em", maxWidth: "480px", marginBottom: "16px", whiteSpace: "pre-line" }}>
+        <p style={{ fontSize: "14px", color: "#666", lineHeight: 1.8, letterSpacing: "-0.025em", maxWidth: "760px", marginBottom: "16px", whiteSpace: "pre-line", wordBreak: "keep-all" }}>
           {hero.bio}
         </p>
         <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>

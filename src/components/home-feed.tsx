@@ -107,36 +107,9 @@ export default function HomeFeed({ projects }: { projects: Project[] }) {
 
   return (
     <>
-      {/* Featured */}
-      {f && (
-        <div style={{ padding: "32px 0 48px", borderBottom: "1px solid #f0f0f0" }}>
-          <div className="home-featured">
-            <Link href={`/projects/${f.slug}`} style={{ display: "block" }}>
-              <Thumb p={f} radius={16} ratio="16/10" />
-            </Link>
-            <div>
-              <div style={{ fontSize: "11px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: fc?.color ?? "#bbb", marginBottom: "12px" }}>
-                Featured{fc ? ` · ${fc.title}` : ""}
-              </div>
-              <Link href={`/projects/${f.slug}`} style={{ textDecoration: "none" }}>
-                <div style={{ fontSize: "24px", fontWeight: 700, letterSpacing: "-0.05em", color: "#111", lineHeight: 1.3, marginBottom: "16px" }}>
-                  {renderTitle(f.title)}
-                </div>
-              </Link>
-              <Bullets items={f.outcomes} />
-              {projects.length > 1 && (
-                <div style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "24px" }}>
-                  <button className="home-page-btn" onClick={() => setSlide((slide - 1 + projects.length) % projects.length)} aria-label="이전">‹</button>
-                  <span style={{ fontSize: "12px", color: "#bbb" }}>{slide + 1} / {projects.length}</span>
-                  <button className="home-page-btn" onClick={() => setSlide((slide + 1) % projects.length)} aria-label="다음">›</button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Featured 캐러셀은 design 사이트에서 쓰지 않는다 (2026-11-23) */}
 
-      <div className="home-two-col" style={{ paddingTop: "24px" }}>
+      <div className="home-two-col" style={{ paddingTop: "8px" }}>
         <div>
           <div className="home-tabs" role="tablist">
             {([{ key: "all", label: "전체" }, ...COLLECTIONS.map((c) => ({ key: c.id, label: c.title }))] as { key: TabKey; label: string }[]).map(({ key, label }) => (
