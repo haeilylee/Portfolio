@@ -31,6 +31,8 @@ type Project = {
   sections?: Section[];
   /** 목차 첫 항목(상단 요약 영역) 이름. 비우면 Overview */
   overviewLabel?: string;
+  /** true면 초안 — 사이트에 노출 안 함 */
+  draft?: boolean;
   github_url: string; download_url: string;
 };
 type Hero = { name: string; role: string; bio: string; github: string; linkedin: string };
@@ -292,6 +294,7 @@ export default function AdminPage() {
           <div style={{ fontSize: "10px", color: "#ccc", letterSpacing: ".06em", textTransform: "uppercase", margin: "16px 0 8px", padding: "0 12px" }}>프로젝트</div>
           {content.projects.map((p) => (
             <button key={p.slug} style={s.sideItem(tab === p.slug)} onClick={() => setTab(p.slug)}>
+              {p.draft && <span style={{ fontSize: "10px", fontWeight: 700, color: "#c76a12", background: "#fff2e3", borderRadius: "4px", padding: "1px 5px", marginRight: "6px" }}>초안</span>}
               {p.title.slice(0, 14)}…
             </button>
           ))}
@@ -320,7 +323,14 @@ export default function AdminPage() {
           {/* ── 프로젝트 ── */}
           {activeProject && (
             <>
-              <div style={s.sectionTitle}>{activeProject.title}</div>
+              <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
+                <div style={{ ...s.sectionTitle, marginBottom: 0, flex: 1 }}>{activeProject.title}</div>
+                {/* 초안/공개 — 초안은 홈·상세에 나오지 않는다. 노출 순서는 사이드바 순서(= content.json 배열 순서) */}
+                <label style={{ display: "inline-flex", alignItems: "center", gap: "6px", fontSize: "12px", fontWeight: 600, color: activeProject.draft ? "#c76a12" : "#168f52", cursor: "pointer", whiteSpace: "nowrap" }}>
+                  <input type="checkbox" checked={!activeProject.draft} onChange={(e) => setProject(activeProject.slug, "draft", e.target.checked ? undefined : true)} />
+                  {activeProject.draft ? "초안 (사이트 비공개)" : "사이트에 공개"}
+                </label>
+              </div>
 
               <label style={s.label}>제목</label>
               <input style={s.input} value={activeProject.title} onChange={(e) => setProject(activeProject.slug, "title", e.target.value)} />

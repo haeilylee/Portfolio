@@ -8,13 +8,34 @@
   },
   "projects": [
     {
+      "slug": "ai-agent-ux",
+      "draft": true,
+      "title": "CS 문의 줄이는 차세대 통신사 플랫폼 AI Agent 설계하기",
+      "category": "AI Agent UX",
+      "catClass": "ux",
+      "collection": "product-design",
+      "date": "",
+      "tags": [
+        "AI Agent",
+        "Interaction Design",
+        "UX Planning"
+      ],
+      "outcomes": [],
+      "tools": [],
+      "insight": "",
+      "insightHighlights": [],
+      "sections": [],
+      "github_url": "",
+      "download_url": ""
+    },
+    {
       "slug": "sdui",
       "thumbnail": "/images/sdui/ㄴㄴㄴ.png",
       "heroThumbnail": "/images/sdui/thumbnail-detail.png",
       "title": "머릿속에 있던 컴포넌트 선택 기준을, AI가 읽는 레지스트리로 만들기",
-      "category": "AI Design System",
+      "category": "Component Registry",
       "catClass": "design-system",
-      "collection": "design-systems",
+      "collection": "ai-workflow",
       "date": "2026/04 → 06",
       "tags": [
         "Design System",
@@ -272,7 +293,7 @@
       "title": "30일 걸리던 요구사항 정의서, AI 워크플로우로 3일 만에",
       "category": "PRD Automation",
       "catClass": "ai",
-      "collection": "knowledge-systems",
+      "collection": "ai-workflow",
       "date": "2026/02 → 03",
       "tags": [
         "AI Workflow",
@@ -657,6 +678,26 @@
       "download_url": "#",
       "heroThumbnail": "/images/ai-requirements/01_thumbnail_policy-to-requirements.png",
       "thumbnail": "/images/ai-requirements/요구사항정의서_썸네일_리스트최적화_2720x2040@2x.png"
+    },
+    {
+      "slug": "shinhan-securities",
+      "draft": true,
+      "title": "금융 서비스 UX/UI 프로젝트",
+      "category": "신한투자증권",
+      "catClass": "ux",
+      "collection": "product-design",
+      "date": "",
+      "tags": [
+        "Fintech",
+        "Product UX/UI"
+      ],
+      "outcomes": [],
+      "tools": [],
+      "insight": "",
+      "insightHighlights": [],
+      "sections": [],
+      "github_url": "",
+      "download_url": ""
     }
   ]
 }

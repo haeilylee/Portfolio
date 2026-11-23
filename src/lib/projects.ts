@@ -48,6 +48,8 @@ export interface Project {
   insightHighlights?: string[];
   codeSnippet?: { code: string; lang?: string; filename?: string };
   sections?: Section[];
+  /** true면 초안 — 사이트(홈·상세)에 노출하지 않고 Admin에서만 보인다 */
+  draft?: boolean;
   /** 목차 첫 항목 이름. 비우면 Overview */
   overviewLabel?: string;
   github_url: string;
@@ -63,7 +65,8 @@ export interface Hero {
 }
 
 export const hero: Hero = contentData.hero;
-export const projects: Project[] = contentData.projects as Project[];
+/** 공개 프로젝트만 (draft 제외). 배열 순서 = 홈 노출 순서, 첫 번째가 Featured */
+export const projects: Project[] = (contentData.projects as Project[]).filter((p) => !p.draft);
 
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
