@@ -43,6 +43,12 @@ export default function AdminPage() {
   const [tab, setTab] = useState<string>("hero");
   const [deploying, setDeploying] = useState(false);
   const [msg, setMsg] = useState("");
+  // 지금 편집 중인 사이트 = 체크아웃된 브랜치 (main → haeilylee, design → haeilydesign)
+  const [target, setTarget] = useState<{ branch: string; site: { domain: string; label: string } | null } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/deploy").then((r) => r.json()).then(setTarget).catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (sessionStorage.getItem("admin_auth") === "1") setAuthed(true);
@@ -266,9 +272,16 @@ export default function AdminPage() {
     <div style={s.wrap}>
       {/* 상단 바 */}
       <div style={s.topbar}>
-        <span style={s.logo}>Admin · 포트폴리오 편집</span>
+        <span style={s.logo}>
+          Admin · 포트폴리오 편집
+          {target && (
+            <span style={{ marginLeft: "12px", fontSize: "11px", fontWeight: 600, padding: "3px 9px", borderRadius: "99px", background: target.site ? (target.branch === "design" ? "#7031d4" : "#2d5cd8") : "#b91c1c", color: "#fff", letterSpacing: "-0.01em" }}>
+              {target.site ? `${target.site.label} · ${target.branch} → ${target.site.domain}` : `${target.branch} — 연결된 사이트 없음`}
+            </span>
+          )}
+        </span>
         {msg && <span style={{ fontSize: "12px", color: msg.startsWith("✓") ? "#4ade80" : "#f87171" }}>{msg}</span>}
-        <button onClick={deploy} disabled={deploying} style={s.deployBtn}>{deploying ? "배포 중…" : "Vercel 배포"}</button>
+        <button onClick={deploy} disabled={deploying || !target?.site} style={s.deployBtn}>{deploying ? "배포 중…" : "배포 (push)"}</button>
       </div>
 
       <div style={s.body}>
