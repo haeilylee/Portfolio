@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
-import { PD_HERO, PD_META, PD_SERIES, plainTitle } from "./story";
+import { hero } from "@/lib/projects";
+import { PD_META, PD_SERIES, plainTitle } from "./story";
 import { StoryStyles } from "./ui";
 
 /**
@@ -41,12 +42,12 @@ export default function SketchHome({ projects }: { projects: Project[] }) {
   const [sy, setSy] = useState(0); // 부드럽게 따라가는 스크롤 (고정 요소용)
   const [introDone, setIntroDone] = useState(false);
   const groups = toGroups(projects);
-  const [line0, line1] = PD_HERO.bio.split("\n");
-  // 첫 문단("나의 1시간을 아끼기 위해 / 다른 사람의 …않습니다.")은 등장할 때 자동으로 채워지고,
-  // 두 번째 문단("매일이 도전인 …있습니다.")은 스크롤에 맞춰 채워진다.
-  const cut = line0.indexOf("위해 ") + 3;
-  const leadA = line0.slice(0, cut).trim();
-  const leadB = line0.slice(cut).trim();
+  // 소개는 content.json(Admin 입력값). 문단은 빈 줄, 문단 안 줄바꿈은 줄바꿈으로 구분한다.
+  // 첫 문단은 등장할 때 자동으로, 두 번째 문단은 스크롤에 맞춰 글자별로 채워진다.
+  const paras = hero.bio.includes("\n\n") ? hero.bio.split(/\n\s*\n/) : hero.bio.split("\n");
+  const withBreaks = (p = "") => p.trim().split("\n").flatMap((l, i) => (i ? ["\n", l.trim()] : [l.trim()]));
+  const leadParts = withBreaks(paras[0]);
+  const restParts = withBreaks(paras.slice(1).join("\n"));
   const [introFill, setIntroFill] = useState(0);
   useEffect(() => {
     if (!intro) return;
@@ -201,10 +202,10 @@ export default function SketchHome({ projects }: { projects: Project[] }) {
         >
           <div style={{ animation: `sk-in .7s .5s ${EASE} both` }}>
             <p style={{ margin: 0, fontSize: 22, fontWeight: 600, lineHeight: 1.45, letterSpacing: "-0.03em", wordBreak: "keep-all" }}>
-              <CharFill parts={[leadA, "\n", leadB]} progress={introFill} dim={[217, 217, 217]} ink={[25, 25, 25]} />
+              <CharFill parts={leadParts} progress={introFill} dim={[217, 217, 217]} ink={[25, 25, 25]} />
             </p>
-            <p style={{ margin: "26px auto 0", fontSize: 22, fontWeight: 500, lineHeight: 1.45, letterSpacing: "-0.03em", maxWidth: 520, wordBreak: "keep-all" }}>
-              <CharFill parts={[line1]} progress={fill} dim={[235, 235, 235]} ink={[110, 110, 110]} />
+            <p style={{ margin: "26px auto 0", fontSize: 22, fontWeight: 500, lineHeight: 1.45, letterSpacing: "-0.03em", wordBreak: "keep-all" }}>
+              <CharFill parts={restParts} progress={fill} dim={[235, 235, 235]} ink={[110, 110, 110]} />
             </p>
           </div>
         </section>

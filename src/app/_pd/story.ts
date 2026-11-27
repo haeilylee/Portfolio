@@ -5,7 +5,7 @@ import type { Block, Project } from "@/lib/projects";
 export const PD_HERO = {
   name: "Hakyeong Lee",
   role: "Product Designer · PD",
-  bio: "나의 1시간을 아끼기 위해 다른 사람의 이해 시간을 늘리고 싶지는 않습니다.\n매일이 도전인 에이전시에서 AI를 디자인 속에 녹여보며, 디자인과 기술의 경계를 확장하고 있습니다.",
+  bio: "AI의 가능성이 확장되는 만큼,\n디자이너의 무대도 넓어진다고 믿습니다.\n\n기술과 비즈니스의 경계를 유연하게 넘나들며,\nAI Agent를 통한 새로운 통신사 경험을 설계하고 있습니다.",
   github: "https://github.com/haeilylee",
   linkedin: "https://www.linkedin.com/in/%ED%95%98%EA%B2%BD-%EC%9D%B4-59655a237/",
 };
