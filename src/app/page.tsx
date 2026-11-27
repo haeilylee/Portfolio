@@ -1,18 +1,17 @@
-import { projects, hero } from "@/lib/projects";
-import HomeFeed from "@/components/home-feed";
-import HomeHero from "@/components/home-hero";
+import { projects } from "@/lib/projects";
+import SketchHome from "./_pd/sketch-home";
 
+/** PD 사이트 홈 — 캐릭터·소개 스크롤 인터랙션 + 시리즈별 목록. 상세는 기존 /projects/[slug] 그대로 */
 export default function HomePage() {
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
-      <div className="home-container" style={{ maxWidth: "1120px", margin: "0 auto", padding: "0 56px" }}>
-
-        <HomeHero hero={hero} />
-
-        {/* ── Projects — 대표 캐러셀 · 탭 목록 · 인기/댓글/시리즈 사이드 (toss.tech 구조) ── */}
-        <HomeFeed projects={projects} />
-        <div style={{ height: "80px" }} />
-      </div>
-    </div>
+    <>
+      <style>{`
+        .site-nav { display: none !important; }
+        main { padding-top: 0 !important; }
+        html { background: #f6f7f9 !important; }
+        body { background: transparent !important; }
+      `}</style>
+      <SketchHome projects={projects} />
+    </>
   );
 }
