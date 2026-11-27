@@ -28,6 +28,12 @@
   - 형광펜: 진행바 파랑(#3182f6)의 23% 불투명도 → `rgba(49, 130, 246, 0.23)`, 글자 아래 45% 높이
   - 글자: 볼드(700) + 본문(#444)보다 진한 검정 `#111`
 
+- **고객사 프로젝트 글 공개 기준**(2026-11-26 사용자 지정, Astra 글에 처음 적용):
+  - 보안 기준을 지켰다는 것이 글 곳곳에 드러나게 한다 — 본문 첫머리 "보안 준수 기준" 콜아웃·목록(가칭, 공개용 UI 재구성, 근사치 표기, 정보 제외), 시각 자료마다 `SECURITY · 근사치 표기/공개용 재구성` 배지
+  - 조사 수치는 근사치로 뭉뚱그린다(예: 75.1% → 4명 중 3명, 79.1% → 약 80%). 문항 번호(MQ), 표본 수, 표본오차, 조사 날짜는 넣지 않는다
+  - 원고의 "편집용 근거 및 확인 필요 항목" 같은 내부 메모는 옮기지 않는다
+- **HTML 원고로 받은 글**은 내용(문장)은 그대로 두고 사이트 블록으로 옮긴다. 시각 박스(그래프·흐름도)는 원본을 캡처해 이미지로, 문단·카드·표·인용은 텍스트·리스트·표·콜아웃 블록으로.
+
 ## 2. 시안 작업 방식
 
 - 시안은 기본 **3개**로 제안한다. 확정되면 `/preview` 시안 코드와 이력은 지운다(2026-11-04에 전부 정리함). 새 시안이 필요하면 `/preview/<group>/{a,b,c}`(개발 환경 전용)로 다시 만든다.
@@ -43,6 +49,11 @@
   - 2026-11-04부터 이 주소는 프로젝트의 **정식 운영 도메인**으로 등록돼 있다. `main`에 push하면 빌드가 끝나는 대로 자동 반영되고, 누구나 로그인 없이 볼 수 있다.
   - 예전처럼 `vercel alias set`으로 수동 연결하지 않는다. 수동 alias 주소는 Vercel 보호(로그인) 대상이 되어 외부에서 볼 수 없다.
   - 배포 확인: `vercel ls haeilylee-portfolio`로 최신 배포가 Ready인지 보고, 로그인하지 않은 상태에서 `curl`로 운영 주소를 열어 확인한다.
+- **Product Designer 버전**: https://haeilydesign-portfolio.vercel.app/ (Vercel 프로젝트 `haeilydesign-portfolio`, Git 연결 없이 CLI로 배포). 디자인 개편 요청은 이 사이트를 기준으로 한다(2026-11-26 사용자 지정).
+  - 소스: 형제 폴더 `../Portfolio-PD` = 이 저장소의 git worktree, 로컬 브랜치 `pd-site`(push 안 함). main과 같은 코드에 홈(`src/app/page.tsx` → `src/app/_pd/sketch-home.tsx`), 소개·직함(PD), 시리즈명(AI Workflow / Product Design), 소분류(Component Registry / PRD Automation)만 다르다.
+  - 배포: `cd ../Portfolio-PD && rm -rf .next && vercel deploy --prod --yes` (`.vercel`이 haeilydesign-portfolio에 연결돼 있음). main에 push하면 TW 사이트로 가니 PD 작업은 main에 섞지 않는다.
+  - 상세(`/projects/[slug]`)는 기존 글 형식 그대로 둔다(2026-11-26 사용자 지정). 새 상세 인터랙션은 로컬에서 따로 검토한다.
+  - 시안 원본: `src/app/preview/home`(홈), `src/app/preview/dark`(상세 플레이어 시안), 공통 `src/app/preview/_shared`.
 - 이 프로젝트에는 아직 Upstash Redis 환경변수가 없다. 그래서 운영에서는 박수 버튼, 댓글, 홈 인기·댓글 구좌가 숨겨져 있다. Vercel Marketplace에서 Upstash를 `haeilylee-portfolio` 프로젝트에 연결하면 켜진다.
 - 로컬 `.vercel/`은 다른 프로젝트(`portfolio`)에 연결돼 있다. 여기서 `vercel --prod`를 실행해도 운영 사이트에는 반영되지 않으니 쓰지 않는다.
 - 운영에 반영하는 작업(push, alias 변경)은 사용자에게 확인을 받은 뒤에 실행한다.
