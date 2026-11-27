@@ -86,7 +86,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                 ))}
               </div>
             </div>
-            <div>
+            {project.tools.length > 0 && <div>
               <div style={eyebrowLabel}>Tools &amp; Stack</div>
               <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
                 {project.tools.map((tool) => (
@@ -96,7 +96,7 @@ export default function ProjectDetail({ project }: { project: Project }) {
                   </div>
                 ))}
               </div>
-            </div>
+            </div>}
           </div>
 
           {project.codeSnippet?.code && (
